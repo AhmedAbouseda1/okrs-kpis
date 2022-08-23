@@ -1,9 +1,9 @@
 import TextField from '@mui/material/TextField';
-import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { resetPassword, clearErrors } from '../../actions/userAction';
-import { useSnackbar } from 'notistack';
+import {useEffect, useState} from 'react';
+import {Link, useNavigate, useParams} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {clearErrors, resetPassword} from '../../actions/userAction';
+import {useSnackbar} from 'notistack';
 import BackdropLoader from '../Layouts/BackdropLoader';
 import MetaData from '../Layouts/MetaData';
 import FormSidebar from './FormSidebar';

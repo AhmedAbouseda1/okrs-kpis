@@ -10,10 +10,9 @@ import MetaData from "../../Layouts/MetaData";
 import Loader from "../../Layouts/Loader";
 import {createCollections} from "../../../actions/collectionsAction";
 import {COLLECTIONS_SETUP_RESET} from "../../../constants/libraryConstants";
-import {collectionsReducer} from "../../../reducers/libraryReducer";
 
 
-const Collections = () => {
+const Collections = ({year, month}) => {
 
     const dispatch = useDispatch();
     const {enqueueSnackbar} = useSnackbar();
@@ -63,7 +62,8 @@ const Collections = () => {
         formData.set("totalNoOfRareMaterials", totalNoOfRareMaterials);
         formData.set("totalOfRareMaterialsNeedConservation", totalOfRareMaterialsNeedConservation);
         formData.set("numberOfAllInterLibraryLoans", numberOfAllInterLibraryLoans);
-
+        formData.set("year", year);
+        formData.set("month", month);
 
         dispatch(createCollections(formData));
     }

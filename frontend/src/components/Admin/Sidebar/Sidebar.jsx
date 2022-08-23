@@ -19,40 +19,48 @@ const navMenu = [
         icon: <EqualizerIcon />,
         label: "Dashboard",
         ref: "/admin/dashboard",
+        key:1,
     },
     {
         icon: <ShoppingBagIcon />,
         label: "Orders",
         ref: "/admin/orders",
+        key:2,
     },
     {
         icon: <InventoryIcon />,
         label: "Products",
         ref: "/admin/products",
+        key:3,
     },
     {
         icon: <AddBoxIcon />,
         label: "Add Product",
         ref: "/admin/new_product",
+        key:4,
     },
     {
         icon: <GroupIcon />,
         label: "Users",
         ref: "/admin/users",
+        key:5,
     },
     {
         icon: <ReviewsIcon />,
         label: "Reviews",
         ref: "/admin/reviews",
+        key:6,
     },
     {
         icon: <AccountBoxIcon />,
         label: "My Profile",
         ref: "/account",
+        key:7,
     },
     {
         icon: <LogoutIcon />,
         label: "Logout",
+        key:8,
     },
 ];
 
@@ -92,12 +100,12 @@ const Sidebar = ({ activeTab, setToggleSidebar }) => {
                     return (
                         <>
                             {label === "Logout" ? (
-                                <button onClick={handleLogout} className="hover:bg-gray-700 flex gap-3 items-center py-3 px-4 font-medium">
+                                <button  key={item.key} onClick={handleLogout} className="hover:bg-gray-700 flex gap-3 items-center py-3 px-4 font-medium">
                                     <span>{icon}</span>
                                     <span>{label}</span>
                                 </button>
                             ) : (
-                                <Link to={ref} className={`${activeTab === index ? "bg-gray-700" : "hover:bg-gray-700"} flex gap-3 items-center py-3 px-4 font-medium`}>
+                                <Link  key={item.key} to={ref} className={`${activeTab === index ? "bg-gray-700" : "hover:bg-gray-700"} flex gap-3 items-center py-3 px-4 font-medium`}>
                                     <span>{icon}</span>
                                     <span>{label}</span>
                                 </Link>

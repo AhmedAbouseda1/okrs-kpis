@@ -4,7 +4,7 @@ import Container from "@mui/material/Container";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
-import {createInfrastructure} from "../../../actions/infrastructureAction";
+import {createInfrastructure, getInfrastructure} from "../../../actions/infrastructureAction";
 import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
@@ -29,6 +29,7 @@ const Infrastructure = ({year, month}) => {
     const [activitiesHallsSeats, setActivitiesHallsSeats] = useState();
     const [noOfPc, setNoOfPc] = useState(0);
 
+
     const toggle = () => {
         setTotalArea(((squaredMetersOfBuildings == null) ? 0 : squaredMetersOfBuildings) +
             (((squaredMetersAvailableForPublic) == null) ? 0 : squaredMetersAvailableForPublic));
@@ -48,9 +49,19 @@ const Infrastructure = ({year, month}) => {
         formData.set("activitiesHallsTables", activitiesHallsTables);
         formData.set("activitiesHallsSeats", activitiesHallsSeats);
         formData.set("noOfPc", noOfPc);
+        formData.set("year", year);
+        formData.set("month", month);
 
         dispatch(createInfrastructure(formData));
     }
+    useEffect(() => {
+        if (error) {
+            enqueueSnackbar(error, {variant: "error"});
+            dispatch(clearErrors());
+        }
+        dispatch(getInfrastructure(year, month));
+    }, [dispatch, year, month, error, enqueueSnackbar]);
+
     useEffect(() => {
         if (error) {
             enqueueSnackbar(error, {variant: "error"});
@@ -69,7 +80,6 @@ const Infrastructure = ({year, month}) => {
             <MetaData title="Infrastructure"/>
             {loading ? <Loader/> :
                 <>
-                    id={id}
                     <main className="w-full mt-12 sm:mt-0">
                         <div>
                             <form onSubmit={handleSubmit} encType="multipart/form-data"
@@ -88,7 +98,7 @@ const Infrastructure = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={squaredMetersOfBuildings}
+                                                        value={infrastructure != null ? infrastructure.squaredMetersOfBuildings : squaredMetersOfBuildings}
                                                         onChange={e => {
                                                             setSquaredMetersOfBuildings(parseInt(e.target.value.toString()));
                                                         }}/>
@@ -101,7 +111,7 @@ const Infrastructure = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Squared Meters Available For Public"
-                                                        value={squaredMetersAvailableForPublic}
+                                                        value={infrastructure != null ? infrastructure.squaredMetersAvailableForPublic : squaredMetersAvailableForPublic}
                                                         onChange={e => {
                                                             setSquaredMetersAvailableForPublic(parseInt(e.target.value.toString()));
                                                         }}
@@ -143,7 +153,7 @@ const Infrastructure = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={activitiesHallsTables || ""}
+                                                        value={infrastructure != null ? infrastructure.activitiesHallsTables : activitiesHallsTables}
                                                         onChange={e => {
                                                             setActivitiesHallsTables(parseInt(e.target.value.toString()));
                                                         }}
@@ -157,7 +167,7 @@ const Infrastructure = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Activities Halls Seats"
-                                                        value={activitiesHallsSeats || ""}
+                                                        value={infrastructure != null ? infrastructure.activitiesHallsSeats : activitiesHallsSeats}
                                                         onChange={e => {
                                                             setActivitiesHallsSeats(parseInt(e.target.value.toString()));
                                                         }}
@@ -182,7 +192,7 @@ const Infrastructure = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Reading Halls Tables"
-                                                        value={readingHallsTables || ""}
+                                                        value={infrastructure!=null ?infrastructure.readingHallsTables:readingHallsTables}
                                                         onChange={e => {
                                                             setReadingHallsTables(parseInt(e.target.value.toString()));
                                                         }}
@@ -196,7 +206,7 @@ const Infrastructure = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Reading Halls Seats"
-                                                        value={readingHallsSeats || ""}
+                                                        value={infrastructure!=null ?infrastructure.readingHallsSeats:readingHallsSeats}
                                                         onChange={e => {
                                                             setReadingHallsSeats(parseInt(e.target.value.toString()));
                                                         }}
@@ -215,7 +225,8 @@ const Infrastructure = ({year, month}) => {
                                                     size="small"
                                                     required
                                                     label="No. of PC's with int. for clients"
-                                                    value={noOfPc || ""}
+                                                    value={infrastructure!=null ?infrastructure.noOfPc:noOfPc}
+
                                                     onChange={e => {
                                                         setNoOfPc(parseInt(e.target.value.toString()));
                                                     }}

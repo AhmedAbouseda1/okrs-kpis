@@ -1,7 +1,7 @@
 import home from '../../assets/images/MenusIcons/homepage.png';
 import aboutUs from '../../assets/images/MenusIcons/about-us.png';
 import dashboard from '../../assets/images/MenusIcons/dashboard.png';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const catNav = [
     {

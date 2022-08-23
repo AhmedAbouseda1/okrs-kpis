@@ -39,6 +39,14 @@ const infrastructureSchema = new mongoose.Schema({
         ref: "User",
         required: true
     },
+    year: {
+        type: String,
+        required: true
+    },
+    month: {
+        type: String,
+        required: true
+    },
 });
 
 // infrastructureSchema.pre("save", async function (next) {

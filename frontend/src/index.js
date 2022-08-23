@@ -2,16 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import {BrowserRouter as Router} from 'react-router-dom';
+import {Provider} from 'react-redux';
 import store from './store';
-import { SnackbarProvider } from 'notistack';
-import SettingsProvider from "./contexts/Settings";
+import {SnackbarProvider} from 'notistack';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-        <SettingsProvider/>
       <SnackbarProvider
         maxSnack={2}
         anchorOrigin={{

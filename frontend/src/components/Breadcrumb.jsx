@@ -1,5 +1,5 @@
-import { Breadcrumbs, Hidden, Icon, styled, useTheme } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import {Breadcrumbs, Hidden, Icon, styled, useTheme} from '@mui/material';
+import {NavLink} from 'react-router-dom';
 
 const BreadcrumbRoot = styled('div')(() => ({
   display: 'flex',

@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import MetaData from '../Layouts/MetaData';
 import MinCategory from '../Layouts/MinCategory';
 import Sidebar from '../User/Sidebar';

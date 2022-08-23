@@ -4,6 +4,9 @@ import {
     INFRASTRUCTURE_SETUP,
     INFRASTRUCTURE_SETUP_FAIL,
     INFRASTRUCTURE_SETUP_SUCCESS,
+    LOAD_INFRASTRUCTURE_FAIL,
+    LOAD_INFRASTRUCTURE_REQUEST,
+    LOAD_INFRASTRUCTURE_SUCCESS,
 } from "../constants/libraryConstants";
 
 
@@ -24,6 +27,28 @@ export const createInfrastructure = (infrastructureData) => async (dispatch) => 
         });
     }
 }
+
+
+// load Infrastructure
+export const getInfrastructure = (year, month) => async (dispatch) => {
+    try {
+
+        dispatch({ type: LOAD_INFRASTRUCTURE_REQUEST });
+
+        const { data } = await axios.get(`/api/v1/library/librarySetup/infrastructure/${year}/${month}`);
+
+        dispatch({
+            type: LOAD_INFRASTRUCTURE_SUCCESS,
+            payload: data.infrastructure,
+        });
+
+    } catch (error) {
+        dispatch({
+            type: LOAD_INFRASTRUCTURE_FAIL,
+            payload: error.response.data.message,
+        });
+    }
+};
 
 // Clear All Errors
 export const clearErrors = () => (dispatch) => {

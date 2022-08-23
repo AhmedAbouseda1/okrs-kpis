@@ -15,13 +15,15 @@ exports.createInfrastructure = asyncErrorHandler(async (req, res, next) => {
 });
 
 
-exports.createInfrastructure = asyncErrorHandler(async (req, res, next) => {
+exports.getInfrastructure = asyncErrorHandler(async (req, res, next) => {
 
-    req.body.user = req.user.id;
-    const infrastructure = await Infrastructure.create(req.body);
+    const infrastructure = await Infrastructure.findOne({
+       year: req.params.year,
+       month: req.params.month,
+    });
 
-    res.status(201).json({
+    res.status(200).json({
         success: true,
-        infrastructure
+        infrastructure,
     });
 });

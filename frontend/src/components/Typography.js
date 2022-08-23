@@ -1,4 +1,4 @@
-import { Box, styled } from '@mui/material';
+import {Box, styled} from '@mui/material';
 import clsx from 'clsx';
 
 const StyledBox = styled(Box)(({ theme, textTransformStyle, ellipsis }) => ({

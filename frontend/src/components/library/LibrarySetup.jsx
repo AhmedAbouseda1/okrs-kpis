@@ -6,14 +6,11 @@ import Stepper from "@mui/material/Stepper";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import Infrastructure from "./input-setup/Infrastructure";
-// import {Breadcrumb} from "././Breadcrumb";
 import Container from "@mui/material/Container";
 import Collections from "./input-setup/Collections";
 import Finance from "./input-setup/Finance";
 import Processing from "./input-setup/Processing";
 import MetaData from "../Layouts/MetaData";
-import DateSetup from "./input-setup/DateSetup";
-import TextField from "@mui/material/TextField";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from 'react-date-picker';
 
@@ -74,12 +71,7 @@ export default function LibrarySetup() {
         <>
             <MetaData title="Library Setup"/>
             <>
-                {/*<MinCategory />*/}
                 <Container>
-                    <Box className="breadcrumb">
-                        {/*<Breadcrumb routeSegments={[{name: 'Library Setup', path: '/'}, {name: 'Input Setup'}]}/>*/}
-                    </Box>
-
                     {openSteps ? (
                         <Box>
                             <Stepper activeStep={activeStep} alternativeLabel>
@@ -123,8 +115,7 @@ export default function LibrarySetup() {
                                 )}
                             </Box>
                         </Box>) : (
-                        <main className="w-full mt-12 sm:mt-0">
-                            <div>
+                        <Box>
                                 <form onSubmit={handleSubmit} encType="multipart/form-data"
                                       className="flex flex-col sm:flex-row bg-white rounded-lg shadow p-4"
                                       id="mainform">
@@ -137,7 +128,7 @@ export default function LibrarySetup() {
                                                     setSetupDate(e);
                                                 }}
                                                 value={setupDate}
-                                                dateFormat="MM/yyyy"
+                                                dateFormat="MM/YYYY"
                                                 showMonthYearPicker
                                             />
                                             <input form="mainform" type="submit"
@@ -146,8 +137,7 @@ export default function LibrarySetup() {
                                         </div>
                                     </div>
                                 </form>
-                            </div>
-                        </main>
+                        </ Box>
 
 
                     )
