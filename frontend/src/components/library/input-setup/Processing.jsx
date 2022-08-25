@@ -1,81 +1,140 @@
-// import {Button, Grid, Icon, styled,} from "@mui/material";
-// import React, {useEffect, useState} from "react";
-// import {TextValidator, ValidatorForm} from "react-material-ui-form-validator";
-// import {InputSetupDTO} from "../../../../modal/librarySetup/InputSetupDTO";
-// import {ProcessingDTO} from "../../../../modal/librarySetup/ProcessingDTO";
-// import {Span} from "../../../components/Typography";
-//
-// const TextField = styled(TextValidator)(() => ({
-//     width: "100%",
-//     marginBottom: "16px",
-// }));
-//
-// const Processing = (inputSetupThisMonth = new InputSetupDTO()) => {
-//     const [state, setState] = useState(0);
-//     const handleChange = (event) => {
-//         event.persist();
-//         setState({...state, [event.target.name]: event.target.value});
-//     };
-//
-//     const {
-//         requiredTitlesInCollection,
-//         targetPopulationReached,
-//         numberOfAcademicPublicationsLast3Years,
-//     } = state;
-//     const handleSubmit = (event) => {
-//         let processingDTO = new ProcessingDTO();
-//         processingDTO.requiredTitlesInCollection = requiredTitlesInCollection;
-//         processingDTO.targetPopulationReached = targetPopulationReached;
-//         processingDTO.numberOfAcademicPublicationsLast3Years = numberOfAcademicPublicationsLast3Years;
-//         inputSetupThisMonth.processingDTO = processingDTO;
-//     };
-//     return (
-//
-//         <div>
-//             <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
-//                 <Grid container spacing={6}>
-//                     <Grid item lg={6} md={6} sm={12} xs={12} sx={{mt: 2}}>
-//                         <TextField
-//                             sx={{mb: 4}}
-//                             type="number"
-//                             name="requiredTitlesInCollection"
-//                             label="Required Titles in the Collection"
-//                             value={requiredTitlesInCollection || ""}
-//                             onChange={handleChange}
-//                             errorMessages={["this field is required"]}
-//                             validators={["required"]}
-//                         />
-//
-//                         <TextField
-//                             sx={{mb: 4}}
-//                             type="number"
-//                             name="targetPopulationReached"
-//                             label="Target Population Reached"
-//                             value={targetPopulationReached || ""}
-//                             onChange={handleChange}
-//                             errorMessages={["this field is required"]}
-//                             validators={["required"]}
-//                         />
-//                         <TextField
-//                             sx={{mb: 4}}
-//                             type="number"
-//                             name="numberOfAcademicPublicationsLast3Years"
-//                             label="Total number of hours to complete a specified number of inter library loans or electronic document delivery transactions"
-//                             value={numberOfAcademicPublicationsLast3Years || ""}
-//                             onChange={handleChange}
-//                             errorMessages={["this field is required"]}
-//                             validators={["required"]}
-//                         />
-//
-//                     </Grid>
-//                 </Grid>
-//                 <Button color="primary" variant="contained" type="submit">
-//                     <Icon>send</Icon>
-//                     <Span sx={{pl: 1, textTransform: "capitalize"}}>Save</Span>
-//                 </Button>
-//             </ValidatorForm>
-//         </div>
-//     );
-// };
-//
-// export default Processing;
+import {Button, CircularProgress, Grid, IconButton,} from "@mui/material";
+import React, {useEffect, useState} from "react";
+import Container from "@mui/material/Container";
+import {useDispatch, useSelector} from "react-redux";
+import {useSnackbar} from "notistack";
+import {useNavigate} from "react-router-dom";
+import {createProcessing, getProcessing} from "../../../actions/processingAction";
+import {clearErrors} from "../../../actions/productAction";
+import TextField from "@mui/material/TextField";
+import MetaData from "../../Layouts/MetaData";
+import Loader from "../../Layouts/Loader";
+import {PROCESSING_SETUP_RESET} from "../../../constants/libraryConstants";
+
+
+const Processing = ({year, month}) => {
+
+    const dispatch = useDispatch();
+    const {enqueueSnackbar} = useSnackbar();
+    const navigate = useNavigate();
+
+    const {processing, loading, success, error} = useSelector((state) => state.processing);
+    const [requiredTitlesInCollection, setRequiredTitlesInCollection] = useState();
+    const [targetPopulationReached, setTargetPopulationReached] = useState();
+    const [numberOfAcademicPublicationsLast3Years, setNumberOfAcademicPublicationsLast3Years] = useState(0);
+
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.set("requiredTitlesInCollection", requiredTitlesInCollection);
+        formData.set("targetPopulationReached", targetPopulationReached);
+        formData.set("numberOfAcademicPublicationsLast3Years", numberOfAcademicPublicationsLast3Years);
+        formData.set("year", year);
+        formData.set("month", month);
+
+        dispatch(createProcessing(formData));
+    }
+    useEffect(() => {
+        if (error) {
+            enqueueSnackbar(error, {variant: "error"});
+            dispatch(clearErrors());
+        }
+        dispatch(getProcessing(year, month));
+    }, [dispatch, year, month, error, enqueueSnackbar]);
+
+    useEffect(() => {
+        if (error) {
+            enqueueSnackbar(error, {variant: "error"});
+            dispatch(clearErrors());
+        }
+        if (success) {
+            enqueueSnackbar("Processing Setup Done", {variant: "success"});
+            dispatch({type: PROCESSING_SETUP_RESET});
+        }
+    }, [dispatch, error, success, navigate, enqueueSnackbar]);
+
+
+    return (
+        <>
+            <MetaData title="Processing"/>
+            {loading ? <Loader/> :
+                <>
+                    <main className="w-full mt-12 sm:mt-0">
+                        <div>
+                            <form onSubmit={handleSubmit} encType="multipart/form-data"
+                                  className="flex flex-col sm:flex-row bg-white rounded-lg shadow p-4" id="mainform">
+                                <Grid container spacing={6}>
+                                    <Grid item lg={6} md={6} sm={12} xs={12} sx={{mt: 2}}>
+                                        <div className="flex flex-col gap-2">
+                                            <div className="flex flex-col sm:flex-row items-center gap-3"
+                                                 id="areaInputs">
+                                                <div
+                                                    className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
+                                                    <TextField
+                                                        type="number"
+                                                        label="Required Titles In Collection"
+                                                        variant="outlined"
+                                                        size="small"
+                                                        required
+                                                        value={processing != null ? processing.requiredTitlesInCollection : requiredTitlesInCollection}
+                                                        onChange={e => {
+                                                            setRequiredTitlesInCollection(parseInt(e.target.value.toString()));
+                                                        }}/>
+                                                </div>
+                                                <div
+                                                    className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
+                                                    <TextField
+                                                        type="number"
+                                                        variant="outlined"
+                                                        size="small"
+                                                        required
+                                                        label="Target Population Reached"
+                                                        value={processing != null ? processing.targetPopulationReached : targetPopulationReached}
+                                                        onChange={e => {
+                                                            setTargetPopulationReached(parseInt(e.target.value.toString()));
+                                                        }}
+                                                    />
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </Grid>
+                                    <Grid item lg={6} md={6} sm={12} xs={12} sx={{mt: 2}}>
+                                        <div className="flex flex-col gap-2">
+                                            <div className="flex flex-col sm:flex-row items-center gap-3"
+                                                 id="activitiesInputs">
+                                                <div
+                                                    className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
+                                                    <TextField
+                                                        type="number"
+                                                        label="Number Of Academic Publications Last 3 Years"
+                                                        variant="outlined"
+                                                        size="small"
+                                                        required
+                                                        value={processing != null ? processing.numberOfAcademicPublicationsLast3Years : numberOfAcademicPublicationsLast3Years}
+                                                        onChange={e => {
+                                                            setNumberOfAcademicPublicationsLast3Years(parseInt(e.target.value.toString()));
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Grid>
+
+                                </Grid>
+
+                            </form>
+                        </div>
+                    </main>
+                </>
+            }
+        </>
+    );
+};
+
+export default Processing;
+

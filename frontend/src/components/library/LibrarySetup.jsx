@@ -10,6 +10,8 @@ import Container from "@mui/material/Container";
 import Collections from "./input-setup/Collections";
 import Finance from "./input-setup/Finance";
 import Processing from "./input-setup/Processing";
+import HumanResources from "./input-setup/HumanResources";
+
 import MetaData from "../Layouts/MetaData";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from 'react-date-picker';
@@ -27,14 +29,14 @@ function getStepContent(stepIndex) {
         case 0:
             return <Infrastructure year={year} month={month}/>
         case 1:
-            return <Collections/>
+            return <Collections year={year} month={month}/>
         case 2:
-        // return <HumanResources/>
+            return <HumanResources year={year} month={month}/>
         case 3:
-        // return <Finance />
+            return <Finance year={year} month={month}/>
 
         case 4:
-        // return <Processing />
+            return <Processing year={year} month={month}/>
 
     }
 }
@@ -63,7 +65,7 @@ export default function LibrarySetup() {
 
     function handleSubmit(s) {
         setOpenSteps(true)
-        year = setupDate.getFullYear() ;
+        year = setupDate.getFullYear();
         month = setupDate.getMonth();
     }
 
@@ -116,27 +118,27 @@ export default function LibrarySetup() {
                             </Box>
                         </Box>) : (
                         <Box>
-                                <form onSubmit={handleSubmit} encType="multipart/form-data"
-                                      className="flex flex-col sm:flex-row bg-white rounded-lg shadow p-4"
-                                      id="mainform">
-                                    <div className="flex flex-col gap-2">
-                                        <h2 className="text-sm">Setup your library for year and month :</h2>
-                                        <div
-                                            className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
-                                            <DatePicker
-                                                onChange={e => {
-                                                    setSetupDate(e);
-                                                }}
-                                                value={setupDate}
-                                                dateFormat="MM/YYYY"
-                                                showMonthYearPicker
-                                            />
-                                            <input form="mainform" type="submit"
-                                                   className="bg-primary-orange uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value="Submit"/>
-                                        </div>
+                            <form onSubmit={handleSubmit} encType="multipart/form-data"
+                                  className="flex flex-col sm:flex-row bg-white rounded-lg shadow p-4"
+                                  id="mainform">
+                                <div className="flex flex-col gap-2">
+                                    <h2 className="text-sm">Setup your library for year and month :</h2>
+                                    <div
+                                        className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
+                                        <DatePicker
+                                            onChange={e => {
+                                                setSetupDate(e);
+                                            }}
+                                            value={setupDate}
+                                            dateFormat="MM/YYYY"
+                                            showMonthYearPicker
+                                        />
+                                        <input form="mainform" type="submit"
+                                               className="bg-primary-orange uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
+                                               value="Submit"/>
                                     </div>
-                                </form>
+                                </div>
+                            </form>
                         </ Box>
 
 

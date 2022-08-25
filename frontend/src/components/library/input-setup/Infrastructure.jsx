@@ -70,7 +70,6 @@ const Infrastructure = ({year, month}) => {
         if (success) {
             enqueueSnackbar("Infrastructure Setup Done", {variant: "success"});
             dispatch({type: INFRASTRUCTURE_SETUP_RESET});
-            navigate("/admin/products");
         }
     }, [dispatch, error, success, navigate, enqueueSnackbar]);
 

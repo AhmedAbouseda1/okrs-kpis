@@ -75,7 +75,6 @@ const Collections = ({year, month}) => {
         if (success) {
             enqueueSnackbar("Collection Setup Done", {variant: "success"});
             dispatch({type: COLLECTIONS_SETUP_RESET});
-            navigate("/admin/products");
         }
     }, [dispatch, error, success, navigate, enqueueSnackbar]);
 
