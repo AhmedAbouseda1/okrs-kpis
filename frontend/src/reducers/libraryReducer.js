@@ -8,7 +8,19 @@ import {
     INFRASTRUCTURE_SETUP,
     INFRASTRUCTURE_SETUP_FAIL,
     INFRASTRUCTURE_SETUP_RESET,
-    INFRASTRUCTURE_SETUP_SUCCESS
+    INFRASTRUCTURE_SETUP_SUCCESS,
+    FINANCE_SETUP,
+    FINANCE_SETUP_FAIL,
+    FINANCE_SETUP_RESET,
+    FINANCE_SETUP_SUCCESS,
+    HUMAN_RESOURCES_SETUP,
+    HUMAN_RESOURCES_SETUP_FAIL,
+    HUMAN_RESOURCES_SETUP_RESET,
+    HUMAN_RESOURCES_SETUP_SUCCESS,
+    PROCESSING_SETUP,
+    PROCESSING_SETUP_FAIL,
+    PROCESSING_SETUP_RESET,
+    PROCESSING_SETUP_SUCCESS
 } from "../constants/libraryConstants";
 
 // infrastructure Reducer
@@ -80,6 +92,114 @@ export const collectionsReducer = (state = {collections: {}}, {type, payload}) =
             return state;
     }
 }
+
+
+// processing Reducer
+export const processingReducer = (state = {processing: {}}, {type, payload}) => {
+    switch (type) {
+        case PROCESSING_SETUP:
+            return {
+                ...state,
+                loading: true,
+            };
+        case  PROCESSING_SETUP_SUCCESS:
+            return {
+                loading: false,
+                success: payload.success,
+                infrastructure: payload.processing,
+            };
+        case  PROCESSING_SETUP_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: payload,
+            };
+        case  PROCESSING_SETUP_RESET:
+            return {
+                ...state,
+                success: false,
+            };
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+        default:
+            return state;
+    }
+}
+
+
+//  humanResources Reducer
+export const humanResourcesReducer = (state = {humanResources: {}}, {type, payload}) => {
+    switch (type) {
+        case HUMAN_RESOURCES_SETUP:
+            return {
+                ...state,
+                loading: true,
+            };
+        case HUMAN_RESOURCES_SETUP_SUCCESS:
+            return {
+                loading: false,
+                success: payload.success,
+                infrastructure: payload.infrastructure,
+            };
+        case HUMAN_RESOURCES_SETUP_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: payload,
+            };
+        case HUMAN_RESOURCES_SETUP_RESET:
+            return {
+                ...state,
+                success: false,
+            };
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+        default:
+            return state;
+    }
+}
+
+// finance Reducer
+export const financeReducer = (state = {finance: {}}, {type, payload}) => {
+    switch (type) {
+        case  FINANCE_SETUP:
+            return {
+                ...state,
+                loading: true,
+            };
+        case  FINANCE_SETUP_SUCCESS:
+            return {
+                loading: false,
+                success: payload.success,
+                infrastructure: payload.finance,
+            };
+        case  FINANCE_SETUP_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: payload,
+            };
+        case  FINANCE_SETUP_RESET:
+            return {
+                ...state,
+                success: false,
+            };
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+        default:
+            return state;
+    }
+}
+
 
 // setupDateReducer Reducer
 export const currentSetupDateReducer = (state = {currentSetupDate: {}}, {type, payload}) => {

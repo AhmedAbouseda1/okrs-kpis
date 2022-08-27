@@ -8,8 +8,9 @@ import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
 import Loader from "../../Layouts/Loader";
-import {createCollections} from "../../../actions/collectionsAction";
+import {createCollections, getCollections} from "../../../actions/collectionsAction";
 import {COLLECTIONS_SETUP_RESET} from "../../../constants/libraryConstants";
+import {getInfrastructure} from "../../../actions/infrastructureAction";
 
 
 const Collections = ({year, month}) => {
@@ -18,7 +19,7 @@ const Collections = ({year, month}) => {
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
 
-    const {loading, success, error} = useSelector((state) => state.collections);
+    const {collections, loading, success, error} = useSelector((state) => state.collections);
 
     let [total, setTotal] = useState(0);
     const [open, setOpen] = useState(false);
@@ -67,6 +68,14 @@ const Collections = ({year, month}) => {
 
         dispatch(createCollections(formData));
     }
+    useEffect(() => {
+        if (error) {
+            enqueueSnackbar(error, {variant: "error"});
+            dispatch(clearErrors());
+        }
+        dispatch(getCollections(year, month));
+    }, [dispatch, year, month, error, enqueueSnackbar]);
+
     useEffect(() => {
         if (error) {
             enqueueSnackbar(error, {variant: "error"});

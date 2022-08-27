@@ -28,7 +28,12 @@ import {
     paymentStatusReducer
 } from './reducers/orderReducer';
 import {wishlistReducer} from './reducers/wishlistReducer';
-import {collectionsReducer, currentSetupDateReducer, infrastructureReducer} from "./reducers/libraryReducer";
+import {
+    collectionsReducer,
+    currentSetupDateReducer, financeReducer,
+    humanResourcesReducer,
+    infrastructureReducer, processingReducer
+} from "./reducers/libraryReducer";
 
 const reducer = combineReducers({
     user: userReducer,
@@ -54,6 +59,9 @@ const reducer = combineReducers({
     wishlist: wishlistReducer,
     infrastructure: infrastructureReducer,
     collections : collectionsReducer,
+    humanResources: humanResourcesReducer,
+    processing :processingReducer,
+    finance: financeReducer,
     currentSetupDate : currentSetupDateReducer
 });
 

@@ -83,6 +83,12 @@ const Processing = ({year, month}) => {
                                                             setRequiredTitlesInCollection(parseInt(e.target.value.toString()));
                                                         }}/>
                                                 </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex flex-col gap-2">
+                                            <div className="flex flex-col sm:flex-row items-center gap-3"
+                                                 id="areaInputs">
                                                 <div
                                                     className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
                                                     <TextField
@@ -100,10 +106,6 @@ const Processing = ({year, month}) => {
                                                 </div>
                                             </div>
                                         </div>
-
-
-                                    </Grid>
-                                    <Grid item lg={6} md={6} sm={12} xs={12} sx={{mt: 2}}>
                                         <div className="flex flex-col gap-2">
                                             <div className="flex flex-col sm:flex-row items-center gap-3"
                                                  id="activitiesInputs">
@@ -122,6 +124,11 @@ const Processing = ({year, month}) => {
                                                     />
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div className="flex justify-end">
+                                            <input form="mainform" type="submit"
+                                                   className="bg-primary-orange uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
+                                                   value="Submit"/>
                                         </div>
                                     </Grid>
 

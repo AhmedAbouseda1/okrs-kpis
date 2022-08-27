@@ -80,15 +80,20 @@ const Finance = ({year, month}) => {
 
     return (
         <>
+
             <MetaData title="Finance"/>
+
             {loading ? <Loader/> :
+
                 <>
+
                     <main className="w-full mt-12 sm:mt-0">
                         <div>
                             <form onSubmit={handleSubmit} encType="multipart/form-data"
                                   className="flex flex-col sm:flex-row bg-white rounded-lg shadow p-4" id="mainform">
                                 <Grid container spacing={6}>
                                     <Grid item lg={6} md={6} sm={12} xs={12} sx={{mt: 2}}>
+                                        {finance.postAndTelecommunications}
                                         <div className="flex flex-col gap-2">
                                             <div className="flex flex-col sm:flex-row items-center gap-3"
                                                  id="areaInputs">
@@ -104,21 +109,6 @@ const Finance = ({year, month}) => {
                                                         onChange={e => {
                                                             setAcquisition(parseInt(e.target.value.toString()));
                                                         }}/>
-                                                </div>
-                                                <div
-                                                    className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
-                                                    <TextField
-                                                        type="number"
-                                                        variant="outlined"
-                                                        size="small"
-                                                        required
-                                                        label="Water And Lighting"
-                                                        value={finance != null ? finance.waterAndLighting : waterAndLighting}
-                                                        onChange={e => {
-                                                            setWaterAndLighting(parseInt(e.target.value.toString()));
-                                                        }}
-                                                    />
-
                                                 </div>
                                             </div>
                                         </div>
@@ -139,21 +129,6 @@ const Finance = ({year, month}) => {
                                                             setVariousRequirements(parseInt(e.target.value.toString()));
                                                         }}
                                                     />
-                                                </div>
-                                                <div
-                                                    className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
-                                                    <TextField
-                                                        type="number"
-                                                        variant="outlined"
-                                                        size="small"
-                                                        required
-                                                        label="Maintenance"
-                                                        value={finance != null ? finance.maintenance : maintenance}
-                                                        onChange={e => {
-                                                            setMaintenance(parseInt(e.target.value.toString()));
-                                                        }}
-                                                    />
-
                                                 </div>
                                             </div>
                                         </div>
@@ -225,11 +200,52 @@ const Finance = ({year, month}) => {
                                             </div>
                                         </div>
 
+                                        <div className="flex flex-col gap-2">
+                                            <div className="flex flex-col sm:flex-row items-center gap-3"
+                                                 id="areaInputs">
+                                                <div
+                                                    className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
+                                                    <TextField
+                                                        type="number"
+                                                        variant="outlined"
+                                                        size="small"
+                                                        required
+                                                        label="Water And Lighting"
+                                                        value={finance != null ? finance.waterAndLighting : waterAndLighting}
+                                                        onChange={e => {
+                                                            setWaterAndLighting(parseInt(e.target.value.toString()));
+                                                        }}
+                                                    />
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex flex-col gap-2">
+
+                                            <div className="flex flex-col sm:flex-row items-center gap-3"
+                                                 id="activitiesInputs">
+                                                <div
+                                                    className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
+                                                    <TextField
+                                                        type="number"
+                                                        variant="outlined"
+                                                        size="small"
+                                                        required
+                                                        label="Maintenance"
+                                                        value={finance != null ? finance.maintenance : maintenance}
+                                                        onChange={e => {
+                                                            setMaintenance(parseInt(e.target.value.toString()));
+                                                        }}
+                                                    />
+
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </Grid>
                                     <Grid item lg={6} md={6} sm={12} xs={12} sx={{mt: 2}}>
                                         <div className="flex flex-col gap-2">
-                                            <h2 className="text-sm">Reading Halls</h2>
-
                                             <div className="flex flex-col sm:flex-row items-center gap-3"
                                                  id="readingInputs">
                                                 <div
@@ -245,21 +261,6 @@ const Finance = ({year, month}) => {
                                                             setPostAndTelecommunications(parseInt(e.target.value.toString()));
                                                         }}
                                                     />
-                                                </div>
-                                                <div
-                                                    className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
-                                                    <TextField
-                                                        type="number"
-                                                        variant="outlined"
-                                                        size="small"
-                                                        required
-                                                        label="Publishing,advertising and reception"
-                                                        value={finance != null ? finance.publishingAndAdvertisingAndReception : publishingAndAdvertisingAndReception}
-                                                        onChange={e => {
-                                                            setPublishingAndAdvertisingAndReception(parseInt(e.target.value.toString()));
-                                                        }}
-                                                    />
-
                                                 </div>
                                             </div>
                                         </div>
@@ -354,7 +355,27 @@ const Finance = ({year, month}) => {
 
                                             </div>
                                         </div>
+                                        <div className="flex flex-col gap-2">
 
+                                            <div className="flex flex-col sm:flex-row items-center gap-3"
+                                                 id="readingInputs">
+                                                <div
+                                                    className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
+                                                    <TextField
+                                                        type="number"
+                                                        variant="outlined"
+                                                        size="small"
+                                                        required
+                                                        label="Publishing,advertising and reception"
+                                                        value={finance != null ? finance.publishingAndAdvertisingAndReception : publishingAndAdvertisingAndReception}
+                                                        onChange={e => {
+                                                            setPublishingAndAdvertisingAndReception(parseInt(e.target.value.toString()));
+                                                        }}
+                                                    />
+
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div className="flex justify-end">
                                             <input form="mainform" type="submit"
                                                    className="bg-primary-orange uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
