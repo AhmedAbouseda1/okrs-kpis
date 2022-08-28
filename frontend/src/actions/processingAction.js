@@ -45,7 +45,6 @@ export const getProcessing = (year, month) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: LOAD_PROCESSING_FAIL,
-            payload: error.response.data.message,
         });
     }
 };

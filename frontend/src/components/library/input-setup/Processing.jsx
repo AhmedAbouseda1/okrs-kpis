@@ -21,7 +21,7 @@ const Processing = ({year, month}) => {
     const {processing, loading, success, error} = useSelector((state) => state.processing);
     const [requiredTitlesInCollection, setRequiredTitlesInCollection] = useState();
     const [targetPopulationReached, setTargetPopulationReached] = useState();
-    const [numberOfAcademicPublicationsLast3Years, setNumberOfAcademicPublicationsLast3Years] = useState(0);
+    const [numberOfAcademicPublicationsLast3Years, setNumberOfAcademicPublicationsLast3Years] = useState();
 
 
 

@@ -36,16 +36,14 @@ export const getInfrastructure = (year, month) => async (dispatch) => {
         dispatch({ type: LOAD_INFRASTRUCTURE_REQUEST });
 
         const { data } = await axios.get(`/api/v1/library/librarySetup/infrastructure/${year}/${month}`);
-
         dispatch({
             type: LOAD_INFRASTRUCTURE_SUCCESS,
             payload: data.infrastructure,
         });
-
     } catch (error) {
+        alert(error)
         dispatch({
             type: LOAD_INFRASTRUCTURE_FAIL,
-            payload: error.response.data.message,
         });
     }
 };

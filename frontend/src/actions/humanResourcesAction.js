@@ -45,7 +45,6 @@ export const getHumanResources = (year, month) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: LOAD_HUMAN_RESOURCES_FAIL,
-            payload: error.response.data.message,
         });
     }
 };

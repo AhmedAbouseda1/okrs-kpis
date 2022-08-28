@@ -16,13 +16,13 @@ exports.createCollections = asyncErrorHandler(async (req, res, next) => {
 
 exports.getCollections = asyncErrorHandler(async (req, res, next) => {
 
-    const infrastructure = await Collections.findOne({
+    const collections = await Collections.findOne({
         year: req.params.year,
         month: req.params.month,
     });
 
     res.status(200).json({
         success: true,
-        infrastructure,
+        collections,
     });
 });

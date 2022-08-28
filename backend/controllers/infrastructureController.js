@@ -16,7 +16,6 @@ exports.createInfrastructure = asyncErrorHandler(async (req, res, next) => {
 
 
 exports.getInfrastructure = asyncErrorHandler(async (req, res, next) => {
-
     const infrastructure = await Infrastructure.findOne({
        year: req.params.year,
        month: req.params.month,

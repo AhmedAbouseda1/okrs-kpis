@@ -25,7 +25,7 @@ const financeSchema = new mongoose.Schema({
     },
     publishingAndAdvertisingAndReception: {
         type: Number,
-        required: [true, "Please Enter postAndTelecommunications"]
+        required: [true, "Please Enter publishingAndAdvertisingAndReception"]
     },
     expensesPrintingAndTranslationsAndJournalsAndCopyright: {
         type: Number,

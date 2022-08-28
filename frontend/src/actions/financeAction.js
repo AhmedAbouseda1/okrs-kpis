@@ -45,7 +45,6 @@ export const getFinance = (year, month) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: LOAD_FINANCE_FAIL,
-            payload: error.response.data.message,
         });
     }
 };

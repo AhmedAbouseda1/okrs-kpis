@@ -32,11 +32,8 @@ export const createCollections = (collectionsData) => async (dispatch) => {
 export const getCollections = (year, month) => async (dispatch) => {
 
     try {
-
         dispatch({type: LOAD_COLLECTIONS_REQUEST});
-
         const {data} = await axios.get(`/api/v1/library/librarySetup/collections/${year}/${month}`);
-
         dispatch({
             type: LOAD_COLLECTIONS_SUCCESS,
             payload: data.collections,
@@ -45,7 +42,6 @@ export const getCollections = (year, month) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: LOAD_COLLECTIONS_FAIL,
-            payload: error.response.data.message,
         });
     }
 };

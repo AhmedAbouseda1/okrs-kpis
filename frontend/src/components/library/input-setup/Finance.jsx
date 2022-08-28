@@ -18,21 +18,21 @@ const Finance = ({year, month}) => {
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
     const {finance, loading, success, error} = useSelector((state) => state.finance);
-    const [acquisition, setAcquisition] = useState(0)
-    const [waterAndLighting, setWaterAndLighting] = useState(0)
-    const [variousRequirements, setVariousRequirements] = useState(0)
-    const [maintenance, setMaintenance] = useState(0)
-    const [postAndTelecommunications, setPostAndTelecommunications] = useState(0)
-    const [publishingAndAdvertisingAndReception, setPublishingAndAdvertisingAndReception] = useState(0)
-    const [expensesPrintingAndTranslationsAndJournalsAndCopyright, setExpensesPrintingAndTranslationsAndJournalsAndCopyright] = useState(0)
-    const [publicTransportAndTransitions, setPublicTransportAndTransitions] = useState(0)
-    const [expensesOfVariousService, setExpensesOfVariousService] = useState(0)
-    const [booksAndMediaItems, setBooksAndMediaItems] = useState(0)
-    const [conferences, setConferences] = useState(0)
-    const [trainingPrograms, setTrainingPrograms] = useState(0)
-    const [otherExpenditures, setOtherExpenditures] = useState(0)
-    const [institutionalMeansAllocated, setInstitutionalMeansAllocated] = useState(0)
-    const [costOfEachElectronicResourceForSpecifiedPeriod, setCostOfEachElectronicResourceForSpecifiedPeriod] = useState(0)
+    const [acquisition, setAcquisition] = useState()
+    const [waterAndLighting, setWaterAndLighting] = useState()
+    const [variousRequirements, setVariousRequirements] = useState()
+    const [maintenance, setMaintenance] = useState()
+    const [postAndTelecommunications, setPostAndTelecommunications] = useState()
+    const [publishingAndAdvertisingAndReception, setPublishingAndAdvertisingAndReception] = useState()
+    const [expensesPrintingAndTranslationsAndJournalsAndCopyright, setExpensesPrintingAndTranslationsAndJournalsAndCopyright] = useState()
+    const [publicTransportAndTransitions, setPublicTransportAndTransitions] = useState()
+    const [expensesOfVariousService, setExpensesOfVariousService] = useState()
+    const [booksAndMediaItems, setBooksAndMediaItems] = useState()
+    const [conferences, setConferences] = useState()
+    const [trainingPrograms, setTrainingPrograms] = useState()
+    const [otherExpenditures, setOtherExpenditures] = useState()
+    const [institutionalMeansAllocated, setInstitutionalMeansAllocated] = useState()
+    const [costOfEachElectronicResourceForSpecifiedPeriod, setCostOfEachElectronicResourceForSpecifiedPeriod] = useState()
 
 
     const handleSubmit = (e) => {
@@ -93,7 +93,6 @@ const Finance = ({year, month}) => {
                                   className="flex flex-col sm:flex-row bg-white rounded-lg shadow p-4" id="mainform">
                                 <Grid container spacing={6}>
                                     <Grid item lg={6} md={6} sm={12} xs={12} sx={{mt: 2}}>
-                                        {finance.postAndTelecommunications}
                                         <div className="flex flex-col gap-2">
                                             <div className="flex flex-col sm:flex-row items-center gap-3"
                                                  id="areaInputs">

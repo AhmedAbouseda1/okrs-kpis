@@ -10,9 +10,6 @@ import MetaData from "../../Layouts/MetaData";
 import Loader from "../../Layouts/Loader";
 import {createCollections, getCollections} from "../../../actions/collectionsAction";
 import {COLLECTIONS_SETUP_RESET} from "../../../constants/libraryConstants";
-import {getInfrastructure} from "../../../actions/infrastructureAction";
-
-
 const Collections = ({year, month}) => {
 
     const dispatch = useDispatch();

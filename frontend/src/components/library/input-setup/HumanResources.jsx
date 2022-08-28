@@ -20,10 +20,9 @@ const HumanResources = ({year, month}) => {
     const {humanResources, loading, success, error} = useSelector((state) => state.humanResources);
     const [noPrimaryUserGroup, setNoPrimaryUserGroup] = useState();
     const [openingHoursTotal, setOpeningHoursTotal] = useState();
-    const [totalNumOfHours, setTotalNumOfHours] = useState(0);
-    const [staffHoursTotal, setStaffHoursTotal] = useState(0);
-    const [noOfStaff, setNoOfStaff] = useState(0);
-
+    const [totalNumOfHours, setTotalNumOfHours] = useState();
+    const [staffHoursTotal, setStaffHoursTotal] = useState();
+    const [noOfStaff, setNoOfStaff] = useState();
 
 
     const handleSubmit = (e) => {
@@ -84,7 +83,7 @@ const HumanResources = ({year, month}) => {
                                                         required
                                                         value={humanResources != null ? humanResources.noPrimaryUserGroup : noPrimaryUserGroup}
                                                         onChange={e => {
-                                                           setNoPrimaryUserGroup(parseInt(e.target.value.toString()));
+                                                            setNoPrimaryUserGroup(parseInt(e.target.value.toString()));
                                                         }}/>
                                                 </div>
                                             </div>
@@ -142,7 +141,7 @@ const HumanResources = ({year, month}) => {
                                                         required
                                                         value={humanResources != null ? humanResources.totalNumOfHours : totalNumOfHours}
                                                         onChange={e => {
-                                                           setTotalNumOfHours(parseInt(e.target.value.toString()));
+                                                            setTotalNumOfHours(parseInt(e.target.value.toString()));
                                                         }}
                                                     />
                                                 </div>

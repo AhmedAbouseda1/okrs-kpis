@@ -17,8 +17,7 @@ const Infrastructure = ({year, month}) => {
     const dispatch = useDispatch();
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
-
-    const {infrastructure, loading, success, error} = useSelector((state) => state.infrastructure);
+    const {loading, success, infrastructure,error} = useSelector((state) => state.infrastructure);
     const [totalArea, setTotalArea] = useState(0);
     const [open, setOpen] = useState(false);
     const [squaredMetersOfBuildings, setSquaredMetersOfBuildings] = useState();
@@ -27,8 +26,7 @@ const Infrastructure = ({year, month}) => {
     const [readingHallsTables, setReadingHallsTables] = useState();
     const [activitiesHallsTables, setActivitiesHallsTables] = useState();
     const [activitiesHallsSeats, setActivitiesHallsSeats] = useState();
-    const [noOfPc, setNoOfPc] = useState(0);
-
+    const [noOfPc, setNoOfPc] = useState();
 
     const toggle = () => {
         setTotalArea(((squaredMetersOfBuildings == null) ? 0 : squaredMetersOfBuildings) +
@@ -71,15 +69,17 @@ const Infrastructure = ({year, month}) => {
             enqueueSnackbar("Infrastructure Setup Done", {variant: "success"});
             dispatch({type: INFRASTRUCTURE_SETUP_RESET});
         }
-    }, [dispatch, error, success, navigate, enqueueSnackbar]);
+    }, [dispatch,  year, month, error, success, navigate, enqueueSnackbar]);
 
 
     return (
         <>
             <MetaData title="Infrastructure"/>
             {loading ? <Loader/> :
+
                 <>
-                    <main className="w-full mt-12 sm:mt-0">
+
+                <main className="w-full mt-12 sm:mt-0">
                         <div>
                             <form onSubmit={handleSubmit} encType="multipart/form-data"
                                   className="flex flex-col sm:flex-row bg-white rounded-lg shadow p-4" id="mainform">
@@ -102,6 +102,33 @@ const Infrastructure = ({year, month}) => {
                                                             setSquaredMetersOfBuildings(parseInt(e.target.value.toString()));
                                                         }}/>
                                                 </div>
+                                                <div className="flex flex-col gap-2">
+
+                                                    <React.Fragment>
+                                                        {!open && (
+                                                            <Button onClick={toggle}>Calculate Total Area
+                                                            </Button>
+                                                        )}
+                                                        {open && (
+                                                            <Container>
+                                                                Total Area : {totalArea}
+                                                                <IconButton onClick={toggle}
+                                                                            sx={{mx: 2, verticalAlign: 'middle'}}>
+                                                                    <CircularProgress className="progress"/>
+                                                                </IconButton>
+                                                            </Container>
+                                                        )}
+                                                    </React.Fragment>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div className="flex flex-col gap-2">
+                                            <div className="flex flex-col sm:flex-row items-center gap-3"
+                                                 id="areaInputs">
                                                 <div
                                                     className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
                                                     <TextField
@@ -119,29 +146,10 @@ const Infrastructure = ({year, month}) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="flex flex-col gap-2">
 
-                                            <React.Fragment>
-                                                {!open && (
-                                                    <Button onClick={toggle}>Calculate Total Area
-                                                    </Button>
-                                                )}
-                                                {open && (
-                                                    <Container>
-                                                        Total Area : {totalArea}
-                                                        <IconButton onClick={toggle}
-                                                                    sx={{mx: 2, verticalAlign: 'middle'}}>
-                                                            <CircularProgress className="progress"/>
-                                                        </IconButton>
-                                                    </Container>
-                                                )}
-                                            </React.Fragment>
-                                        </div>
                                         <div className="flex flex-col gap-2">
-
 
                                             <h2 className="text-sm">Activities Halls</h2>
-
                                             <div className="flex flex-col sm:flex-row items-center gap-3"
                                                  id="activitiesInputs">
                                                 <div
@@ -158,6 +166,12 @@ const Infrastructure = ({year, month}) => {
                                                         }}
                                                     />
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col gap-2">
+
+                                            <div className="flex flex-col sm:flex-row items-center gap-3"
+                                                 id="activitiesInputs">
                                                 <div
                                                     className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
                                                     <TextField
@@ -197,6 +211,13 @@ const Infrastructure = ({year, month}) => {
                                                         }}
                                                     />
                                                 </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex flex-col gap-2">
+
+                                            <div className="flex flex-col sm:flex-row items-center gap-3"
+                                                 id="readingInputs">
                                                 <div
                                                     className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
                                                     <TextField
