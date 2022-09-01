@@ -23,11 +23,11 @@ const PrimaryDropDownMenu = ({ setTogglePrimaryDropDown, user }) => {
     }
 
     return (
-        <div className="absolute w-60 -left-24 ml-2 top-9 bg-white shadow-2xl rounded flex-col text-sm">
+        <div className="absolute w-60 -left-24 ml-2 top-9 bg-white shadow-2xl rounded flex-col">
 
             {user.role === "admin" &&
                 <Link className="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50 rounded-t" to="/admin/dashboard">
-                    <span className="text-primary-blue"><DashboardIcon sx={{ fontSize: "18px" }} /></span>
+                    <span className="text-primary-blue"><DashboardIcon sx={{ fontSize: "30px" }} /></span>
                     Admin Dashboard
                 </Link>
             }

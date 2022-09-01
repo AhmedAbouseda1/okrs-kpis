@@ -56,6 +56,7 @@ export default function LibrarySetup() {
     const handleReset = () => setActiveStep(0);
     const Container = styled("div")(({theme}) => ({
         margin: "30px",
+
         [theme.breakpoints.down("sm")]: {margin: "16px"},
         "& .breadcrumb": {
             marginBottom: "30px",

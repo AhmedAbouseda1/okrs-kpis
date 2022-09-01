@@ -4,20 +4,23 @@ import logo from '../../../assets/images/logo.png';
 import PrimaryDropDownMenu from './PrimaryDropDownMenu';
 import {useState} from 'react';
 import {useSelector} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const Header = () => {
 
   const { isAuthenticated, user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const { cartItems } = useSelector(state => state.cart);
 
   const [togglePrimaryDropDown, setTogglePrimaryDropDown] = useState(false);
   const [toggleSecondaryDropDown, setToggleSecondaryDropDown] = useState(false);
-
+  const login = () => {
+    navigate("/login");
+  }
   return (
 
-    <header className="bg-primary-blue fixed top-0 py-2.5 w-full z-10">
+    <header className="transparent fixed top-0 py-5 w-full z-10">
 
       {/* <!-- navbar container --> */}
       <div className="w-full sm:w-9/12 px-1 sm:px-4 m-auto flex justify-between items-center relative">
@@ -39,7 +42,7 @@ const Header = () => {
             <Link to="/login" className="px-3 sm:px-9 py-0.5 text-primary-blue bg-white border font-medium rounded-sm cursor-pointer">Login</Link>
             :
             (
-              <span className="userDropDown flex items-center text-white font-medium gap-1 cursor-pointer" onClick={() =>
+              <span className="userDropDown flex items-center text-black #efd236 font-large gap-1 cursor-pointer" onClick={() =>
                   setTogglePrimaryDropDown(!togglePrimaryDropDown)}>{user.name}
                 <span>{togglePrimaryDropDown ? <ExpandLessIcon sx={{ fontSize: "16px" }} /> : <ExpandMoreIcon sx={{ fontSize: "16px" }} />}</span>
               </span>
