@@ -10,22 +10,20 @@ const Header = () => {
 
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
-  const { cartItems } = useSelector(state => state.cart);
 
   const [togglePrimaryDropDown, setTogglePrimaryDropDown] = useState(false);
-  const [toggleSecondaryDropDown, setToggleSecondaryDropDown] = useState(false);
 
   return (
 
-    <header className="bg-primary-blue fixed top-0 py-2.5 w-full z-10">
+    <header className="transparent fixed top-0 py-2.5 w-full z-10">
 
       {/* <!-- navbar container --> */}
       <div className="w-full sm:w-9/12 px-1 sm:px-4 m-auto flex justify-between items-center relative">
 
         {/* <!-- logo & search container --> */}
         <div className="flex items-center flex-1">
-          <Link className="h-7 mr-1 sm:mr-4" to="/">
-            <img draggable="false" className="h-full w-full object-contain" src={logo} alt="Our Library Logo" />
+          <Link className="site-title h-7 mr-1 sm:mr-4" to="/">
+            <h3>OKRs & KPIs</h3>
           </Link>
 
           {/*<Searchbar />*/}
@@ -36,11 +34,14 @@ const Header = () => {
         <div className="flex items-center justify-between ml-1 sm:ml-0 gap-0.5 sm:gap-7 relative">
 
           {isAuthenticated === false ?
-            <Link to="/login" className="px-3 sm:px-9 py-0.5 text-primary-blue bg-white border font-medium rounded-sm cursor-pointer">Login</Link>
+            <Link to="/login" className="px-3 sm:px-9 py-0.5 text-primary-blue bg-white border font-medium rounded-sm cursor-pointer">
+              Login
+            </Link>
             :
             (
-              <span className="userDropDown flex items-center text-white font-medium gap-1 cursor-pointer" onClick={() =>
-                  setTogglePrimaryDropDown(!togglePrimaryDropDown)}>{user.name}
+              <span className=" site-title userDropDown flex items-center text-black font-medium gap-1 cursor-pointer" onClick={() =>
+                  setTogglePrimaryDropDown(!togglePrimaryDropDown)}>
+                <h3>{user.name}</h3>
                 <span>{togglePrimaryDropDown ? <ExpandLessIcon sx={{ fontSize: "16px" }} /> : <ExpandMoreIcon sx={{ fontSize: "16px" }} />}</span>
               </span>
             )

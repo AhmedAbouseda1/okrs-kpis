@@ -1,10 +1,9 @@
-import {Button, CircularProgress, Grid, IconButton,} from "@mui/material";
+import {Grid} from "@mui/material";
 import React, {useEffect, useState} from "react";
-import Container from "@mui/material/Container";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
-import {createFinance, getFinance} from "../../../actions/financeAction";
+import {createFinance, getFinance, updateFinance} from "../../../actions/financeAction";
 import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
@@ -55,8 +54,12 @@ const Finance = ({year, month}) => {
         formData.set("costOfEachElectronicResourceForSpecifiedPeriod", costOfEachElectronicResourceForSpecifiedPeriod);
         formData.set("year", year);
         formData.set("month", month);
+        if (finance != null) {
+            dispatch(updateFinance(year, month, formData));
 
-        dispatch(createFinance(formData));
+        } else {
+            dispatch(createFinance(formData));
+        }
     }
     useEffect(() => {
         if (error) {
@@ -64,6 +67,23 @@ const Finance = ({year, month}) => {
             dispatch(clearErrors());
         }
         dispatch(getFinance(year, month));
+        if (finance != null) {
+            setAcquisition(finance.acquisition);
+            setWaterAndLighting(finance.waterAndLighting);
+            setVariousRequirements(finance.variousRequirements);
+            setMaintenance(finance.maintenance);
+            setPostAndTelecommunications(finance.postAndTelecommunications);
+            setPublishingAndAdvertisingAndReception(finance.publishingAndAdvertisingAndReception);
+            setExpensesPrintingAndTranslationsAndJournalsAndCopyright(finance.expensesPrintingAndTranslationsAndJournalsAndCopyright);
+            setPublicTransportAndTransitions(finance.publicTransportAndTransitions);
+            setExpensesOfVariousService(finance.expensesOfVariousService);
+            setBooksAndMediaItems(finance.booksAndMediaItems);
+            setConferences(finance.conferences);
+            setTrainingPrograms(finance.trainingPrograms);
+            setOtherExpenditures(finance.otherExpenditures);
+            setInstitutionalMeansAllocated(finance.institutionalMeansAllocated);
+            setCostOfEachElectronicResourceForSpecifiedPeriod(finance.costOfEachElectronicResourceForSpecifiedPeriod);
+        }
     }, [dispatch, year, month, error, enqueueSnackbar]);
 
     useEffect(() => {
@@ -78,8 +98,7 @@ const Finance = ({year, month}) => {
     }, [dispatch, error, success, navigate, enqueueSnackbar]);
 
 
-    return (
-        <>
+    return (<>
 
             <MetaData title="Finance"/>
 
@@ -104,7 +123,7 @@ const Finance = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={finance != null ? finance.acquisition : acquisition}
+                                                        value={acquisition}
                                                         onChange={e => {
                                                             setAcquisition(parseInt(e.target.value.toString()));
                                                         }}/>
@@ -123,7 +142,7 @@ const Finance = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={finance != null ? finance.variousRequirements : variousRequirements}
+                                                        value={variousRequirements}
                                                         onChange={e => {
                                                             setVariousRequirements(parseInt(e.target.value.toString()));
                                                         }}
@@ -140,7 +159,7 @@ const Finance = ({year, month}) => {
                                                     size="small"
                                                     required
                                                     label="Public transport and transitions"
-                                                    value={finance != null ? finance.publicTransportAndTransitions : publicTransportAndTransitions}
+                                                    value={publicTransportAndTransitions}
 
                                                     onChange={e => {
                                                         setPublicTransportAndTransitions(parseInt(e.target.value.toString()));
@@ -155,7 +174,7 @@ const Finance = ({year, month}) => {
                                                     size="small"
                                                     required
                                                     label="Expenses Of Various Service"
-                                                    value={finance != null ? finance.expensesOfVariousService : expensesOfVariousService}
+                                                    value={expensesOfVariousService}
 
                                                     onChange={e => {
                                                         setExpensesOfVariousService(parseInt(e.target.value.toString()));
@@ -173,8 +192,7 @@ const Finance = ({year, month}) => {
                                                     size="small"
                                                     required
                                                     label="Books and media items"
-                                                    value={finance != null ? finance.booksAndMediaItems : booksAndMediaItems}
-
+                                                    value={booksAndMediaItems}
                                                     onChange={e => {
                                                         setBooksAndMediaItems(parseInt(e.target.value.toString()));
                                                     }}
@@ -189,7 +207,7 @@ const Finance = ({year, month}) => {
                                                     size="small"
                                                     required
                                                     label="Conferences"
-                                                    value={finance != null ? finance.conferences : conferences}
+                                                    value={conferences}
 
                                                     onChange={e => {
                                                         setConferences(parseInt(e.target.value.toString()));
@@ -210,7 +228,7 @@ const Finance = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Water And Lighting"
-                                                        value={finance != null ? finance.waterAndLighting : waterAndLighting}
+                                                        value={waterAndLighting}
                                                         onChange={e => {
                                                             setWaterAndLighting(parseInt(e.target.value.toString()));
                                                         }}
@@ -232,7 +250,7 @@ const Finance = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Maintenance"
-                                                        value={finance != null ? finance.maintenance : maintenance}
+                                                        value={maintenance}
                                                         onChange={e => {
                                                             setMaintenance(parseInt(e.target.value.toString()));
                                                         }}
@@ -255,7 +273,7 @@ const Finance = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Post and Telecommunications"
-                                                        value={finance != null ? finance.postAndTelecommunications : postAndTelecommunications}
+                                                        value={postAndTelecommunications}
                                                         onChange={e => {
                                                             setPostAndTelecommunications(parseInt(e.target.value.toString()));
                                                         }}
@@ -272,7 +290,7 @@ const Finance = ({year, month}) => {
                                                     size="small"
                                                     required
                                                     label="Expenses printing, Translations, Journals and Copyright"
-                                                    value={finance != null ? finance.expensesPrintingAndTranslationsAndJournalsAndCopyright : expensesPrintingAndTranslationsAndJournalsAndCopyright}
+                                                    value={expensesPrintingAndTranslationsAndJournalsAndCopyright}
 
                                                     onChange={e => {
                                                         setExpensesPrintingAndTranslationsAndJournalsAndCopyright(parseInt(e.target.value.toString()));
@@ -291,7 +309,7 @@ const Finance = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Training Programs"
-                                                        value={finance != null ? finance.trainingPrograms : trainingPrograms}
+                                                        value={trainingPrograms}
 
                                                         onChange={e => {
                                                             setTrainingPrograms(parseInt(e.target.value.toString()));
@@ -307,7 +325,7 @@ const Finance = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Other Expenditures"
-                                                        value={finance != null ? finance.otherExpenditures : otherExpenditures}
+                                                        value={otherExpenditures}
 
                                                         onChange={e => {
                                                             setOtherExpenditures(parseInt(e.target.value.toString()));
@@ -326,7 +344,7 @@ const Finance = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Institutional Means Allocated"
-                                                        value={finance != null ? finance.institutionalMeansAllocated : institutionalMeansAllocated}
+                                                        value={institutionalMeansAllocated}
 
                                                         onChange={e => {
                                                             setInstitutionalMeansAllocated(parseInt(e.target.value.toString()));
@@ -342,7 +360,7 @@ const Finance = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Cost Of Each Electronic Resource For Specified Period"
-                                                        value={finance != null ? finance.costOfEachElectronicResourceForSpecifiedPeriod : costOfEachElectronicResourceForSpecifiedPeriod}
+                                                        value={costOfEachElectronicResourceForSpecifiedPeriod}
 
                                                         onChange={e => {
                                                             setCostOfEachElectronicResourceForSpecifiedPeriod(parseInt(e.target.value.toString()));
@@ -366,7 +384,7 @@ const Finance = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Publishing,advertising and reception"
-                                                        value={finance != null ? finance.publishingAndAdvertisingAndReception : publishingAndAdvertisingAndReception}
+                                                        value={publishingAndAdvertisingAndReception}
                                                         onChange={e => {
                                                             setPublishingAndAdvertisingAndReception(parseInt(e.target.value.toString()));
                                                         }}
@@ -377,8 +395,8 @@ const Finance = ({year, month}) => {
                                         </div>
                                         <div className="flex justify-end">
                                             <input form="mainform" type="submit"
-                                                   className="bg-primary-orange uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value="Submit"/>
+                                                   className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
+                                                   value={finance != null ? "Update" : "Submit"}/>
                                         </div>
                                     </Grid>
 
@@ -387,10 +405,8 @@ const Finance = ({year, month}) => {
                             </form>
                         </div>
                     </main>
-                </>
-            }
-        </>
-    );
+                </>}
+        </>);
 };
 
 export default Finance;

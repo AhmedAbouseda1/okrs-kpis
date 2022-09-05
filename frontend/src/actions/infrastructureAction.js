@@ -29,6 +29,26 @@ export const createInfrastructure = (infrastructureData) => async (dispatch) => 
 }
 
 
+export const updateInfrastructure = (year, month,infrastructureData) => async (dispatch) => {
+    try {
+        dispatch({ type: INFRASTRUCTURE_SETUP });
+        const config = { header: { "Content-Type": "application/json" } }
+        const { data } = await axios.put(`/api/v1/library/librarySetup/infrastructure/${year}/${month}`
+            , infrastructureData,
+            config);
+
+        dispatch({
+            type: INFRASTRUCTURE_SETUP_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: INFRASTRUCTURE_SETUP_FAIL,
+            payload: error.response.data.message,
+        });
+    }
+}
+
 // load Infrastructure
 export const getInfrastructure = (year, month) => async (dispatch) => {
     try {

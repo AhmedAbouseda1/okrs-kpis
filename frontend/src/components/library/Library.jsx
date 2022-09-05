@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import UserSidebar from './Sidebar/UserSidebar';
+import Sidebar from '../Sidebar/Sidebar';
 import MenuIcon from '@mui/icons-material/Menu';
 
 const Library = ({activeTab, children}) => {
@@ -17,8 +17,8 @@ const Library = ({activeTab, children}) => {
         <>
             <main className="flex min-h-screen mt-14 sm:min-w-full">
 
-                {!onMobile && <UserSidebar activeTab={activeTab}/>}
-                {toggleSidebar && <UserSidebar activeTab={activeTab} setToggleSidebar={setToggleSidebar}/>}
+                {!onMobile && <Sidebar activeTab={activeTab}/>}
+                {toggleSidebar && <Sidebar activeTab={activeTab} setToggleSidebar={setToggleSidebar}/>}
 
                 <div className="w-full sm:w-4/5 sm:ml-64 min-h-screen">
                     <div className="flex flex-col gap-6 sm:m-8 p-2 pb-6 overflow-hidden">

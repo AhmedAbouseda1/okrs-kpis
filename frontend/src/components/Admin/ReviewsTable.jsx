@@ -104,7 +104,7 @@ const ReviewsTable = () => {
             {loading && <BackdropLoader />}
             <div className="flex justify-between items-center gap-2 sm:gap-12">
                 <h1 className="text-lg font-medium uppercase">reviews</h1>
-                <input type="text" placeholder="Product ID" value={productId} onChange={(e) => setProductId(e.target.value)} className="outline-none border-0 rounded p-2 w-full shadow hover:shadow-lg" />
+                <input type="text" placeholder="Review Id" value={productId} onChange={(e) => setProductId(e.target.value)} className="outline-none border-0 rounded p-2 w-full shadow hover:shadow-lg" />
             </div>
             <div className="bg-white rounded-xl shadow-lg w-full" style={{ height: 450 }}>
 

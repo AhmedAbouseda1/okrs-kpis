@@ -94,11 +94,11 @@ const Register = () => {
             <main className="w-full mt-12 sm:pt-20 sm:mt-0">
 
                 {/* <!-- row --> */}
-                <div className="flex sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">
+                <div className="flex text-black sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">
 
                     <FormSidebar
                         title="Looks like you're new here!"
-                        tag="Sign up with your mobile number to get started"
+                        tag="Sign up with your email to get started"
                     />
 
                     {/* <!-- signup column --> */}
@@ -192,7 +192,7 @@ const Register = () => {
                                         Choose File
                                     </label>
                                 </div>
-                                <button type="submit" className="text-white py-3 w-full bg-primary-orange shadow hover:shadow-lg rounded-sm font-medium">Signup</button>
+                                <button type="submit" className="text-white py-3 w-full backgroundgreen shadow hover:shadow-lg rounded-sm font-medium">Signup</button>
                                 <Link to="/login" className="hover:bg-gray-50 text-primary-blue text-center py-3 w-full shadow border rounded-sm font-medium">Existing User? Log in</Link>
                             </div>
 

@@ -5,37 +5,39 @@ import {useDispatch, useSelector} from 'react-redux';
 import {clearErrors, getSliderProducts} from '../../actions/productAction';
 import {useSnackbar} from 'notistack';
 import MetaData from '../Layouts/MetaData';
+import {Navigate} from "react-router-dom";
 
 const Home = () => {
 
-  const dispatch = useDispatch();
-  const { enqueueSnackbar } = useSnackbar();
+    const dispatch = useDispatch();
+    const {enqueueSnackbar} = useSnackbar();
+    const {error, loading, isAuthenticated, user} = useSelector(state => state.user);
 
-  const { error, loading } = useSelector((state) => state.products);
+    useEffect(() => {
+        if (error) {
+            enqueueSnackbar(error, {variant: "error"});
+            dispatch(clearErrors());
+        }
+        dispatch(getSliderProducts());
+    }, [dispatch, error, enqueueSnackbar]);
 
-  useEffect(() => {
-    if (error) {
-      enqueueSnackbar(error, { variant: "error" });
-      dispatch(clearErrors());
-    }
-    dispatch(getSliderProducts());
-  }, [dispatch, error, enqueueSnackbar]);
-
-  return (
-    <>
-      <MetaData title="OKRs And KPIs" />
-      <MainMenu />
-      <main className="flex flex-col gap-3 px-2 mt-16 sm:mt-2">
-        {/*<Banner />*/}
-        <DealSlider title={"Our Products"} />
-        {/*{!loading && <ProductSlider title={"Suggested for You"} tagline={"Based on Your Activity"} />}*/}
-        {/*<DealSlider title={"Top Brands, Best Price"} />*/}
-        {/*{!loading && <ProductSlider title={"You May Also Like..."} tagline={"Based on Your Interest"} />}*/}
-        {/*<DealSlider title={"Top Offers On"} />*/}
-        {/*{!loading && <ProductSlider title={"Don't Miss These!"} tagline={"Inspired by your order"} />}*/}
-      </main>
-    </>
-  );
+    return (
+        <>
+            <MetaData title="OKRs And KPIs"/>
+            <MainMenu/>
+            <main className="flex flex-col gap-3 px-2 mt-16 sm:mt-2">
+                <>
+                    {loading === false && (
+                        isAuthenticated === false ?
+                            <Navigate to="/login"/> :
+                            user.role === "admin" ?
+                                <Navigate to="/admin/dashboard"/> :
+                                <Navigate to="/library/Library"/>
+                    )}
+                </>
+            </main>
+        </>
+    );
 };
 
 export default Home;

@@ -2,6 +2,7 @@ const Collections = require('../models/collectionsModel');
 const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
 const SearchFeatures = require('../utils/searchFeatures');
 const ErrorHandler = require('../utils/errorHandler');
+const Infrastructure = require("../models/infrastructureModel");
 
 exports.createCollections = asyncErrorHandler(async (req, res, next) => {
 
@@ -9,6 +10,27 @@ exports.createCollections = asyncErrorHandler(async (req, res, next) => {
     const collections = await Collections.create(req.body);
 
     res.status(201).json({
+        success: true,
+        collections
+    });
+});
+
+
+// updateCollections
+exports.updateCollections = asyncErrorHandler(async (req, res, next) => {
+    let collections = await Collections.findOneAndUpdate({
+        year: req.params.year,
+        month: req.params.month,
+    }, req.body, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+    });
+    if (!collections) {
+        return next(new ErrorHandler("Collections Not Found", 404));
+    }
+
+    res.status(200).json({
         success: true,
         collections
     });

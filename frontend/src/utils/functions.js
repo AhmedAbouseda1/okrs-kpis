@@ -15,3 +15,7 @@ export const formatDate = (dt) => {
 export const getRandomProducts = (prodsArray, n) => {
     return prodsArray.sort(() => 0.5 - Math.random()).slice(0, n)
 }
+
+function isLocalhost(url) {
+    return url.includes('localhost') || url.includes('127.0.0.1');
+}

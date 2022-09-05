@@ -7,6 +7,15 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.site-title {
+    padding: 0px 0px;
+}
+.site-title h3 {
+    font-family: 'Century Gothic', serif;
+    font-size: 21px;
+    color: #efd236;
+}
+
 /* hover navbar dropdown arrow */
 .arrow_down {
   border-left: 11px solid transparent;

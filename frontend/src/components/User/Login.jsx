@@ -14,7 +14,7 @@ const Login = () => {
     const { enqueueSnackbar } = useSnackbar();
     const location = useLocation();
 
-    const { loading, isAuthenticated, error } = useSelector((state) => state.user);
+    const { loading, isAuthenticated, error , user} = useSelector((state) => state.user);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -32,7 +32,11 @@ const Login = () => {
             dispatch(clearErrors());
         }
         if (isAuthenticated) {
-            navigate(`/${redirect}`)
+            if (user.role === "admin" ){
+                navigate("/admin/dashboard")
+            }else {
+                navigate("/library/Library")
+            }
         }
     }, [dispatch, error, isAuthenticated, redirect, navigate, enqueueSnackbar]);
 
@@ -46,9 +50,9 @@ const Login = () => {
                 {/* <!-- row --> */}
                 <div className="flex sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">
                     {/* <!-- sidebar column  --> */}
-                    <div className="loginSidebar bg-primary-blue p-10 pr-12 hidden sm:flex flex-col gap-4 w-2/5">
-                        <h1 className="font-medium text-white text-3xl">Login</h1>
-                        <p className="text-gray-200 text-lg">Get access to your Library</p>
+                    <div className="loginSidebar p-10 pr-12 hidden sm:flex flex-col gap-4 w-2/5">
+                        <h1 className="font-medium text-black text-3xl">Login</h1>
+                        <p className="text-black text-lg">Get access to your Library</p>
                     </div>
                     {/* <!-- sidebar column  --> */}
 
@@ -85,7 +89,7 @@ const Login = () => {
                                     {/* <!-- button container --> */}
                                     <div className="flex flex-col gap-2.5 mt-2 mb-32">
                                         <p className="text-xs text-primary-grey text-left">By continuing, you agree to OKRs and KPIs <a href="https://www.flipkart.com/pages/terms" className="text-primary-blue"> Terms of Use</a> and <a href="https://www.flipkart.com/pages/privacypolicy" className="text-primary-blue"> Privacy Policy.</a></p>
-                                        <button type="submit" className="text-white py-3 w-full bg-primary-orange shadow hover:shadow-lg rounded-sm font-medium">Login</button>
+                                        <button type="submit" className="text-white py-3 w-full backgroundgreen shadow hover:shadow-lg rounded-sm font-medium">Login</button>
                                         <Link to="/password/forgot" className="hover:bg-gray-50 text-primary-blue text-center py-3 w-full shadow border rounded-sm font-medium">Forgot Password?</Link>
                                     </div>
                                     {/* <!-- button container --> */}

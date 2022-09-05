@@ -98,7 +98,7 @@ const ResetPassword = () => {
                   {/* <!-- button container --> */}
                   <div class="flex flex-col gap-2.5 mt-2 mb-32">
                     <p class="text-xs text-primary-grey text-left">By continuing, you agree to OKRs and KPIs <a href="https://www.flipkart.com/pages/terms" class="text-primary-blue"> Terms of Use</a> and <a href="https://www.flipkart.com/pages/privacypolicy" class="text-primary-blue"> Privacy Policy.</a></p>
-                    <button type="submit" class="text-white py-3 w-full bg-primary-orange shadow hover:shadow-lg rounded-sm font-medium">Submit</button>
+                    <button type="submit" class="text-white py-3 w-full backgroundgreen shadow hover:shadow-lg rounded-sm font-medium">Submit</button>
                   </div>
                   {/* <!-- button container --> */}
 

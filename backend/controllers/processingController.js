@@ -1,6 +1,5 @@
 const Processing = require('../models/processingModel');
 const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
-const SearchFeatures = require('../utils/searchFeatures');
 const ErrorHandler = require('../utils/errorHandler');
 
 exports.createProcessing = asyncErrorHandler(async (req, res, next) => {
@@ -9,6 +8,27 @@ exports.createProcessing = asyncErrorHandler(async (req, res, next) => {
     const processing = await Processing.create(req.body);
 
     res.status(201).json({
+        success: true,
+        processing
+    });
+});
+
+
+// updateCollections
+exports.updateProcessing = asyncErrorHandler(async (req, res, next) => {
+    let processing = await Processing.findOneAndUpdate({
+        year: req.params.year,
+        month: req.params.month,
+    }, req.body, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+    });
+    if (!processing) {
+        return next(new ErrorHandler("Processing Not Found", 404));
+    }
+
+    res.status(200).json({
         success: true,
         processing
     });

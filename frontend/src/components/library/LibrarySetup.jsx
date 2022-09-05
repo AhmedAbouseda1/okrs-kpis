@@ -87,7 +87,7 @@ export default function LibrarySetup() {
                             <Box mt={4}>
                                 {activeStep === steps.length ? (
                                     <Box>
-                                        <Typography>All steps completed</Typography>
+                                        <Typography>All setup for this month completed</Typography>
 
                                         <Button sx={{mt: 2}} variant="contained" color="secondary"
                                                 onClick={handleReset}>
@@ -134,7 +134,7 @@ export default function LibrarySetup() {
                                             showMonthYearPicker
                                         />
                                         <input form="mainform" type="submit"
-                                               className="bg-primary-orange uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
+                                               className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
                                                value="Submit"/>
                                     </div>
                                 </div>

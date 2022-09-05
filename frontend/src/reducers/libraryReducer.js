@@ -45,6 +45,11 @@ export const infrastructureReducer = (state = {infrastructure: {}}, {type, paylo
                 loading: true,
             };
         case LOAD_INFRASTRUCTURE_SUCCESS:
+            return {
+                loading: false,
+                success: payload.success,
+                infrastructure: payload,
+            };
         case INFRASTRUCTURE_SETUP_SUCCESS:
             return {
                 loading: false,
@@ -87,6 +92,11 @@ export const collectionsReducer = (state = {collections: {}}, {type, payload}) =
                 loading: true,
             };
         case LOAD_COLLECTIONS_SUCCESS:
+            return {
+                loading: false,
+                success: payload.success,
+                collections: payload,
+            };
         case COLLECTIONS_SETUP_SUCCESS:
             return {
                 loading: false,
@@ -126,6 +136,11 @@ export const processingReducer = (state = {processing: {}}, {type, payload}) => 
                 loading: true,
             };
         case  LOAD_PROCESSING_SUCCESS:
+            return {
+                loading: false,
+                success: payload.success,
+                processing: payload,
+            };
         case  PROCESSING_SETUP_SUCCESS:
             return {
                 loading: false,
@@ -165,6 +180,11 @@ export const humanResourcesReducer = (state = {humanResources: {}}, {type, paylo
                 loading: true,
             };
         case  LOAD_HUMAN_RESOURCES_SUCCESS:
+            return {
+                loading: false,
+                success: payload.success,
+                humanResources: payload,
+            };
         case HUMAN_RESOURCES_SETUP_SUCCESS:
             return {
                 loading: false,
@@ -203,6 +223,11 @@ export const financeReducer = (state = {finance: {}}, {type, payload}) => {
                 loading: true,
             };
         case LOAD_FINANCE_SUCCESS:
+            return {
+                loading: false,
+                success: payload.success,
+                finance: payload,
+            };
         case  FINANCE_SETUP_SUCCESS:
             return {
                 loading: false,

@@ -159,7 +159,7 @@ const ProductDetails = () => {
                                                 {itemInCart ? "GO TO CART" : "ADD TO CART"}
                                             </button>
                                         )}
-                                        <button onClick={buyNow} disabled={product.stock < 1 ? true : false} className={product.stock < 1 ? "p-4 w-full flex items-center justify-center gap-2 text-white bg-red-600 cursor-not-allowed rounded-sm shadow hover:shadow-lg" : "p-4 w-1/2 flex items-center justify-center gap-2 text-white bg-primary-orange rounded-sm shadow hover:shadow-lg"}>
+                                        <button onClick={buyNow} disabled={product.stock < 1 ? true : false} className={product.stock < 1 ? "p-4 w-full flex items-center justify-center gap-2 text-white bg-red-600 cursor-not-allowed rounded-sm shadow hover:shadow-lg" : "p-4 w-1/2 flex items-center justify-center gap-2 text-white backgroundgreen rounded-sm shadow hover:shadow-lg"}>
                                             <FlashOnIcon />
                                             {product.stock < 1 ? "OUT OF STOCK" : "BUY NOW"}
                                         </button>

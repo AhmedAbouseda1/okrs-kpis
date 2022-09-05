@@ -4,12 +4,13 @@ import Container from "@mui/material/Container";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
-import {createProcessing, getProcessing} from "../../../actions/processingAction";
+import {createProcessing, getProcessing, updateProcessing} from "../../../actions/processingAction";
 import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
 import Loader from "../../Layouts/Loader";
 import {PROCESSING_SETUP_RESET} from "../../../constants/libraryConstants";
+import {createCollections, updateCollections} from "../../../actions/collectionsAction";
 
 
 const Processing = ({year, month}) => {
@@ -33,8 +34,12 @@ const Processing = ({year, month}) => {
         formData.set("numberOfAcademicPublicationsLast3Years", numberOfAcademicPublicationsLast3Years);
         formData.set("year", year);
         formData.set("month", month);
+        if (processing != null) {
+            dispatch(updateProcessing(year, month, formData));
 
-        dispatch(createProcessing(formData));
+        } else {
+            dispatch(createProcessing(formData));
+        }
     }
     useEffect(() => {
         if (error) {
@@ -42,6 +47,12 @@ const Processing = ({year, month}) => {
             dispatch(clearErrors());
         }
         dispatch(getProcessing(year, month));
+        if(processing!=null){
+            setRequiredTitlesInCollection(processing.requiredTitlesInCollection);
+            setTargetPopulationReached(processing.targetPopulationReached);
+            setNumberOfAcademicPublicationsLast3Years(processing.numberOfAcademicPublicationsLast3Years);
+        }
+        
     }, [dispatch, year, month, error, enqueueSnackbar]);
 
     useEffect(() => {
@@ -78,7 +89,7 @@ const Processing = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={processing != null ? processing.requiredTitlesInCollection : requiredTitlesInCollection}
+                                                        value={requiredTitlesInCollection}
                                                         onChange={e => {
                                                             setRequiredTitlesInCollection(parseInt(e.target.value.toString()));
                                                         }}/>
@@ -97,7 +108,7 @@ const Processing = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Target Population Reached"
-                                                        value={processing != null ? processing.targetPopulationReached : targetPopulationReached}
+                                                        value={targetPopulationReached}
                                                         onChange={e => {
                                                             setTargetPopulationReached(parseInt(e.target.value.toString()));
                                                         }}
@@ -117,7 +128,7 @@ const Processing = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={processing != null ? processing.numberOfAcademicPublicationsLast3Years : numberOfAcademicPublicationsLast3Years}
+                                                        value={numberOfAcademicPublicationsLast3Years}
                                                         onChange={e => {
                                                             setNumberOfAcademicPublicationsLast3Years(parseInt(e.target.value.toString()));
                                                         }}
@@ -127,8 +138,8 @@ const Processing = ({year, month}) => {
                                         </div>
                                         <div className="flex justify-end">
                                             <input form="mainform" type="submit"
-                                                   className="bg-primary-orange uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value="Submit"/>
+                                                   className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
+                                                   value={processing != null ? "Update":"Submit"}/>
                                         </div>
                                     </Grid>
 

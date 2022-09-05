@@ -29,6 +29,26 @@ export const createFinance = (financeData) => async (dispatch) => {
 }
 
 
+export const updateFinance = (year, month,financeData) => async (dispatch) => {
+    try {
+        dispatch({ type: FINANCE_SETUP });
+        const config = { header: { "Content-Type": "application/json" } }
+        const { data } = await axios.put(`/api/v1/library/librarySetup/finance/${year}/${month}`
+            , financeData,
+            config);
+
+        dispatch({
+            type: FINANCE_SETUP_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: FINANCE_SETUP_FAIL,
+            payload: error.response.data.message,
+        });
+    }
+}
+
 // load Finance
 export const getFinance = (year, month) => async (dispatch) => {
     try {

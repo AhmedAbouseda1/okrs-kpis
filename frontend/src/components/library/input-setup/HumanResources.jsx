@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
-import {createHumanResources, getHumanResources} from "../../../actions/humanResourcesAction";
+import {createHumanResources, getHumanResources, updateHumanResources} from "../../../actions/humanResourcesAction";
 import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
@@ -36,8 +36,11 @@ const HumanResources = ({year, month}) => {
 
         formData.set("year", year);
         formData.set("month", month);
-
-        dispatch(createHumanResources(formData));
+        if (humanResources != null) {
+            dispatch(updateHumanResources(year, month, formData));
+        } else {
+            dispatch(createHumanResources(formData));
+        }
     }
     useEffect(() => {
         if (error) {
@@ -45,6 +48,13 @@ const HumanResources = ({year, month}) => {
             dispatch(clearErrors());
         }
         dispatch(getHumanResources(year, month));
+        if (humanResources != null) {
+            setNoPrimaryUserGroup(humanResources.noPrimaryUserGroup);
+            setOpeningHoursTotal(humanResources.openingHoursTotal);
+            setTotalNumOfHours(humanResources.totalNumOfHours);
+            setStaffHoursTotal(humanResources.noOfStaff);
+            setNoOfStaff(humanResources.staffHoursTotal);
+        }
     }, [dispatch, year, month, error, enqueueSnackbar]);
 
     useEffect(() => {
@@ -81,7 +91,7 @@ const HumanResources = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={humanResources != null ? humanResources.noPrimaryUserGroup : noPrimaryUserGroup}
+                                                        value={noPrimaryUserGroup}
                                                         onChange={e => {
                                                             setNoPrimaryUserGroup(parseInt(e.target.value.toString()));
                                                         }}/>
@@ -99,7 +109,7 @@ const HumanResources = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={humanResources != null ? humanResources.staffHoursTotal : staffHoursTotal}
+                                                        value={staffHoursTotal}
                                                         onChange={e => {
                                                             setStaffHoursTotal(parseInt(e.target.value.toString()));
                                                         }}/>
@@ -117,7 +127,7 @@ const HumanResources = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Opening Hours Total"
-                                                        value={humanResources != null ? humanResources.openingHoursTotal : openingHoursTotal}
+                                                        value={openingHoursTotal}
                                                         onChange={e => {
                                                             setOpeningHoursTotal(parseInt(e.target.value.toString()));
                                                         }}
@@ -139,7 +149,7 @@ const HumanResources = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={humanResources != null ? humanResources.totalNumOfHours : totalNumOfHours}
+                                                        value={totalNumOfHours}
                                                         onChange={e => {
                                                             setTotalNumOfHours(parseInt(e.target.value.toString()));
                                                         }}
@@ -156,7 +166,7 @@ const HumanResources = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={humanResources != null ? humanResources.noOfStaff : noOfStaff}
+                                                        value={noOfStaff}
                                                         onChange={e => {
                                                             setNoOfStaff(parseInt(e.target.value.toString()));
                                                         }}
@@ -166,8 +176,8 @@ const HumanResources = ({year, month}) => {
                                             </div>
                                             <div className="flex justify-end">
                                                 <input form="mainform" type="submit"
-                                                       className="bg-primary-orange uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                       value="Submit"/>
+                                                       className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
+                                                       value={humanResources != null ? "Update" : "Submit"}/>
                                             </div>
                                         </div>
                                     </Grid>

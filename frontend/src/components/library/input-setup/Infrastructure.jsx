@@ -4,7 +4,7 @@ import Container from "@mui/material/Container";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
-import {createInfrastructure, getInfrastructure} from "../../../actions/infrastructureAction";
+import {createInfrastructure, getInfrastructure, updateInfrastructure} from "../../../actions/infrastructureAction";
 import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
@@ -17,7 +17,7 @@ const Infrastructure = ({year, month}) => {
     const dispatch = useDispatch();
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
-    const {loading, success, infrastructure,error} = useSelector((state) => state.infrastructure);
+    const {loading, success, infrastructure, error} = useSelector((state) => state.infrastructure);
     const [totalArea, setTotalArea] = useState(0);
     const [open, setOpen] = useState(false);
     const [squaredMetersOfBuildings, setSquaredMetersOfBuildings] = useState();
@@ -50,14 +50,28 @@ const Infrastructure = ({year, month}) => {
         formData.set("year", year);
         formData.set("month", month);
 
-        dispatch(createInfrastructure(formData));
+        if (infrastructure != null) {
+            dispatch(updateInfrastructure(year, month, formData));
+        } else {
+            dispatch(createInfrastructure(formData));
+        }
     }
     useEffect(() => {
+
         if (error) {
             enqueueSnackbar(error, {variant: "error"});
             dispatch(clearErrors());
         }
         dispatch(getInfrastructure(year, month));
+        if (infrastructure !== null) {
+            setSquaredMetersOfBuildings(infrastructure.squaredMetersOfBuildings);
+            setSquaredMetersAvailableForPublic(infrastructure.squaredMetersAvailableForPublic);
+            setReadingHallsSeats(infrastructure.readingHallsSeats);
+            setReadingHallsTables(infrastructure.readingHallsTables);
+            setActivitiesHallsTables(infrastructure.activitiesHallsTables);
+            setActivitiesHallsSeats(infrastructure.activitiesHallsSeats);
+            setNoOfPc(infrastructure.noOfPc);
+        }
     }, [dispatch, year, month, error, enqueueSnackbar]);
 
     useEffect(() => {
@@ -69,7 +83,7 @@ const Infrastructure = ({year, month}) => {
             enqueueSnackbar("Infrastructure Setup Done", {variant: "success"});
             dispatch({type: INFRASTRUCTURE_SETUP_RESET});
         }
-    }, [dispatch,  year, month, error, success, navigate, enqueueSnackbar]);
+    }, [dispatch, year, month, error, success, navigate, enqueueSnackbar]);
 
 
     return (
@@ -79,14 +93,14 @@ const Infrastructure = ({year, month}) => {
 
                 <>
 
-                <main className="w-full mt-12 sm:mt-0">
+                    <main className="w-full mt-12 sm:mt-0">
                         <div>
                             <form onSubmit={handleSubmit} encType="multipart/form-data"
                                   className="flex flex-col sm:flex-row bg-white rounded-lg shadow p-4" id="mainform">
                                 <Grid container spacing={6}>
                                     <Grid item lg={6} md={6} sm={12} xs={12} sx={{mt: 2}}>
                                         <div className="flex flex-col gap-2">
-                                            <h2 className="text-sm">Area</h2>
+                                            <h2 className="text-sm" class="text-[#006d76]">Area</h2>
                                             <div className="flex flex-col sm:flex-row items-center gap-3"
                                                  id="areaInputs">
                                                 <div
@@ -97,7 +111,7 @@ const Infrastructure = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={infrastructure != null ? infrastructure.squaredMetersOfBuildings : squaredMetersOfBuildings}
+                                                        value={squaredMetersOfBuildings}
                                                         onChange={e => {
                                                             setSquaredMetersOfBuildings(parseInt(e.target.value.toString()));
                                                         }}/>
@@ -106,7 +120,8 @@ const Infrastructure = ({year, month}) => {
 
                                                     <React.Fragment>
                                                         {!open && (
-                                                            <Button onClick={toggle}>Calculate Total Area
+                                                            <Button onClick={toggle} class="text-[#006d76]">Calculate
+                                                                Total Area
                                                             </Button>
                                                         )}
                                                         {open && (
@@ -125,7 +140,6 @@ const Infrastructure = ({year, month}) => {
                                         </div>
 
 
-
                                         <div className="flex flex-col gap-2">
                                             <div className="flex flex-col sm:flex-row items-center gap-3"
                                                  id="areaInputs">
@@ -137,7 +151,7 @@ const Infrastructure = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Squared Meters Available For Public"
-                                                        value={infrastructure != null ? infrastructure.squaredMetersAvailableForPublic : squaredMetersAvailableForPublic}
+                                                        value={squaredMetersAvailableForPublic}
                                                         onChange={e => {
                                                             setSquaredMetersAvailableForPublic(parseInt(e.target.value.toString()));
                                                         }}
@@ -149,7 +163,7 @@ const Infrastructure = ({year, month}) => {
 
                                         <div className="flex flex-col gap-2">
 
-                                            <h2 className="text-sm">Activities Halls</h2>
+                                            <h2 className="text-sm" class="text-[#006d76]">Activities Halls</h2>
                                             <div className="flex flex-col sm:flex-row items-center gap-3"
                                                  id="activitiesInputs">
                                                 <div
@@ -160,7 +174,7 @@ const Infrastructure = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={infrastructure != null ? infrastructure.activitiesHallsTables : activitiesHallsTables}
+                                                        value={activitiesHallsTables}
                                                         onChange={e => {
                                                             setActivitiesHallsTables(parseInt(e.target.value.toString()));
                                                         }}
@@ -180,7 +194,7 @@ const Infrastructure = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Activities Halls Seats"
-                                                        value={infrastructure != null ? infrastructure.activitiesHallsSeats : activitiesHallsSeats}
+                                                        value={activitiesHallsSeats}
                                                         onChange={e => {
                                                             setActivitiesHallsSeats(parseInt(e.target.value.toString()));
                                                         }}
@@ -193,7 +207,7 @@ const Infrastructure = ({year, month}) => {
                                     </Grid>
                                     <Grid item lg={6} md={6} sm={12} xs={12} sx={{mt: 2}}>
                                         <div className="flex flex-col gap-2">
-                                            <h2 className="text-sm">Reading Halls</h2>
+                                            <h2 className="text-sm" class="text-[#006d76]">Reading Halls</h2>
 
                                             <div className="flex flex-col sm:flex-row items-center gap-3"
                                                  id="readingInputs">
@@ -205,7 +219,7 @@ const Infrastructure = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Reading Halls Tables"
-                                                        value={infrastructure!=null ?infrastructure.readingHallsTables:readingHallsTables}
+                                                        value={readingHallsTables}
                                                         onChange={e => {
                                                             setReadingHallsTables(parseInt(e.target.value.toString()));
                                                         }}
@@ -226,7 +240,7 @@ const Infrastructure = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Reading Halls Seats"
-                                                        value={infrastructure!=null ?infrastructure.readingHallsSeats:readingHallsSeats}
+                                                        value={readingHallsSeats}
                                                         onChange={e => {
                                                             setReadingHallsSeats(parseInt(e.target.value.toString()));
                                                         }}
@@ -236,7 +250,7 @@ const Infrastructure = ({year, month}) => {
                                             </div>
                                         </div>
                                         <div className="flex flex-col gap-2">
-                                            <h2 className="text-sm">No. of PC</h2>
+                                            <h2 className="text-sm" class="text-[#006d76]">No. of PC</h2>
                                             <div
                                                 className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
                                                 <TextField
@@ -245,7 +259,7 @@ const Infrastructure = ({year, month}) => {
                                                     size="small"
                                                     required
                                                     label="No. of PC's with int. for clients"
-                                                    value={infrastructure!=null ?infrastructure.noOfPc:noOfPc}
+                                                    value={noOfPc}
 
                                                     onChange={e => {
                                                         setNoOfPc(parseInt(e.target.value.toString()));
@@ -256,8 +270,8 @@ const Infrastructure = ({year, month}) => {
                                         </div>
                                         <div className="flex justify-end">
                                             <input form="mainform" type="submit"
-                                                   className="bg-primary-orange uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value="Submit"/>
+                                                   className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
+                                                   value={infrastructure != null ? "Update":"Submit"}/>
                                         </div>
                                     </Grid>
 

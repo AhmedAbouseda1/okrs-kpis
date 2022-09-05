@@ -3,22 +3,25 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import PersonIcon from '@mui/icons-material/Person';
 import FolderSharedIcon from '@mui/icons-material/FolderShared';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {useSnackbar} from 'notistack';
 import {logoutUser} from '../../actions/userAction';
 
-const Sidebar = ({ activeTab }) => {
+const Sidebar = ({activeTab}) => {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const { enqueueSnackbar } = useSnackbar();
+    const {enqueueSnackbar} = useSnackbar();
 
-    const { user } = useSelector(state => state.user);
+    const {user} = useSelector(state => state.user);
 
     const handleLogout = () => {
         dispatch(logoutUser());
-        enqueueSnackbar("Logout Successfully", { variant: "success" });
-        navigate("/login");
+        enqueueSnackbar("Logout Successfully", {variant: "success"});
+        if (window.location.href.includes('localhost')) {
+            window.location.href = "http://localhost:3000";
+        } else {
+            window.location.href = "https://okrs-kpis-website.herokuapp.com";
+        }
     }
 
     return (
@@ -28,7 +31,8 @@ const Sidebar = ({ activeTab }) => {
             <div className="flex items-center gap-4 p-3 bg-white rounded-sm shadow">
                 {/* <!-- user icon --> */}
                 <div className="w-12 h-12 rounded-full">
-                    <img draggable="false" className="h-full w-full object-cover rounded-full" src={user.avatar.url} alt="Avatar" />
+                    <img draggable="false" className="h-full w-full object-cover rounded-full" src={user.avatar.url}
+                         alt="Avatar"/>
                 </div>
                 {/* <!-- user icon --> */}
                 <div className="flex flex-col gap-1">
@@ -53,13 +57,15 @@ const Sidebar = ({ activeTab }) => {
 
                 {/* <!-- account settings tab --> */}
                 <div className="flex items-center gap-5 px-4 py-4">
-                    <span className="text-primary-blue"><PersonIcon /></span>
+                    <span className="text-primary-blue"><PersonIcon/></span>
                     <p className="flex w-full justify-between font-medium text-gray-500">ACCOUNT SETTINGS</p>
                 </div>
                 <div className="flex flex-col pb-3 border-b text-sm">
-                    <Link to="/account" className={`${activeTab === "profile" ? "bg-blue-50 text-primary-blue font-medium" : "hover:bg-blue-50 hover:text-primary-blue"} p-3 pl-14`}>Profile Information</Link>
-                {/*    <Link className="p-3 pl-14 hover:bg-blue-50 hover:text-primary-blue" to="/">Manage Addresses</Link>*/}
-                {/*    <Link className="p-3 pl-14 hover:bg-blue-50 hover:text-primary-blue" to="/">PAN Card Information</Link>*/}
+                    <Link to="/account"
+                          className={`${activeTab === "profile" ? "bg-blue-50 text-primary-blue font-medium" : "hover:bg-blue-50 hover:text-primary-blue"} p-3 pl-14`}>Profile
+                        Information</Link>
+                    {/*    <Link className="p-3 pl-14 hover:bg-blue-50 hover:text-primary-blue" to="/">Manage Addresses</Link>*/}
+                    {/*    <Link className="p-3 pl-14 hover:bg-blue-50 hover:text-primary-blue" to="/">PAN Card Information</Link>*/}
                 </div>
                 {/*/!* <!-- account settings tab --> *!/*/}
 
@@ -87,23 +93,27 @@ const Sidebar = ({ activeTab }) => {
 
                 {/* <!-- my stuff tab --> */}
                 <div className="flex items-center gap-5 px-4 py-4">
-                    <span className="text-primary-blue"><FolderSharedIcon /></span>
+                    <span className="text-primary-blue"><FolderSharedIcon/></span>
                     <p className="flex w-full justify-between font-medium text-gray-500">MY STUFF</p>
                 </div>
                 <div className="flex flex-col pb-3 border-b text-sm">
                     {/*<Link className="p-3 pl-14 hover:bg-blue-50 hover:text-primary-blue" to="/">My Coupons</Link>*/}
                     {/*<Link className="p-3 pl-14 hover:bg-blue-50 hover:text-primary-blue" to="/">My Reviews & Ratings</Link>*/}
                     <Link className="p-3 pl-14 hover:bg-blue-50 hover:text-primary-blue" to="/">All Notifications</Link>
-                    <Link to="/wishlist" className={`${activeTab === "wishlist" ? "bg-blue-50 text-primary-blue font-medium" : "hover:bg-blue-50 hover:text-primary-blue"} p-3 pl-14`}>My TODO List</Link>
+                    <Link to="/wishlist"
+                          className={`${activeTab === "wishlist" ? "bg-blue-50 text-primary-blue font-medium" : "hover:bg-blue-50 hover:text-primary-blue"} p-3 pl-14`}>My
+                        TODO List</Link>
                 </div>
                 {/* <!-- my stuff tab --> */}
 
                 {/* <!-- logout tab --> */}
                 <div className="flex items-center gap-5 px-4 py-4 border-b">
-                    <span className="text-primary-blue"><PowerSettingsNewIcon /></span>
-                    <div className="flex w-full justify-between font-medium text-gray-500 hover:text-primary-blue cursor-pointer" onClick={handleLogout}>
+                    <span className="text-primary-blue"><PowerSettingsNewIcon/></span>
+                    <div
+                        className="flex w-full justify-between font-medium text-gray-500 hover:text-primary-blue cursor-pointer"
+                        onClick={handleLogout}>
                         Logout
-                        <span><ChevronRightIcon /></span>
+                        <span><ChevronRightIcon/></span>
                     </div>
                 </div>
                 {/* <!-- logout tab --> */}
