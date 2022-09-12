@@ -20,7 +20,7 @@ import MetaData from '../Layouts/MetaData';
 import { getRandomProducts } from '../../utils/functions';
 import { useLocation } from 'react-router-dom';
 
-const Products = () => {
+const OkrsAndKpis = () => {
 
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
@@ -214,4 +214,4 @@ const Products = () => {
     );
 };
 
-export default Products;
+export default OkrsAndKpis;

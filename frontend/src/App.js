@@ -38,6 +38,7 @@ import Wishlist from './components/Wishlist/Wishlist';
 import NotFound from './components/NotFound';
 import LibrarySetup from "./components/library/LibrarySetup";
 import Library from "./components/library/Library";
+import OkrsKpis from "./components/OkrsAndKpis/OkrsKpis";
 
 function App() {
 
@@ -200,6 +201,13 @@ function App() {
                     </ProtectedRoute>
                 }></Route>
 
+                <Route path="/OkrsAndKpis/OkrsKpis" element={
+                    <ProtectedRoute isAdmin={true}>
+                        <Dashboard activeTab={3}>
+                            <OkrsKpis/>
+                        </Dashboard>
+                    </ProtectedRoute>
+                }></Route>
 
                 <Route path="/admin/orders" element={
                     <ProtectedRoute isAdmin={true}>

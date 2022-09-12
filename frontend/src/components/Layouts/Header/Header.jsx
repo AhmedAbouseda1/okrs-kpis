@@ -15,15 +15,21 @@ const Header = () => {
 
   return (
 
-    <header className="transparent fixed top-0 py-2.5 w-full z-10">
+    <header className="backgroundgreen rounded-xl fixed top-0 py-2.5 w-full z-10">
 
       {/* <!-- navbar container --> */}
       <div className="w-full sm:w-9/12 px-1 sm:px-4 m-auto flex justify-between items-center relative">
 
         {/* <!-- logo & search container --> */}
         <div className="flex items-center flex-1">
-          <Link className="site-title h-7 mr-1 sm:mr-4" to="/">
-            <h3>OKRs & KPIs</h3>
+          <Link className=" p-5 site-title h-7 mr-1 sm:mr-4" to="/">
+            {isAuthenticated === false ?
+                <h3>OKRs And KPIs</h3>
+                :
+                <h3>Our Library</h3>
+            }
+
+
           </Link>
 
           {/*<Searchbar />*/}
@@ -39,7 +45,7 @@ const Header = () => {
             </Link>
             :
             (
-              <span className=" site-title userDropDown flex items-center text-black font-medium gap-1 cursor-pointer" onClick={() =>
+              <span className="site-title userDropDown flex items-center text-black font-medium gap-1 cursor-pointer" onClick={() =>
                   setTogglePrimaryDropDown(!togglePrimaryDropDown)}>
                 <h3>{user.name}</h3>
                 <span>{togglePrimaryDropDown ? <ExpandLessIcon sx={{ fontSize: "16px" }} /> : <ExpandMoreIcon sx={{ fontSize: "16px" }} />}</span>
