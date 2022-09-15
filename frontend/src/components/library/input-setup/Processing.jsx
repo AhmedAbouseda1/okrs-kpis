@@ -111,8 +111,8 @@ const Processing = ({year, month}) => {
                                                         value={targetPopulationReached}
                                                         onChange={e => {
                                                             setTargetPopulationReached(parseInt(e.target.value.toString()));
-                                                        }}
-                                                    />
+                                                         }}
+                                                     />
 
                                                 </div>
                                             </div>
@@ -132,7 +132,7 @@ const Processing = ({year, month}) => {
                                                         onChange={e => {
                                                             setNumberOfAcademicPublicationsLast3Years(parseInt(e.target.value.toString()));
                                                         }}
-                                                    />
+                                                     />
                                                 </div>
                                             </div>
                                         </div>
@@ -150,7 +150,7 @@ const Processing = ({year, month}) => {
                     </main>
                 </>
             }
-        </>
+         </>
     );
 };
 

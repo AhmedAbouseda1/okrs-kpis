@@ -14,7 +14,6 @@ import './Sidebar.css';
 import {logoutUser} from '../../actions/userAction';
 
 const navMenu = [
-
     {
         icon: <EqualizerIcon/>,
         label: "Dashboard",
@@ -163,10 +162,9 @@ const Sidebar = ({activeTab, setToggleSidebar}) => {
             <div className="backgroundgreen flex flex-col gap-1 bg- p-3 rounded-lg shadow-lg mb-6 mt-28 mx-3.5 overflow-hidden">
                 <h5>Developed by:</h5>
                 <div className="flex flex-col gap-0">
-                    <a href="https://www.linkedin.com" target="_blank" rel="noreferrer"
+                    <a href="https://www.facebook.com/ahmad.gamal.735" target="_blank" rel="noreferrer"
                        className="font-medium text-lg hover:text-blue-500">OKRs And KPIs Team</a>
-                    <a href="mailto:test@gmail.com"
-                       className="text-sm hover:text-blue-500">test@gmail.com</a>
+
                 </div>
             </div>
         </aside>

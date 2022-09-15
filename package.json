@@ -5,6 +5,8 @@
     "node": "v16.14.0",
     "npm": "8.1.3"
   },
+  "proxy": "http://localhost:3000",
+  "homepage": ".",
   "description": "OKRs And KPIs",
   "main": "backend/server.js",
   "scripts": {
@@ -15,6 +17,9 @@
   "author": "Ahmed Abouseda",
   "license": "OKRs And KPIs",
   "dependencies": {
+    "@mui/lab": "^5.0.0-alpha.97",
+    "@mui/x-date-pickers": "^5.0.0",
+    "@mui/x-date-pickers-pro": "^5.0.0",
     "@sendgrid/mail": "^7.6.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.1",
@@ -27,8 +32,13 @@
     "mongoose": "^6.1.7",
     "nodemailer": "^6.7.2",
     "paytmchecksum": "^1.5.0",
+    "react-material-ui-form-validator": "^3.0.1",
+    "react-native-table-component": "^1.2.2",
     "stripe": "^8.200.0",
     "uuid": "^8.3.2",
     "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "@types/uuid": "^8.3.4"
   }
 }
