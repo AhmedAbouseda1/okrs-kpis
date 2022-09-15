@@ -55,7 +55,7 @@ const Collections = ({year, month}) => {
         formData.set("numberOfAllInterLibraryLoans", numberOfAllInterLibraryLoans);
         formData.set("year", year);
         formData.set("month", month);
-        if (collections != null) {
+        if (collections.year != null) {
             dispatch(updateCollections(year, month, formData));
         } else {
             dispatch(createCollections(formData));
@@ -67,7 +67,7 @@ const Collections = ({year, month}) => {
             dispatch(clearErrors());
         }
         dispatch(getCollections(year, month));
-        if (collections !== null) {
+        if (collections.year !== null) {
             setChildren(collections.children);
             setJournalsAndPeriodicals(collections.journalsAndPeriodicals);
             setElectronicResources(collections.electronicResources);
@@ -322,7 +322,7 @@ const Collections = ({year, month}) => {
                                 <div className="flex justify-end">
                                     <input form="mainform" type="submit"
                                            className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                           value={collections != null ? "Update":"Submit"}/>
+                                           value={collections.year != null ? "Update":"Submit"}/>
                                 </div>
                             </Grid>
 

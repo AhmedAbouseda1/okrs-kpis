@@ -54,7 +54,7 @@ const Finance = ({year, month}) => {
         formData.set("costOfEachElectronicResourceForSpecifiedPeriod", costOfEachElectronicResourceForSpecifiedPeriod);
         formData.set("year", year);
         formData.set("month", month);
-        if (finance != null) {
+        if (finance.year != null) {
             dispatch(updateFinance(year, month, formData));
 
         } else {
@@ -67,7 +67,7 @@ const Finance = ({year, month}) => {
             dispatch(clearErrors());
         }
         dispatch(getFinance(year, month));
-        if (finance != null) {
+        if (finance.year != null) {
             setAcquisition(finance.acquisition);
             setWaterAndLighting(finance.waterAndLighting);
             setVariousRequirements(finance.variousRequirements);
@@ -396,7 +396,7 @@ const Finance = ({year, month}) => {
                                         <div className="flex justify-end">
                                             <input form="mainform" type="submit"
                                                    className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value={finance != null ? "Update" : "Submit"}/>
+                                                   value={finance.year != null ? "Update" : "Submit"}/>
                                         </div>
                                     </Grid>
 

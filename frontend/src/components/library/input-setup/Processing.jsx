@@ -1,6 +1,5 @@
-import {Button, CircularProgress, Grid, IconButton,} from "@mui/material";
+import { Grid, } from "@mui/material";
 import React, {useEffect, useState} from "react";
-import Container from "@mui/material/Container";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
@@ -10,7 +9,6 @@ import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
 import Loader from "../../Layouts/Loader";
 import {PROCESSING_SETUP_RESET} from "../../../constants/libraryConstants";
-import {createCollections, updateCollections} from "../../../actions/collectionsAction";
 
 
 const Processing = ({year, month}) => {
@@ -34,7 +32,7 @@ const Processing = ({year, month}) => {
         formData.set("numberOfAcademicPublicationsLast3Years", numberOfAcademicPublicationsLast3Years);
         formData.set("year", year);
         formData.set("month", month);
-        if (processing != null) {
+        if (processing.year != null) {
             dispatch(updateProcessing(year, month, formData));
 
         } else {
@@ -47,12 +45,12 @@ const Processing = ({year, month}) => {
             dispatch(clearErrors());
         }
         dispatch(getProcessing(year, month));
-        if(processing!=null){
+        if(processing.year !=null){
             setRequiredTitlesInCollection(processing.requiredTitlesInCollection);
             setTargetPopulationReached(processing.targetPopulationReached);
             setNumberOfAcademicPublicationsLast3Years(processing.numberOfAcademicPublicationsLast3Years);
         }
-        
+
     }, [dispatch, year, month, error, enqueueSnackbar]);
 
     useEffect(() => {
@@ -139,7 +137,7 @@ const Processing = ({year, month}) => {
                                         <div className="flex justify-end">
                                             <input form="mainform" type="submit"
                                                    className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value={processing != null ? "Update":"Submit"}/>
+                                                   value={processing.year != null ? "Update":"Submit"}/>
                                         </div>
                                     </Grid>
 

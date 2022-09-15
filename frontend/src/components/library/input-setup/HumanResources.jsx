@@ -36,7 +36,7 @@ const HumanResources = ({year, month}) => {
 
         formData.set("year", year);
         formData.set("month", month);
-        if (humanResources != null) {
+        if (humanResources.year != null) {
             dispatch(updateHumanResources(year, month, formData));
         } else {
             dispatch(createHumanResources(formData));
@@ -48,7 +48,7 @@ const HumanResources = ({year, month}) => {
             dispatch(clearErrors());
         }
         dispatch(getHumanResources(year, month));
-        if (humanResources != null) {
+        if (humanResources.year != null) {
             setNoPrimaryUserGroup(humanResources.noPrimaryUserGroup);
             setOpeningHoursTotal(humanResources.openingHoursTotal);
             setTotalNumOfHours(humanResources.totalNumOfHours);
@@ -66,6 +66,7 @@ const HumanResources = ({year, month}) => {
             enqueueSnackbar("HumanResources Setup Done", {variant: "success"});
             dispatch({type: HUMAN_RESOURCES_SETUP_RESET});
         }
+
     }, [dispatch, error, success, navigate, enqueueSnackbar]);
 
 
@@ -177,7 +178,7 @@ const HumanResources = ({year, month}) => {
                                             <div className="flex justify-end">
                                                 <input form="mainform" type="submit"
                                                        className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                       value={humanResources != null ? "Update" : "Submit"}/>
+                                                       value={humanResources.year != null ? "Update" : "Submit"}/>
                                             </div>
                                         </div>
                                     </Grid>
