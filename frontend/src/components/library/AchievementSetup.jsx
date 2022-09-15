@@ -10,6 +10,9 @@ import ProcessingAch from "./achievement-setup/ProcessingAch";
 import GeneralAch from "./achievement-setup/GeneralAch";
 import CirculationsAch from "./achievement-setup/CirculationsAch";
 import PublicationsAch from "./achievement-setup/PublicationsAch";
+import UsersAch from "./achievement-setup/UsersAch";
+import ActivitesAch from "./achievement-setup/ActivitesAch";
+import TrainingAch from "./achievement-setup/TrainingAch";
 
 import MetaData from "../Layouts/MetaData";
 import "react-datepicker/dist/react-datepicker.css";
@@ -36,13 +39,11 @@ function getStepContent(stepIndex) {
         case 4:
             return <PublicationsAch year={year} month={month}/>
          case 5:
-            return <text year={year} month={month}/>
+            return <UsersAch year={year} month={month}/>
         case 6:
-            return <text year={year} month={month}/>
+            return <ActivitesAch year={year} month={month}/>
         case 7:
-            return <text year={year} month={month}/>
-        case 8:
-            return <text year={year} month={month}/>
+            return <TrainingAch year={year} month={month}/>
     }
 }
 
@@ -145,8 +146,6 @@ export default function AchievementSetup() {
                                 </div>
                             </form>
                         </ Box>
-
-
                     )
                     }
                 </Container>
