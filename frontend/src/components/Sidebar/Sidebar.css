@@ -9,6 +9,10 @@
     background: url(../../assets/images/img1.png) 50% 0 no-repeat fixed;
     border: 10px;
 }
+
+.imageBackGround {
+    background: url(../../assets/images/img1.png) 50% 0 no-repeat fixed;
+}
 .backgroundgreen {
     background-color: #04393b;
 }
