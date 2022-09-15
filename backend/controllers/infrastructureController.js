@@ -1,4 +1,4 @@
-const Infrastructure = require('../models/infrastructureModel');
+const Infrastructure = require('../models/library/infrastructureModel');
 const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
 const SearchFeatures = require('../utils/searchFeatures');
 const ErrorHandler = require('../utils/errorHandler');

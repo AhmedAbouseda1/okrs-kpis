@@ -57,13 +57,6 @@ const navMenu = [
         key: 5,
         role: "user,admin",
     },
-    // {
-    //     icon: <ReviewsIcon/>,
-    //     label: "Reviews",
-    //     ref: "/admin/reviews",
-    //     key: 5,
-    //     role: "user,admin",
-    // },
     {
         icon: <InventoryIcon/>,
         label: "Products",

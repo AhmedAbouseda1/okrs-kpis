@@ -1,8 +1,7 @@
-const Collections = require('../models/collectionsModel');
+const Collections = require('../models/library/collectionsModel');
 const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
 const SearchFeatures = require('../utils/searchFeatures');
 const ErrorHandler = require('../utils/errorHandler');
-const Infrastructure = require("../models/infrastructureModel");
 
 exports.createCollections = asyncErrorHandler(async (req, res, next) => {
 

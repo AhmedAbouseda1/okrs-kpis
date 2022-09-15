@@ -1,4 +1,4 @@
-const Finance = require('../models/financeModel');
+const Finance = require('../models/library/financeModel');
 const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
 const ErrorHandler = require('../utils/errorHandler');
 

@@ -1,8 +1,7 @@
-const HumanResources = require('../models/humanResourcesModel');
+const HumanResources = require('../models/library/humanResourcesModel');
 const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
 const SearchFeatures = require('../utils/searchFeatures');
 const ErrorHandler = require('../utils/errorHandler');
-const Collections = require("../models/collectionsModel");
 
 exports.createHumanResources = asyncErrorHandler(async (req, res, next) => {
 

@@ -1,4 +1,4 @@
-const Processing = require('../models/processingModel');
+const Processing = require('../models/library/processingModel');
 const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
 const ErrorHandler = require('../utils/errorHandler');
 
