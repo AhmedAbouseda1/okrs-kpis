@@ -202,7 +202,7 @@ function App() {
                 }></Route>
 
                 <Route path="/OkrsAndKpis/OkrsKpis" element={
-                    <ProtectedRoute isAdmin={true}>
+                    <ProtectedRoute>
                         <Dashboard activeTab={3}>
                             <OkrsKpis/>
                         </Dashboard>
