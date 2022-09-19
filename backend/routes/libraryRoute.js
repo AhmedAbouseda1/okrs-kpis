@@ -3,16 +3,16 @@ const {
     createInfrastructure,
     getInfrastructure,
     updateInfrastructure
-} = require('../controllers/infrastructureController');
+} = require('../controllers/librarysetup/infrastructureController');
 const {isAuthenticatedUser, authorizeRoles} = require("../middlewares/auth");
-const {createCollections, getCollections, updateCollections} = require("../controllers/collectionsController");
+const {createCollections, getCollections, updateCollections} = require("../controllers/librarysetup/collectionsController");
 const {
     createHumanResources,
     getHumanResources,
     updateHumanResources
-} = require("../controllers/humanResourcesController");
-const {createProcessing, getProcessing, updateProcessing} = require("../controllers/processingController");
-const {createFinance, getFinance, updateFinance} = require("../controllers/financeController");
+} = require("../controllers/librarysetup/humanResourcesController");
+const {createProcessing, getProcessing, updateProcessing} = require("../controllers/librarysetup/processingController");
+const {createFinance, getFinance, updateFinance} = require("../controllers/librarysetup/financeController");
 
 const router = express.Router();
 
