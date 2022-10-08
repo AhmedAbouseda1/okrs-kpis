@@ -42,7 +42,7 @@ export default function OkrsKpis() {
             <MetaData title="OKRs and KPIs"/>
             <>
                 <div className="flex justify-between items-center">
-                    <h1 className="text-lg font-medium ">OKRs and KPIs for current month</h1>
+                    <h1 className="text-lg font-medium ">OKRs and KPIs for October 2022 with October 2021 comparison</h1>
                 </div>
                 <Container>
                     <Box>

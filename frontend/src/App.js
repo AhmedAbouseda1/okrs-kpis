@@ -39,6 +39,7 @@ import NotFound from './components/NotFound';
 import LibrarySetup from "./components/library/LibrarySetup";
 import Library from "./components/library/Library";
 import OkrsKpis from "./components/OkrsAndKpis/OkrsKpis";
+import Reports from "./components/Admin/Reports";
 
 function App() {
 
@@ -195,7 +196,7 @@ function App() {
 
                 <Route path="/library/Library" element={
                     <ProtectedRoute >
-                        <Library activeTab={0}>
+                        <Library activeTab={1}>
                             <LibrarySetup/>
                         </Library>
                     </ProtectedRoute>
@@ -203,35 +204,42 @@ function App() {
 
                 <Route path="/OkrsAndKpis/OkrsKpis" element={
                     <ProtectedRoute>
-                        <Dashboard activeTab={3}>
+                        <Dashboard activeTab={5}>
                             <OkrsKpis/>
                         </Dashboard>
                     </ProtectedRoute>
                 }></Route>
 
-                <Route path="/admin/orders" element={
-                    <ProtectedRoute isAdmin={true}>
-                        <Dashboard activeTab={1}>
-                            <OrderTable/>
+                <Route path="/admin/Reports" element={
+                    <ProtectedRoute>
+                        <Dashboard activeTab={4}>
+                            <Reports/>
                         </Dashboard>
                     </ProtectedRoute>
                 }></Route>
+                {/*<Route path="/admin/orders" element={*/}
+                {/*    <ProtectedRoute isAdmin={true}>*/}
+                {/*        <Dashboard activeTab={1}>*/}
+                {/*            <OrderTable/>*/}
+                {/*        </Dashboard>*/}
+                {/*    </ProtectedRoute>*/}
+                {/*}></Route>*/}
 
-                <Route path="/admin/order/:id" element={
-                    <ProtectedRoute isAdmin={true}>
-                        <Dashboard activeTab={1}>
-                            <UpdateOrder/>
-                        </Dashboard>
-                    </ProtectedRoute>
-                }></Route>
+                {/*<Route path="/admin/order/:id" element={*/}
+                {/*    <ProtectedRoute isAdmin={true}>*/}
+                {/*        <Dashboard activeTab={1}>*/}
+                {/*            <UpdateOrder/>*/}
+                {/*        </Dashboard>*/}
+                {/*    </ProtectedRoute>*/}
+                {/*}></Route>*/}
 
-                <Route path="/admin/products" element={
-                    <ProtectedRoute isAdmin={true}>
-                        <Dashboard activeTab={2}>
-                            <ProductTable/>
-                        </Dashboard>
-                    </ProtectedRoute>
-                }></Route>
+                {/*<Route path="/admin/products" element={*/}
+                {/*    <ProtectedRoute isAdmin={true}>*/}
+                {/*        <Dashboard activeTab={2}>*/}
+                {/*            <ProductTable/>*/}
+                {/*        </Dashboard>*/}
+                {/*    </ProtectedRoute>*/}
+                {/*}></Route>*/}
 
                 <Route path="/admin/new_product" element={
                     <ProtectedRoute isAdmin={true}>
@@ -251,7 +259,7 @@ function App() {
 
                 <Route path="/admin/users" element={
                     <ProtectedRoute isAdmin={true}>
-                        <Dashboard activeTab={4}>
+                        <Dashboard activeTab={7}>
                             <UserTable/>
                         </Dashboard>
                     </ProtectedRoute>
@@ -259,7 +267,7 @@ function App() {
 
                 <Route path="/admin/user/:id" element={
                     <ProtectedRoute isAdmin={true}>
-                        <Dashboard activeTab={4}>
+                        <Dashboard activeTab={8}>
                             <UpdateUser/>
                         </Dashboard>
                     </ProtectedRoute>
