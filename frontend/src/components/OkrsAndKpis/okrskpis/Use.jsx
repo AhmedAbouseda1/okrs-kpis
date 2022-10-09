@@ -31,31 +31,36 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
         border: 0,
     },
 }));
-
 function createData(
     name: string,
     nameAr: string,
     result: number,
     upOrDown: number,
+    lastYear: number,
+
 ) {
-    return {name, nameAr, result, upOrDown};
+    return {name, nameAr, result, upOrDown,lastYear};
 }
 
 const rows = [
     createData('Collection Turnover',
         'معدل دوران المجموعات',
-        24407,
-        1),
+        4.60,
+        1.70,
+        2.90 ),
     createData('Number of Downloads per Document Digitized',
         'عدد مرات التحميل للوثائق التي تم رقمنتها',
-        121,
-        1),
+        0.14,
+        5,
+        9),
     createData('Percentage of Successful Inter library Loans',
         'النسبة المئوية لعمليات الإعارة الناجحة بين المكتبات ',
-        2322,
-        1.5),
+        19.5,
+        -8.95,
+        28.45),
 
 ];
+
 
 
 const Environment = () => {
@@ -83,6 +88,7 @@ const Environment = () => {
                                             )}
                                     </IconButton>
                                 </StyledTableCell>
+                                <StyledTableCell align="right">{row.lastYear}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>

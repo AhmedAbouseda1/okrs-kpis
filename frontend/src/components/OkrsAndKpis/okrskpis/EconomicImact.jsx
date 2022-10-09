@@ -37,31 +37,38 @@ function createData(
     nameAr: string,
     result: number,
     upOrDown: number,
+    lastYear: number,
+
 ) {
-    return {name, nameAr, result, upOrDown};
+    return {name, nameAr, result, upOrDown,lastYear};
 }
 
 const rows = [
     createData('Cost per User',
         'التكلفة لكل مستفيد ',
-        24407,
-        1.5),
+        194.8,
+        175.30,
+        19.48 ),
     createData('Cost per Download',
         'التكلفة لكل عملية تحميل  ',
-        121,
-        1),
+        170.0,
+        102.84,
+        67.16),
     createData('Ratio of Acquisition Expenditures to Staff Costs',
         'معدل الإنفاق على التزويد مقابل تكلفة العاملين',
-        2322,
-        3.5),
+        1.3,
+        -1.25,
+        2.50),
     createData('Percentage of Institutional Means Allocated to the Library',
         'نسبة الموارد المالية المؤسسية المخصصة للمكتبة',
-        2322,
-        1.5),
+        80,
+        65,
+        15),
     createData('Percentage of Library Means Received by Special Grant or Income Generated',
         'النسبة المئوية للموارد المالية للمكتبة المتلقاة بمنحة خاصة أو الدخل المُتولد (المتحقق)',
-        23,
-        -2),
+        10,
+        0,
+        10),
 
 ];
 
@@ -91,6 +98,7 @@ const EconomicImpact = () => {
                                             )}
                                     </IconButton>
                                 </StyledTableCell>
+                                <StyledTableCell align="right">{row.lastYear}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>

@@ -37,38 +37,44 @@ function createData(
     nameAr: string,
     result: number,
     upOrDown: number,
+    lastYear: number,
+
 ) {
-    return {name, nameAr, result, upOrDown};
+    return {name, nameAr, result, upOrDown,lastYear};
 }
+
+
+
+
+
 
 const rows = [
     createData('User Services Staff as a Percentage of Total Staff',
         'نسبة الموظفين/العاملين في الخدمة إلى إجمالي العاملين',
         .3,
-        .1),
+        -1,
+        1),
     createData(        'Number of Attendance Hours at Formal Training Lessons per Staff Member',
         'عدد ساعات الحضور في دروس التدريب الرسمية لكل موظف',
         20,
-        -1),
+        -2.41,
+        22.41 ),
     createData('Employee Productivity in Media Processing',
         'نسبة إنتاجية الفرد في معالجة الأوعية. ',
-        .8,
-        1.5),
+        15.8,
+        3.89,11.94),
 
     createData('Employee Productivity in Lending and Delivery Services',
 'إنتاجية الموظفين في خدمات الإعارة والتوصيل',
-        1.9,
-        -0.9),
+        14.7,-8.92,23.58),
 
     createData('Number of User Attendances at Training Lessons per Capital',
 'عدد حضور المستخدمين في الدروس التدريبية لكل فرد',
-        22,
-        1.5),
+        1.9,-1.25,3.15),
 
     createData('Correct Answer Fill Rate',
         'معدل ملء الإجابات الصحيحة',
-        100,
-        1),
+        0.5,0.08,0.43),
 ];
 
 
@@ -97,6 +103,7 @@ const Environment = () => {
                                             )}
                                     </IconButton>
                                 </StyledTableCell>
+                                <StyledTableCell align="right">{row.lastYear}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>

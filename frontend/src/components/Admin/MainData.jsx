@@ -1,28 +1,15 @@
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 import Chart from 'chart.js/auto'
-import { Doughnut, Line, Pie, Bar } from 'react-chartjs-2';
-import { getAdminProducts } from '../../actions/productAction';
-import { useSelector, useDispatch } from 'react-redux';
-import { getAllOrders } from '../../actions/orderAction';
-import { getAllUsers } from '../../actions/userAction';
-import { categories } from '../../utils/constants';
+import {Doughnut, Line, Pie, Bar} from 'react-chartjs-2';
+import {getAdminProducts} from '../../actions/productAction';
+import {useSelector, useDispatch} from 'react-redux';
+import {getAllOrders} from '../../actions/orderAction';
+import {getAllUsers} from '../../actions/userAction';
 import MetaData from '../Layouts/MetaData';
 
 const MainData = () => {
 
     const dispatch = useDispatch();
-
-    const { products } = useSelector((state) => state.products);
-    const { orders } = useSelector((state) => state.allOrders);
-    const { users } = useSelector((state) => state.users);
-
-    let outOfStock = 0;
-
-    products?.forEach((item) => {
-        if (item.stock === 0) {
-            outOfStock += 1;
-        }
-    });
 
     useEffect(() => {
         dispatch(getAdminProducts());
@@ -30,74 +17,120 @@ const MainData = () => {
         dispatch(getAllUsers());
     }, [dispatch]);
 
-    let totalAmount = orders?.reduce((total, order) => total + order.totalPrice, 0);
 
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    const date = new Date();
+    const years = ['2017', '2018', '2019', '2020', '2021', '2022']
+
     const lineState = {
-        labels: months,
+        labels: years,
         datasets: [
             {
-                label: `Sales in ${date.getFullYear() - 2}`,
+                label: `Percentage of Library Staff Providing Electronic Services`,
                 borderColor: '#8A39E1',
                 backgroundColor: '#8A39E1',
-                data: months.map((m, i) => orders?.filter((od) => new Date(od.createdAt).getMonth() === i && new Date(od.createdAt).getFullYear() === date.getFullYear() - 2).reduce((total, od) => total + od.totalPrice, 0)),
-            },
-            {
-                label: `Sales in ${date.getFullYear() - 1}`,
-                borderColor: 'orange',
-                backgroundColor: 'orange',
-                data: months.map((m, i) => orders?.filter((od) => new Date(od.createdAt).getMonth() === i && new Date(od.createdAt).getFullYear() === date.getFullYear() - 1).reduce((total, od) => total + od.totalPrice, 0)),
-            },
-            {
-                label: `Sales in ${date.getFullYear()}`,
-                borderColor: '#4ade80',
-                backgroundColor: '#4ade80',
-                data: months.map((m, i) => orders?.filter((od) => new Date(od.createdAt).getMonth() === i && new Date(od.createdAt).getFullYear() === date.getFullYear()).reduce((total, od) => total + od.totalPrice, 0)),
+                // toolTipContent: "Week {x}: {y}%",
+                data: [
+                    {x: 1, y: 15},
+                    {x: 2, y: 19},
+                    {x: 3, y: 13},
+                    {x: 4, y: 27},
+                    {x: 5, y: 19},
+                    {x: 6, y: 19}
+                ],
             },
         ],
     };
 
-    const statuses = ['Processing', 'Shipped', 'Delivered'];
+
+    const lineState2 = {
+        labels: years,
+        datasets: [
+            {
+                label: `Number of Downloads per Document Digitized`,
+                borderColor: '#8A39E1',
+                backgroundColor: '#8A39E1',
+                // toolTipContent: "Week {x}: {y}%",
+                data: [
+                    {x: 1, y: 1465},
+                    {x: 2, y: 900},
+                    {x: 3, y: 1113},
+                    {x: 4, y: 830},
+                    {x: 5, y: 754},
+                    {x: 6, y: 830}
+                ],
+            },
+        ],
+    };
 
     const pieState = {
-        labels: statuses,
+        labels: years,
         datasets: [
             {
                 backgroundColor: ['#9333ea', '#facc15', '#4ade80'],
                 hoverBackgroundColor: ['#a855f7', '#fde047', '#86efac'],
-                data: statuses.map((status) => orders?.filter((item) => item.orderStatus === status).length),
+                data: [
+                    {x: 1, y: 15},
+                    {x: 2, y: 19},
+                    {x: 3, y: 13},
+                    {x: 4, y: 27},
+                    {x: 5, y: 19},
+                    {x: 6, y: 19}
+                ],
             },
         ],
     };
 
     const doughnutState = {
-        labels: ['Out of Stock', 'In Stock'],
+        labels: ['Digital active users', 'Active users'],
         datasets: [
             {
                 backgroundColor: ['#ef4444', '#22c55e'],
                 hoverBackgroundColor: ['#dc2626', '#16a34a'],
-                data: [outOfStock, products.length - outOfStock],
+                data: [22, 100 - 22],
             },
         ],
     };
 
     const barState = {
-        labels: categories,
+        labels: years,
         datasets: [
             {
-                label: "Products",
+                label: "Collection Turnover",
                 borderColor: '#9333ea',
                 backgroundColor: '#9333ea',
                 hoverBackgroundColor: '#6b21a8',
-                data: categories.map((cat) => products?.filter((item) => item.category === cat).length),
+                data: [
+                    {x: 1, y: 4.60},
+                    {x: 2, y: 2.90},
+                    {x: 3, y: 3.70},
+                    {x: 4, y: 2.20},
+                    {x: 5, y: 1.90},
+                    {x: 6, y: 3.10}
+                ],
             },
         ],
     };
-
+    const barState2 = {
+        labels: years,
+        datasets: [
+            {
+                label: "Library Visits per Capital",
+                borderColor: '#9333ea',
+                backgroundColor: '#9333ea',
+                hoverBackgroundColor: '#6b21a8',
+                data: [
+                    {x: 1, y: 12},
+                    {x: 2, y: 8},
+                    {x: 3, y: 7},
+                    {x: 4, y: 8},
+                    {x: 5, y: 12},
+                    {x: 6, y: 3}
+                ],
+            },
+        ],
+    };
     return (
         <>
-            <MetaData title="OKRs And KPIs" />
+            <MetaData title="OKRs And KPIs"/>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-6">
                 <div className="flex flex-col bg-purple-600 text-white gap-2 rounded-xl shadow-lg hover:shadow-xl p-6">
@@ -113,30 +146,40 @@ const MainData = () => {
                     <h2 className="text-2xl font-bold">25782</h2>
                 </div>
                 <div className="flex flex-col bg-green-500 text-white gap-2 rounded-xl shadow-lg hover:shadow-xl p-6">
-                    <h4 className="text-gray-100 font-medium">Expenditure on Information Provision Spent on the Electronic Collection</h4>
+                    <h4 className="text-gray-100 font-medium">Expenditure on Information Provision Spent on the
+                        Electronic Collection</h4>
                     <h2 className="text-2xl font-bold">29.54 %</h2>
                 </div>
             </div>
 
             <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-8 min-w-full">
                 <div className="bg-white rounded-xl h-auto w-full shadow-lg p-2">
-                    <Line data={lineState} />
+                    <Line data={lineState}/>
                 </div>
 
                 <div className="bg-white rounded-xl shadow-lg p-4 text-center">
-                    <span className="font-medium uppercase text-gray-800">Order Status</span>
-                    <Pie data={pieState} />
+                    <span className="font-medium uppercase text-gray-800">Costs</span>
+                    <Pie data={pieState}/>
                 </div>
             </div>
 
             <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-8 min-w-full mb-6">
                 <div className="bg-white rounded-xl h-auto w-full shadow-lg p-2">
-                    <Bar data={barState} />
+                    <Bar data={barState}/>
                 </div>
 
                 <div className="bg-white rounded-xl shadow-lg p-4 text-center">
-                    <span className="font-medium uppercase text-gray-800">Stock Status</span>
-                    <Doughnut data={doughnutState} />
+                    <span className="font-medium uppercase text-gray-800">Digital Users Status</span>
+                    <Doughnut data={doughnutState}/>
+                </div>
+            </div>
+            <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-8 min-w-full">
+                <div className="bg-white rounded-xl h-auto w-full shadow-lg p-2">
+                    <Line data={lineState2}/>
+                </div>
+
+                <div className="bg-white rounded-xl h-auto w-full shadow-lg p-2">
+                    <Bar data={barState2}/>
                 </div>
             </div>
         </>

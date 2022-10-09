@@ -31,32 +31,35 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
         border: 0,
     },
 }));
-
 function createData(
     name: string,
     nameAr: string,
     result: number,
     upOrDown: number,
+    lastYear: number,
+
 ) {
-    return {name, nameAr, result, upOrDown};
+    return {name, nameAr, result, upOrDown,lastYear};
 }
 
 const rows = [
     createData('Library Visits per Capital',
         'زيارات المكتبة لكل فرد ',
-        24407,
-        1),
+        0.1,
+        -0.04,
+        0.10 ),
     createData('Percentage of the Target Population Reached',
         'النسبة المئوية للسكان المستهدفين الذين تم الوصول إليهم',
-        23,
-        -1),
+        9,
+        1,
+        8),
     createData('Number of User Attendances at Training Lessons per Capital',
         'عدد حضور المستخدمين في الدروس التدريبية لكل فرد',
-        2322,
-        1.5),
+        4.8,
+        -7.18,
+        11.93),
 
 ];
-
 
 const Environment = () => {
     const {loading} = useSelector((state) => state.product);
@@ -83,6 +86,7 @@ const Environment = () => {
                                             )}
                                     </IconButton>
                                 </StyledTableCell>
+                                <StyledTableCell align="right">{row.lastYear}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
