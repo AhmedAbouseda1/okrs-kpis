@@ -62,20 +62,14 @@ const MainData = () => {
     };
 
     const pieState = {
-        labels: years,
+        labels: ['Scientific ,Educational', 'Seminars, Conferences', 'Outreach activities'],
         datasets: [
             {
                 backgroundColor: ['#9333ea', '#facc15', '#4ade80'],
                 hoverBackgroundColor: ['#a855f7', '#fde047', '#86efac'],
-                data: [
-                    {x: 1, y: 15},
-                    {x: 2, y: 19},
-                    {x: 3, y: 13},
-                    {x: 4, y: 27},
-                    {x: 5, y: 19},
-                    {x: 6, y: 19}
-                ],
+                data: [14, 23,19],
             },
+
         ],
     };
 
@@ -95,9 +89,9 @@ const MainData = () => {
         datasets: [
             {
                 label: "Collection Turnover",
-                borderColor: '#9333ea',
-                backgroundColor: '#9333ea',
-                hoverBackgroundColor: '#6b21a8',
+                borderColor: '#22c55e',
+                backgroundColor: '#22c55e',
+                hoverBackgroundColor: '#22c55e',
                 data: [
                     {x: 1, y: 4.60},
                     {x: 2, y: 2.90},
@@ -114,9 +108,9 @@ const MainData = () => {
         datasets: [
             {
                 label: "Library Visits per Capital",
-                borderColor: '#9333ea',
-                backgroundColor: '#9333ea',
-                hoverBackgroundColor: '#6b21a8',
+                borderColor: '#facc15',
+                backgroundColor: '#facc15',
+                hoverBackgroundColor: '#facc15',
                 data: [
                     {x: 1, y: 12},
                     {x: 2, y: 8},
@@ -158,7 +152,7 @@ const MainData = () => {
                 </div>
 
                 <div className="bg-white rounded-xl shadow-lg p-4 text-center">
-                    <span className="font-medium uppercase text-gray-800">Costs</span>
+                    <span className="font-medium uppercase text-gray-800">Activities 2022</span>
                     <Pie data={pieState}/>
                 </div>
             </div>
