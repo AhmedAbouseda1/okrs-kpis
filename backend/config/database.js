@@ -6,6 +6,7 @@ const connectDatabase = () => {
         .then(() => {
             console.log("Mongoose Connected");
         });
+
 }
 
 module.exports = connectDatabase;

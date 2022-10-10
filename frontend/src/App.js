@@ -36,6 +36,7 @@ import UpdateUser from './components/Admin/UpdateUser';
 import ReviewsTable from './components/Admin/ReviewsTable';
 import Wishlist from './components/Wishlist/Wishlist';
 import NotFound from './components/NotFound';
+import AchievementSetup from "./components/library/AchievementSetup";
 import LibrarySetup from "./components/library/LibrarySetup";
 import Library from "./components/library/Library";
 import OkrsKpis from "./components/OkrsAndKpis/OkrsKpis";
@@ -98,11 +99,14 @@ function App() {
 
 
 
-              {/*<Route path="/library/AchievementSetup" element={*/}
-              {/*  <ProtectedRoute>*/}
-              {/*    <AchievementSetup/>*/}
-              {/*  </ProtectedRoute>*/}
-              {/*}></Route>*/}
+              <Route path="/library/AchievementSetup" element={
+                <ProtectedRoute>
+                       <Library activeTab={1}>
+                           <AchievementSetup/>
+                        </Library>
+                  </ProtectedRoute>
+
+              }></Route>
 
               {/*<Route path="/library/TargetsSetup" element={*/}
               {/*  <ProtectedRoute>*/}
@@ -194,7 +198,7 @@ function App() {
                     </ProtectedRoute>
                 }></Route>
 
-                <Route path="/library/Library" element={
+                <Route path="/library/library" element={
                     <ProtectedRoute >
                         <Library activeTab={1}>
                             <LibrarySetup/>
