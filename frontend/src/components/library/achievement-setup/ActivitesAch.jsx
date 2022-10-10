@@ -3,33 +3,24 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
-import {createInfrastructure, getInfrastructure, updateInfrastructure} from "../../../actions/infrastructureAction";
+import {createActivitiesAch, getActivitiesAch, updateActivitiesAch} from "../../../actions/infrastructureAction";
 import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
 import Loader from "../../Layouts/Loader";
-import {INFRASTRUCTURE_SETUP_RESET} from "../../../constants/libraryConstants";
+import {ACTIVITIESACH_SETUP_RESET} from "../../../constants/libraryConstants";
 
 const Activites  = ({year, month}) => {
 
     const dispatch = useDispatch();
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
-    const {loading, success, activitiesAchievement, error} = useSelector((state) => state.activitiesAchievement);
+    const {loading, success, Activities, error} = useSelector((state) => state.Activities);
     const [totalArea, setTotalArea] = useState(0);
     const [open, setOpen] = useState(false);
     const [outreachActivities, setOutreachActivities] = useState();
     const [scientificAndEducationalActivities, setScientificAndEducationalActivities] = useState();
     const [seminarsAndConferences, setSeminarsAndConferences] = useState();
-
-    const toggle = () => {
-        setTotalArea(((outreachActivities == null) ? 0 : outreachActivities) +
-            ((seminarsAndConferences == null) ? 0 : seminarsAndConferences) +
-            (((scientificAndEducationalActivities) == null) ? 0 : scientificAndEducationalActivities));
-        if (totalArea == null)
-            setTotalArea(0);
-        setOpen(!open);
-    };
 
 
     const handleSubmit = (e) => {
@@ -41,10 +32,10 @@ const Activites  = ({year, month}) => {
         formData.set("year", year);
         formData.set("month", month);
 
-        if (activitiesAchievement.year != null) {
-            dispatch(updateActivitiesAchievement(year, month, formData));
+        if (activitiesAch.year != null) {
+            dispatch(updateActivitiesAch(year, month, formData));
         } else {
-            dispatch(createActivitiesAchievement(formData));
+            dispatch(createActivitiesAch(formData));
         }
     }
     useEffect(() => {
@@ -53,7 +44,7 @@ const Activites  = ({year, month}) => {
             enqueueSnackbar(error, {variant: "error"});
             dispatch(clearErrors());
         }
-        dispatch(getActivitiesAchievement(year, month));
+        dispatch(getActivitiesAch(year, month));
         if (activitiesAchievement.year !== null) {
             setSeminarsAndConferences(activitiesAchievement.seminarsAndConferences);
             setScientificAndEducationalActivities(activitiesAchievement.scientificAndEducationalActivities);
@@ -68,7 +59,7 @@ const Activites  = ({year, month}) => {
         }
         if (success) {
             enqueueSnackbar("ActivitiesAchievement Setup Done", {variant: "success"});
-            dispatch({type: ACTIVITIES_ACHIEVEMENT_SETUP_RESET});
+            dispatch({type: ACTIVITIESACH_SETUP_RESET});
         }
     }, [dispatch, year, month, error, success, navigate, enqueueSnackbar]);
 
@@ -154,7 +145,7 @@ const Activites  = ({year, month}) => {
                                         <div className="flex justify-end">
                                             <input form="mainform" type="submit"
                                                    className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value={activitiesAchievement.year != null ? "Update":"Submit"}/>
+                                                   value={activitiesAch.year != null ? "Update":"Submit"}/>
                                         </div>
                                     </Grid>
 

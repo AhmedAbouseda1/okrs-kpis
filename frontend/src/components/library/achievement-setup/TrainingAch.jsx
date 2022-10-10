@@ -18,33 +18,16 @@ const Training  = ({year, month}) => {
     const {loading, success, infrastructure, error} = useSelector((state) => state.infrastructure);
     const [totalArea, setTotalArea] = useState(0);
     const [open, setOpen] = useState(false);
-    const [squaredMetersOfBuildings, setSquaredMetersOfBuildings] = useState();
-    const [squaredMetersAvailableForPublic, setSquaredMetersAvailableForPublic] = useState();
-    const [readingHallsSeats, setReadingHallsSeats] = useState();
-    const [readingHallsTables, setReadingHallsTables] = useState();
-    const [activitiesHallsTables, setActivitiesHallsTables] = useState();
-    const [activitiesHallsSeats, setActivitiesHallsSeats] = useState();
-    const [noOfPc, setNoOfPc] = useState();
-
-    const toggle = () => {
-        setTotalArea(((squaredMetersOfBuildings == null) ? 0 : squaredMetersOfBuildings) +
-            (((squaredMetersAvailableForPublic) == null) ? 0 : squaredMetersAvailableForPublic));
-        if (totalArea == null)
-            setTotalArea(0);
-        setOpen(!open);
-    };
+    const [Scientificprograms, setScientificprograms] = useState();
+    const [HR, setHR] = useState();
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData();
-        formData.set("squaredMetersOfBuildings", squaredMetersOfBuildings);
-        formData.set("squaredMetersAvailableForPublic", squaredMetersAvailableForPublic);
-        formData.set("readingHallsSeats", readingHallsSeats);
-        formData.set("readingHallsTables", readingHallsTables);
-        formData.set("activitiesHallsTables", activitiesHallsTables);
-        formData.set("activitiesHallsSeats", activitiesHallsSeats);
-        formData.set("noOfPc", noOfPc);
+        formData.set("Scientificprograms", Scientificprograms);
+        formData.set("HR", HR);
+
         formData.set("year", year);
         formData.set("month", month);
 
@@ -100,9 +83,9 @@ const Training  = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={squaredMetersOfBuildings}
+                                                        value={Scientificprograms}
                                                         onChange={e => {
-                                                            setSquaredMetersOfBuildings(parseInt(e.target.value.toString()));
+                                                            setScientificprograms(parseInt(e.target.value.toString()));
                                                         }}/>
                                                 </div>
                                                 <div className="flex flex-col gap-2">
@@ -123,9 +106,9 @@ const Training  = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="HR"
-                                                        value={squaredMetersAvailableForPublic}
+                                                        value={HR}
                                                         onChange={e => {
-                                                            setSquaredMetersAvailableForPublic(parseInt(e.target.value.toString()));
+                                                            setHR(parseInt(e.target.value.toString()));
                                                         }}
                                                      />
 

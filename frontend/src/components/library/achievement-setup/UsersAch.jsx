@@ -9,7 +9,7 @@ import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
 import Loader from "../../Layouts/Loader";
-import {INFRASTRUCTURE_SETUP_RESET} from "../../../constants/libraryConstants";
+import {USERSACH_SETUP_RESET} from "../../../constants/libraryConstants";
 const User  = ({year, month}) => {
 
     const dispatch = useDispatch();
@@ -18,33 +18,18 @@ const User  = ({year, month}) => {
     const {loading, success, infrastructure, error} = useSelector((state) => state.infrastructure);
     const [totalArea, setTotalArea] = useState(0);
     const [open, setOpen] = useState(false);
-    const [squaredMetersOfBuildings, setSquaredMetersOfBuildings] = useState();
-    const [squaredMetersAvailableForPublic, setSquaredMetersAvailableForPublic] = useState();
-    const [readingHallsSeats, setReadingHallsSeats] = useState();
-    const [readingHallsTables, setReadingHallsTables] = useState();
-    const [activitiesHallsTables, setActivitiesHallsTables] = useState();
-    const [activitiesHallsSeats, setActivitiesHallsSeats] = useState();
-    const [noOfPc, setNoOfPc] = useState();
-
-    const toggle = () => {
-        setTotalArea(((squaredMetersOfBuildings == null) ? 0 : squaredMetersOfBuildings) +
-            (((squaredMetersAvailableForPublic) == null) ? 0 : squaredMetersAvailableForPublic));
-        if (totalArea == null)
-            setTotalArea(0);
-        setOpen(!open);
-    };
+    const [VisitsVirtual, setVisitsVirtual] = useState();
+    const [VisitsPhysical, setVisitsPhysical] = useState();
+    const [ActiveBorrowers, setActiveBorrowers] = useState();
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData();
-        formData.set("squaredMetersOfBuildings", squaredMetersOfBuildings);
-        formData.set("squaredMetersAvailableForPublic", squaredMetersAvailableForPublic);
-        formData.set("readingHallsSeats", readingHallsSeats);
-        formData.set("readingHallsTables", readingHallsTables);
-        formData.set("activitiesHallsTables", activitiesHallsTables);
-        formData.set("activitiesHallsSeats", activitiesHallsSeats);
-        formData.set("noOfPc", noOfPc);
+        formData.set("VisitsPhysical", VisitsPhysical);
+        formData.set("VisitsVirtual", VisitsVirtual);
+        formData.set("ActiveBorrowers", ActiveBorrowers);
+
         formData.set("year", year);
         formData.set("month", month);
 
@@ -100,9 +85,9 @@ const User  = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={squaredMetersOfBuildings}
+                                                        value={VisitsPhysical}
                                                         onChange={e => {
-                                                            setSquaredMetersOfBuildings(parseInt(e.target.value.toString()));
+                                                            setVisitsPhysical(parseInt(e.target.value.toString()));
                                                         }}/>
                                                 </div>
                                                 <div className="flex flex-col gap-2">
@@ -123,9 +108,9 @@ const User  = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Visits.Virtual "
-                                                        value={squaredMetersAvailableForPublic}
+                                                        value={VisitsVirtual}
                                                         onChange={e => {
-                                                            setSquaredMetersAvailableForPublic(parseInt(e.target.value.toString()));
+                                                            setVisitsVirtual(parseInt(e.target.value.toString()));
                                                         }}
                                                      />
 
@@ -136,7 +121,7 @@ const User  = ({year, month}) => {
                                         <div className="flex flex-col gap-2">
 
                                             <div className="flex flex-col sm:flex-row items-center gap-3"
-                                                 id="activitiesInputs">
+                                                 id="areaInputs">
                                                 <div
                                                     className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
                                                     <TextField
@@ -145,9 +130,9 @@ const User  = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={activitiesHallsTables}
+                                                        value={ActiveBorrowers}
                                                         onChange={e => {
-                                                            setActivitiesHallsTables(parseInt(e.target.value.toString()));
+                                                            setActiveBorrowers(parseInt(e.target.value.toString()));
                                                         }}
                                                      />
                                                 </div>

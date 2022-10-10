@@ -4,12 +4,12 @@ import Container from "@mui/material/Container";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
-import {createInfrastructure, getInfrastructure, updateInfrastructure} from "../../../actions/infrastructureAction";
+import {createPublicationAch, getPublicationAch, updatePublicationAch} from "../../../actions/infrastructureAction";
 import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
 import Loader from "../../Layouts/Loader";
-import {INFRASTRUCTURE_SETUP_RESET} from "../../../constants/libraryConstants";
+import {PUBLICATIONACH_SETUP_RESET} from "../../../constants/libraryConstants";
 const Publications = ({year, month}) => {
 
     const dispatch = useDispatch();
@@ -18,40 +18,20 @@ const Publications = ({year, month}) => {
     const {loading, success, infrastructure, error} = useSelector((state) => state.infrastructure);
     const [totalArea, setTotalArea] = useState(0);
     const [open, setOpen] = useState(false);
-    const [squaredMetersOfBuildings, setSquaredMetersOfBuildings] = useState();
-    const [squaredMetersAvailableForPublic, setSquaredMetersAvailableForPublic] = useState();
-    const [readingHallsSeats, setReadingHallsSeats] = useState();
-    const [readingHallsTables, setReadingHallsTables] = useState();
-    const [activitiesHallsTables, setActivitiesHallsTables] = useState();
-    const [activitiesHallsSeats, setActivitiesHallsSeats] = useState();
-    const [noOfPc, setNoOfPc] = useState();
-
-    const toggle = () => {
-        setTotalArea(((squaredMetersOfBuildings == null) ? 0 : squaredMetersOfBuildings) +
-            (((squaredMetersAvailableForPublic) == null) ? 0 : squaredMetersAvailableForPublic));
-        if (totalArea == null)
-            setTotalArea(0);
-        setOpen(!open);
-    };
-
+    const [NoOfRecordsInstitutionsAcademicPublicationsInTheInstitutionalRepository, setNoOfRecordsInstitutionsAcademicPublicationsInTheInstitutionalRepository] = useState();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData();
-        formData.set("squaredMetersOfBuildings", squaredMetersOfBuildings);
-        formData.set("squaredMetersAvailableForPublic", squaredMetersAvailableForPublic);
-        formData.set("readingHallsSeats", readingHallsSeats);
-        formData.set("readingHallsTables", readingHallsTables);
-        formData.set("activitiesHallsTables", activitiesHallsTables);
-        formData.set("activitiesHallsSeats", activitiesHallsSeats);
-        formData.set("noOfPc", noOfPc);
+        formData.set("NoOfRecordsInstitutionsAcademicPublicationsInTheInstitutionalRepository", NoOfRecordsInstitutionsAcademicPublicationsInTheInstitutionalRepository);
+
         formData.set("year", year);
         formData.set("month", month);
 
         if (infrastructure != null) {
-            dispatch(updateInfrastructure(year, month, formData));
+            dispatch(updatePublicationAch(year, month, formData));
         } else {
-            dispatch(createInfrastructure(formData));
+            dispatch(createPublicationAch(formData));
         }
     }
     useEffect(() => {
@@ -60,7 +40,7 @@ const Publications = ({year, month}) => {
             enqueueSnackbar(error, {variant: "error"});
             dispatch(clearErrors());
         }
-        dispatch(getInfrastructure(year, month));
+        dispatch(getPublicationAch(year, month));
 
     }, [dispatch, year, month, error, enqueueSnackbar]);
 
@@ -70,8 +50,8 @@ const Publications = ({year, month}) => {
             dispatch(clearErrors());
         }
         if (success) {
-            enqueueSnackbar("Infrastructure Setup Done", {variant: "success"});
-            dispatch({type: INFRASTRUCTURE_SETUP_RESET});
+            enqueueSnackbar("Publications Setup Done", {variant: "success"});
+            dispatch({type: PUBLICATIONACH_SETUP_RESET});
         }
     }, [dispatch, year, month, error, success, navigate, enqueueSnackbar]);
 
@@ -100,9 +80,9 @@ const Publications = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={squaredMetersOfBuildings}
+                                                        value={NoOfRecordsInstitutionsAcademicPublicationsInTheInstitutionalRepository}
                                                         onChange={e => {
-                                                            setSquaredMetersOfBuildings(parseInt(e.target.value.toString()));
+                                                            setNoOfRecordsInstitutionsAcademicPublicationsInTheInstitutionalRepository(parseInt(e.target.value.toString()));
                                                         }}/>
                                                 </div>
                                                 <div className="flex flex-col gap-2">

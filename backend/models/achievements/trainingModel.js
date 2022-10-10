@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
-const questionsSchema = new mongoose.Schema({
-    noOfQuestionsAnswered: {
+const trainingSchema = new mongoose.Schema({
+    Scientificprograms: {
         type: Number,
-        required: [true, "Please Enter digitalActiveUsers"],
+        required: [true, "Please Enter Scientific programs"],
     },
-    totalNoOfQuestionsHandled: {
+    HR: {
         type: Number,
-        required: [true, "Please Enter totalNoOfQuestionsHandled"],
+        required: [true, "Please Enter HR"],
     },
     createdAt: {
         type: Date,
@@ -29,4 +29,4 @@ const questionsSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('Questions', questionsSchema);
+module.exports = mongoose.model('Training', trainingSchema);

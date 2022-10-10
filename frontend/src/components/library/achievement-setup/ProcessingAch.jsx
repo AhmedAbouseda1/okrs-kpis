@@ -4,12 +4,12 @@ import Container from "@mui/material/Container";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
-import {createInfrastructure, getInfrastructure, updateInfrastructure} from "../../../actions/infrastructureAction";
+import {createProcessingAch, getProcessingAch, updateProcessingAch} from "../../../actions/infrastructureAction";
 import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
 import Loader from "../../Layouts/Loader";
-import {INFRASTRUCTURE_SETUP_RESET} from "../../../constants/libraryConstants";
+import {PROCESSINGACH_SETUP_RESET} from "../../../constants/libraryConstants";
 const Processing  = ({year, month}) => {
 
     const dispatch = useDispatch();
@@ -18,40 +18,32 @@ const Processing  = ({year, month}) => {
     const {loading, success, infrastructure, error} = useSelector((state) => state.infrastructure);
     const [totalArea, setTotalArea] = useState(0);
     const [open, setOpen] = useState(false);
-    const [squaredMetersOfBuildings, setSquaredMetersOfBuildings] = useState();
-    const [squaredMetersAvailableForPublic, setSquaredMetersAvailableForPublic] = useState();
-    const [readingHallsSeats, setReadingHallsSeats] = useState();
-    const [readingHallsTables, setReadingHallsTables] = useState();
-    const [activitiesHallsTables, setActivitiesHallsTables] = useState();
-    const [activitiesHallsSeats, setActivitiesHallsSeats] = useState();
-    const [noOfPc, setNoOfPc] = useState();
-
-    const toggle = () => {
-        setTotalArea(((squaredMetersOfBuildings == null) ? 0 : squaredMetersOfBuildings) +
-            (((squaredMetersAvailableForPublic) == null) ? 0 : squaredMetersAvailableForPublic));
-        if (totalArea == null)
-            setTotalArea(0);
-        setOpen(!open);
-    };
-
+    const [NumberOfDocumentDigitizedInTheReportingYear, setNumberOfDocumentDigitizedInTheReportingYear] = useState();
+    const [OwnerInstitutionsAcademicPublicationInTheInstitutionalRepository, setOwnerInstitutionsAcademicPublicationInTheInstitutionalRepository] = useState();
+    const [RareMaterialsAccessibleViaWebCatalogues, setRareMaterialsAccessibleViaWebCatalogues] = useState();
+    const [LibraryVisits, setLibraryVisits] = useState();
+    const [TargetPopulationReached, setTargetPopulationReached] = useState();
+    const [TheNumberOfMediaAcquiredInACertainPeriod, setTheNumberOfMediaAcquiredInACertainPeriod] = useState();
+    const [NumberOfAttendancesAtLibraryInstructionalSessions, setNumberOfAttendancesAtLibraryInstructionalSessions] = useState();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData();
-        formData.set("squaredMetersOfBuildings", squaredMetersOfBuildings);
-        formData.set("squaredMetersAvailableForPublic", squaredMetersAvailableForPublic);
-        formData.set("readingHallsSeats", readingHallsSeats);
-        formData.set("readingHallsTables", readingHallsTables);
-        formData.set("activitiesHallsTables", activitiesHallsTables);
-        formData.set("activitiesHallsSeats", activitiesHallsSeats);
-        formData.set("noOfPc", noOfPc);
+        formData.set("NumberOfDocumentDigitizedInTheReportingYear", NumberOfDocumentDigitizedInTheReportingYear);
+        formData.set("OwnerInstitutionsAcademicPublicationInTheInstitutionalRepository", OwnerInstitutionsAcademicPublicationInTheInstitutionalRepository);
+        formData.set("RareMaterialsAccessibleViaWebCatalogues", RareMaterialsAccessibleViaWebCatalogues);
+        formData.set("LibraryVisits", LibraryVisits);
+        formData.set("TargetPopulationReached", TargetPopulationReached);
+        formData.set("TheNumberOfMediaAcquiredInACertainPeriod", TheNumberOfMediaAcquiredInACertainPeriod);
+        formData.set("NumberOfAttendancesAtLibraryInstructionalSessions", NumberOfAttendancesAtLibraryInstructionalSessions);
+
         formData.set("year", year);
         formData.set("month", month);
 
-        if (infrastructure != null) {
-            dispatch(updateInfrastructure(year, month, formData));
+        if (processing != null) {
+            dispatch(updateProcessingAch(year, month, formData));
         } else {
-            dispatch(createInfrastructure(formData));
+            dispatch(createProcessingAch(formData));
         }
     }
     useEffect(() => {
@@ -60,7 +52,7 @@ const Processing  = ({year, month}) => {
             enqueueSnackbar(error, {variant: "error"});
             dispatch(clearErrors());
         }
-        dispatch(getInfrastructure(year, month));
+        dispatch(getProcessingAch(year, month));
 
     }, [dispatch, year, month, error, enqueueSnackbar]);
 
@@ -70,8 +62,8 @@ const Processing  = ({year, month}) => {
             dispatch(clearErrors());
         }
         if (success) {
-            enqueueSnackbar("Infrastructure Setup Done", {variant: "success"});
-            dispatch({type: INFRASTRUCTURE_SETUP_RESET});
+            enqueueSnackbar("Processing Setup Done", {variant: "success"});
+            dispatch({type: PROCESSINGACH_SETUP_RESET});
         }
     }, [dispatch, year, month, error, success, navigate, enqueueSnackbar]);
 
@@ -96,13 +88,13 @@ const Processing  = ({year, month}) => {
                                                     className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
                                                     <TextField
                                                         type="number"
-                                                            label="Number Of Document Digitized In The Reporting Year"
+                                                        label="Number Of Document Digitized In The Reporting Year"
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={squaredMetersOfBuildings}
+                                                        value={NumberOfDocumentDigitizedInTheReportingYear}
                                                         onChange={e => {
-                                                            setSquaredMetersOfBuildings(parseInt(e.target.value.toString()));
+                                                            setNumberOfDocumentDigitizedInTheReportingYear(parseInt(e.target.value.toString()));
                                                         }}/>
                                                 </div>
                                                 <div className="flex flex-col gap-2">
@@ -123,9 +115,9 @@ const Processing  = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Owner Institution's Academic Publication In The Institutional Repository"
-                                                        value={squaredMetersAvailableForPublic}
+                                                        value={OwnerInstitutionsAcademicPublicationInTheInstitutionalRepository}
                                                         onChange={e => {
-                                                            setSquaredMetersAvailableForPublic(parseInt(e.target.value.toString()));
+                                                            setOwnerInstitutionsAcademicPublicationInTheInstitutionalRepository(parseInt(e.target.value.toString()));
                                                         }}
                                                      />
 
@@ -145,9 +137,9 @@ const Processing  = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        value={activitiesHallsTables}
+                                                        value={RareMaterialsAccessibleViaWebCatalogues}
                                                         onChange={e => {
-                                                            setActivitiesHallsTables(parseInt(e.target.value.toString()));
+                                                            setRareMaterialsAccessibleViaWebCatalogues(parseInt(e.target.value.toString()));
                                                         }}
                                                      />
                                                 </div>
@@ -165,9 +157,9 @@ const Processing  = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Library Visits"
-                                                        value={activitiesHallsSeats}
+                                                        value={LibraryVisits}
                                                         onChange={e => {
-                                                            setActivitiesHallsSeats(parseInt(e.target.value.toString()));
+                                                            setLibraryVisits(parseInt(e.target.value.toString()));
                                                         }}
                                                      />
 
@@ -189,9 +181,9 @@ const Processing  = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="Target Population Reached"
-                                                        value={readingHallsTables}
+                                                        value={TargetPopulationReached}
                                                         onChange={e => {
-                                                            setReadingHallsTables(parseInt(e.target.value.toString()));
+                                                            setTargetPopulationReached(parseInt(e.target.value.toString()));
                                                         }}
                                                      />
                                                 </div>
@@ -210,9 +202,9 @@ const Processing  = ({year, month}) => {
                                                         size="small"
                                                         required
                                                         label="The Number Of Media Acquired In A Certain Period"
-                                                        value={readingHallsSeats}
+                                                        value={TheNumberOfMediaAcquiredInACertainPeriod}
                                                         onChange={e => {
-                                                            setReadingHallsSeats(parseInt(e.target.value.toString()));
+                                                            setTheNumberOfMediaAcquiredInACertainPeriod(parseInt(e.target.value.toString()));
                                                         }}
                                                      />
 
@@ -227,11 +219,11 @@ const Processing  = ({year, month}) => {
                                                     variant="outlined"
                                                     size="small"
                                                     required
-                                                    label="Number Of Attendances At Library Instructional Sessions "
-                                                    value={noOfPc}
+                                                    label="Number Of Attendances At Library Instructional Sessions"
+                                                    value={NumberOfAttendancesAtLibraryInstructionalSessions}
 
                                                     onChange={e => {
-                                                        setNoOfPc(parseInt(e.target.value.toString()));
+                                                        setNumberOfAttendancesAtLibraryInstructionalSessions(parseInt(e.target.value.toString()));
                                                     }}
                                                  />
 
