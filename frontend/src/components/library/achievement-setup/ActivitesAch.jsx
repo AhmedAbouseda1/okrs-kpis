@@ -3,12 +3,12 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
-import {createActivitiesAch, getActivitiesAch, updateActivitiesAch} from "../../../actions/infrastructureAction";
 import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
 import Loader from "../../Layouts/Loader";
-import {ACTIVITIESACH_SETUP_RESET} from "../../../constants/libraryConstants";
+import {ACTIVITESACH_SETUP_RESET} from "../../../constants/libraryConstants";
+import {createActivitesAch, getActivitesAch, updateActivitesAch} from "../../../actions/activitesAchAction";
 
 const Activites  = ({year, month}) => {
 
@@ -16,8 +16,6 @@ const Activites  = ({year, month}) => {
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
     const {loading, success, Activities, error} = useSelector((state) => state.Activities);
-    const [totalArea, setTotalArea] = useState(0);
-    const [open, setOpen] = useState(false);
     const [outreachActivities, setOutreachActivities] = useState();
     const [scientificAndEducationalActivities, setScientificAndEducationalActivities] = useState();
     const [seminarsAndConferences, setSeminarsAndConferences] = useState();
@@ -32,10 +30,10 @@ const Activites  = ({year, month}) => {
         formData.set("year", year);
         formData.set("month", month);
 
-        if (activitiesAch.year != null) {
-            dispatch(updateActivitiesAch(year, month, formData));
+        if (Activities.year != null) {
+            dispatch(updateActivitesAch(year, month, formData));
         } else {
-            dispatch(createActivitiesAch(formData));
+            dispatch(createActivitesAch(formData));
         }
     }
     useEffect(() => {
@@ -44,11 +42,11 @@ const Activites  = ({year, month}) => {
             enqueueSnackbar(error, {variant: "error"});
             dispatch(clearErrors());
         }
-        dispatch(getActivitiesAch(year, month));
-        if (activitiesAchievement.year !== null) {
-            setSeminarsAndConferences(activitiesAchievement.seminarsAndConferences);
-            setScientificAndEducationalActivities(activitiesAchievement.scientificAndEducationalActivities);
-            setOutreachActivities(activitiesAchievement.outreachActivities);
+        dispatch(getActivitesAch(year, month));
+        if (Activities.year !== null) {
+            setSeminarsAndConferences(Activities.seminarsAndConferences);
+            setScientificAndEducationalActivities(Activities.scientificAndEducationalActivities);
+            setOutreachActivities(Activities.outreachActivities);
         }
     }, [dispatch, year, month, error, enqueueSnackbar]);
 
@@ -59,7 +57,7 @@ const Activites  = ({year, month}) => {
         }
         if (success) {
             enqueueSnackbar("ActivitiesAchievement Setup Done", {variant: "success"});
-            dispatch({type: ACTIVITIESACH_SETUP_RESET});
+            dispatch({type: ACTIVITESACH_SETUP_RESET});
         }
     }, [dispatch, year, month, error, success, navigate, enqueueSnackbar]);
 
@@ -145,7 +143,7 @@ const Activites  = ({year, month}) => {
                                         <div className="flex justify-end">
                                             <input form="mainform" type="submit"
                                                    className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value={activitiesAch.year != null ? "Update":"Submit"}/>
+                                                   value={Activities.year != null ? "Update":"Submit"}/>
                                         </div>
                                     </Grid>
 

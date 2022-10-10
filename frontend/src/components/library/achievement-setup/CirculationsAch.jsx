@@ -1,22 +1,20 @@
 import {Button, CircularProgress, Grid, IconButton,} from "@mui/material";
 import React, {useEffect, useState} from "react";
-import Container from "@mui/material/Container";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
-import {createCirculationAch, getCirculationAch, updateCirculationAch} from "../../../actions/infrastructureAction";
+import {createCirculationAch, getCirculationAch, updateCirculationAch} from "../../../actions/CirculationAchAction";
 import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
 import Loader from "../../Layouts/Loader";
-import {CIRCULAR_SETUP_RESET} from "../../../constants/libraryConstants";
+import {CIRCULATIONACH_SETUP_RESET} from "../../../constants/libraryConstants";
 const CirculationAch  = ({year, month}) => {
 
     const dispatch = useDispatch();
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
     const {loading, success, CirculationAch, error} = useSelector((state) => state.CirculationAch);
-    const [open, setOpen] = useState(false);
 
     const [ElectronicResources, setElectronicResources] = useState();
     const [Books, setBooks] = useState();
@@ -28,13 +26,13 @@ const CirculationAch  = ({year, month}) => {
         e.preventDefault();
         const formData = new FormData();
         formData.set("ElectronicResources", ElectronicResources);
-        formData.set("Books", squaredMetersAvailableForPublic);
+        formData.set("Books", Books);
         formData.set("NoOfDownloadsFromEachElectronicResource", NoOfDownloadsFromEachElectronicResource);
 
         formData.set("year", year);
         formData.set("month", month);
 
-        if (CirculationAch != null) {
+        if (CirculationAch.year != null) {
             dispatch(updateCirculationAch(year, month, formData));
         } else {
             dispatch(createCirculationAch(formData));
@@ -57,7 +55,7 @@ const CirculationAch  = ({year, month}) => {
         }
         if (success) {
             enqueueSnackbar("Circulation Setup Done", {variant: "success"});
-            dispatch({type: INFRASTRUCTURE_SETUP_RESET});
+            dispatch({type: CIRCULATIONACH_SETUP_RESET});
         }
     }, [dispatch, year, month, error, success, navigate, enqueueSnackbar]);
 
@@ -143,7 +141,7 @@ const CirculationAch  = ({year, month}) => {
                                         <div className="flex justify-end">
                                             <input form="mainform" type="submit"
                                                    className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value={CirculationAch != null ? "Update":"Submit"}/>
+                                                   value={CirculationAch.year != null ? "Update":"Submit"}/>
                                         </div>
                                     </Grid>
 

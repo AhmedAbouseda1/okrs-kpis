@@ -1,10 +1,9 @@
 import {Button, CircularProgress, Grid, IconButton,} from "@mui/material";
 import React, {useEffect, useState} from "react";
-import Container from "@mui/material/Container";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
-import {createProcessingAch, getProcessingAch, updateProcessingAch} from "../../../actions/infrastructureAction";
+import {createProcessingAch, getProcessingAch, updateProcessingAch} from "../../../actions/processingAchAction";
 import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
@@ -16,8 +15,6 @@ const Processing  = ({year, month}) => {
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
     const {loading, success, infrastructure, error} = useSelector((state) => state.infrastructure);
-    const [totalArea, setTotalArea] = useState(0);
-    const [open, setOpen] = useState(false);
     const [NumberOfDocumentDigitizedInTheReportingYear, setNumberOfDocumentDigitizedInTheReportingYear] = useState();
     const [OwnerInstitutionsAcademicPublicationInTheInstitutionalRepository, setOwnerInstitutionsAcademicPublicationInTheInstitutionalRepository] = useState();
     const [RareMaterialsAccessibleViaWebCatalogues, setRareMaterialsAccessibleViaWebCatalogues] = useState();

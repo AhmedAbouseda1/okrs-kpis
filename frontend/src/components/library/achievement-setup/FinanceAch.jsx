@@ -3,12 +3,13 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
-import {createFinanceAch, getFinanceAch, updateFinanceAch} from "../../../actions/financeAction";
+import {createFinanceAch, getFinanceAch, updateFinanceAch} from "../../../actions/financeAchAction";
 import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
 import Loader from "../../Layouts/Loader";
 import {FINANCEACH_SETUP_RESET} from "../../../constants/libraryConstants";
+import {getCirculationAch} from "../../../actions/CirculationAchAction";
 
 
 const FinanceAch = ({year, month}) => {
@@ -16,9 +17,9 @@ const FinanceAch = ({year, month}) => {
     const dispatch = useDispatch();
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
-    const {finance, loading, success, error} = useSelector((state) => state.finance);
+    const {financeAch, loading, success, error} = useSelector((state) => state.financeAch);
     const [FeesFines, setFeesFines] = useState()
-    const [waterAndLighting, setWaterAndLighting] = useState()
+    const [TrainingCenter, setTrainingCenter] = useState()
     const [OtherIncome, setOtherIncome] = useState()
     const [BookFair, setBookFair] = useState()
     const [TheExpendituresOnAcquisition, setTheExpendituresOnAcquisition] = useState()
@@ -51,13 +52,24 @@ const FinanceAch = ({year, month}) => {
         formData.set("LibraryMeansReceivedBySpecialGrantOrLibrary", LibraryMeansReceivedBySpecialGrantOrLibrary);
         formData.set("year", year);
         formData.set("month", month);
-        if (financeAch != null) {
+        if (financeAch.year != null) {
             dispatch(updateFinanceAch(year, month, formData));
 
         } else {
             dispatch(createFinanceAch(formData));
         }
     }
+
+    useEffect(() => {
+
+        if (error) {
+            enqueueSnackbar(error, {variant: "error"});
+            dispatch(clearErrors());
+        }
+        dispatch(getFinanceAch(year, month));
+
+    }, [dispatch, year, month, error, enqueueSnackbar]);
+
     useEffect(() => {
         if (error) {
             enqueueSnackbar(error, {variant: "error"});
@@ -65,7 +77,7 @@ const FinanceAch = ({year, month}) => {
         }
         if (success) {
             enqueueSnackbar("Finance Setup Done", {variant: "success"});
-            dispatch({type: FINANCE_SETUP_RESET});
+            dispatch({type: FINANCEACH_SETUP_RESET});
         }
     }, [dispatch, error, success, navigate, enqueueSnackbar]);
 
@@ -321,7 +333,7 @@ const FinanceAch = ({year, month}) => {
                                                         value={LibraryMeansReceivedBySpecialGrantOrLibrary}
 
                                                         onChange={e => {
-                                                            setLibraryMeansReceivedBySpecialGrantOrLibrary(parseInt(e.target.value.toString()));
+                                                            seLibraryMeansReceivedBySpecialGrantOrLibrary(parseInt(e.target.value.toString()));
                                                         }}
                                                      />
 
@@ -336,7 +348,7 @@ const FinanceAch = ({year, month}) => {
                                             <div className="flex justify-end">
                                             <input form="mainform" type="submit"
                                                    className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value={FinanceAch != null ? "Update":"Submit"}/>
+                                                   value={financeAch.year  != null ? "Update":"Submit"}/>
                                         </div>
                                         </div>
 

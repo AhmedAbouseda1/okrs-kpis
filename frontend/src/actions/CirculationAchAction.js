@@ -29,7 +29,7 @@ export const createCirculationAch = (circulationAchData) => async (dispatch) => 
 }
 
 
-export const updateCirculationAch  = (year, month,circulationAch Data) => async (dispatch) => {
+export const updateCirculationAch  = (year, month,circulationAchData) => async (dispatch) => {
     try {
         dispatch({ type: CIRCULATIONACH_SETUP });
         const config = { header: { "Content-Type": "application/json" } }

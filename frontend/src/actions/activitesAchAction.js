@@ -29,7 +29,7 @@ export const createActivitesAch = (activitesAchData) => async (dispatch) => {
 }
 
 
-export const updateActivitesAch  = (year, month,activitesAch Data) => async (dispatch) => {
+export const updateActivitesAch  = (year, month, activitesAchData) => async (dispatch) => {
     try {
         dispatch({ type: ACTIVITESACH_SETUP });
         const config = { header: { "Content-Type": "application/json" } }

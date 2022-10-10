@@ -1,6 +1,5 @@
 import {Button, CircularProgress, Grid, IconButton,} from "@mui/material";
 import React, {useEffect, useState} from "react";
-import Container from "@mui/material/Container";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
@@ -16,8 +15,6 @@ const Publications = ({year, month}) => {
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
     const {loading, success, infrastructure, error} = useSelector((state) => state.infrastructure);
-    const [totalArea, setTotalArea] = useState(0);
-    const [open, setOpen] = useState(false);
     const [NoOfRecordsInstitutionsAcademicPublicationsInTheInstitutionalRepository, setNoOfRecordsInstitutionsAcademicPublicationsInTheInstitutionalRepository] = useState();
 
     const handleSubmit = (e) => {
