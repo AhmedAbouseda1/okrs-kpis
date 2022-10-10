@@ -37,15 +37,18 @@ function createData(
     nameAr: string,
     result: number,
     upOrDown: number,
+    lastYear: number,
+
 ) {
-    return {name, nameAr, result, upOrDown};
+    return {name, nameAr, result, upOrDown,lastYear};
 }
 
 const rows = [
     createData('Percentage of Rare Materials Needing Conservation/Restoration Treatment that Received Such Treatment',
         'النسبة المئوية للمجموعات النادرة التي تحتاج الى معالجة حفظ/ترميم التي تلقت مثل تلك المعالجة.',
-        121,
-        1),
+        15  ,
+        -5,
+        19),
 ];
 
 
@@ -63,7 +66,7 @@ const Environment = () => {
                                 <StyledTableCell component="th" scope="row">
                                     {row.name}<br/>{row.nameAr}
                                 </StyledTableCell>
-                                <StyledTableCell align="right">{row.result}</StyledTableCell>
+                                <StyledTableCell align="right">{row.result}%</StyledTableCell>
                                 <StyledTableCell align="right">
                                     <IconButton title={row.upOrDown}>
                                         {row.upOrDown > 0 ? (
@@ -74,6 +77,7 @@ const Environment = () => {
                                             )}
                                     </IconButton>
                                 </StyledTableCell>
+                                <StyledTableCell align="right">{row.lastYear}%</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>

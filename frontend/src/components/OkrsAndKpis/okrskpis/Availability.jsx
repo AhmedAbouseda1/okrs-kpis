@@ -32,28 +32,34 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
     },
 }));
 
+
 function createData(
     name: string,
     nameAr: string,
     result: number,
     upOrDown: number,
+    lastYear: number,
+
 ) {
-    return {name, nameAr, result, upOrDown};
+    return {name, nameAr, result, upOrDown,lastYear};
 }
 
 const rows = [
     createData('Number of Documents Digitized per 1000 Documents in the Collection',
         'عدد الوثائق المرقمنة لكل ١٠٠٠ وثيقة في مجموعات المكتبة',
-        13.7,
-        1),
+        29.0,
+        10.2,
+        18.79 ),
     createData('Percentage of the Owner Institution’s Academic Publications in the Institutional Repository',
         'النسبة المئوية للمنشورات الأكاديمية للمؤسسة الأم في المستودع الرقمي للمؤسسة (نسبة إصدارات المؤسسة في المستودع الخاص بها)',
-        41,
-        -1),
+        23,
+        -7,
+        29),
     createData('Percentage of Rare Materials Accessible via Web Catalogues',
         'النسبة المئوية للمواد النادرة التي يمكن الوصول إليها عبر فهارس الويب ',
-        '105.5',
-        '1'),
+        26,
+        6,
+        20),
 ];
 
 
@@ -82,6 +88,7 @@ const Availability = () => {
                                             )}
                                     </IconButton>
                                 </StyledTableCell>
+                                <StyledTableCell align="right">{row.lastYear}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>

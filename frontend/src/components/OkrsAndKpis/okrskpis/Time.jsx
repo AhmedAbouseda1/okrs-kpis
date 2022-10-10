@@ -37,17 +37,20 @@ function createData(
     nameAr: string,
     result: number,
     upOrDown: number,
+    lastYear: number,
+
 ) {
-    return {name, nameAr, result, upOrDown};
+    return {name, nameAr, result, upOrDown,lastYear};
 }
+
 
 const rows = [
     createData('Speed of Interlibrary Lending',
         'سرعة الإعارة بين المكتبات',
-        2220,
-        6),
+        245.2,
+        229.58,
+        15.65),
 ];
-
 
 const Environment = () => {
     const {loading} = useSelector((state) => state.product);
@@ -74,6 +77,7 @@ const Environment = () => {
                                             )}
                                     </IconButton>
                                 </StyledTableCell>
+                                <StyledTableCell align="right">{row.lastYear}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>

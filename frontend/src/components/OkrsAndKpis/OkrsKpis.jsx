@@ -1,4 +1,4 @@
-import {Accordion, AccordionDetails, AccordionSummary, Box} from "@mui/material";
+import {Accordion, AccordionDetails, AccordionSummary, Box, Button} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import Container from "@mui/material/Container";
@@ -31,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
 export default function OkrsKpis() {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
-
     const handleChange =
         (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
             setExpanded(isExpanded ? panel : false);
@@ -42,7 +41,7 @@ export default function OkrsKpis() {
             <MetaData title="OKRs and KPIs"/>
             <>
                 <div className="flex justify-between items-center">
-                    <h1 className="text-lg font-medium ">OKRs and KPIs for current month</h1>
+                    <h1 className="text-lg font-medium ">OKRs and KPIs for October 2022 with October 2021 comparison</h1>
                 </div>
                 <Container>
                     <Box>

@@ -37,23 +37,24 @@ function createData(
     nameAr: string,
     result: number,
     upOrDown: number,
+    lastYear: number,
+
 ) {
-    return {name, nameAr, result, upOrDown};
+    return {name, nameAr, result, upOrDown,lastYear};
 }
+
 
 const rows = [
     createData('Percentage of Library Staff Providing Electronic Services',
         'نسبة موظفي المكتبة الذين يقدمون خدمات إلكترونية',
-        0.4,
-        0.1),
+        0.4,-32,76 ),
     createData('Percentage of Expenditure on Information Provision Spent on the Electronic Collection',
             'النسبة المئوية للإنفاق على المجموعات الإلكترونية',
-        0.2,
-        -0.1),
+        13,10,3
+    ),
     createData('Percentage of the digital active users to the overall number of active users',
         'النسبة المئوية للمستفيدين النشطين إلكترونياً إلى إجمالي المستفيدين ',
-        '12.5',
-        '1'),
+        37,	13,	24),
 ];
 
 
@@ -82,6 +83,7 @@ const Availability = () => {
                                             )}
                                     </IconButton>
                                 </StyledTableCell>
+                                <StyledTableCell align="right">{row.lastYear}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
