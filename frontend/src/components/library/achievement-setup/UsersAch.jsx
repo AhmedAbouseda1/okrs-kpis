@@ -4,18 +4,18 @@ import Container from "@mui/material/Container";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
-import {createInfrastructure, getInfrastructure, updateInfrastructure} from "../../../actions/infrastructureAction";
+import {createUsersAch, getUsersAch, updateUsersAch} from "../../../actions/userAction";
 import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
 import Loader from "../../Layouts/Loader";
 import {USERSACH_SETUP_RESET} from "../../../constants/libraryConstants";
-const User  = ({year, month}) => {
+const UserAch  = ({year, month}) => {
 
     const dispatch = useDispatch();
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
-    const {loading, success, infrastructure, error} = useSelector((state) => state.infrastructure);
+    const {loading, success, UserAch, error} = useSelector((state) => state.UserAch);
     const [totalArea, setTotalArea] = useState(0);
     const [open, setOpen] = useState(false);
     const [VisitsVirtual, setVisitsVirtual] = useState();
@@ -33,10 +33,10 @@ const User  = ({year, month}) => {
         formData.set("year", year);
         formData.set("month", month);
 
-        if (infrastructure != null) {
-            dispatch(updateInfrastructure(year, month, formData));
+        if (UserAch != null) {
+            dispatch(updateUsersAch(year, month, formData));
         } else {
-            dispatch(createInfrastructure(formData));
+            dispatch(createUsersAch(formData));
         }
     }
     useEffect(() => {
@@ -45,7 +45,7 @@ const User  = ({year, month}) => {
             enqueueSnackbar(error, {variant: "error"});
             dispatch(clearErrors());
         }
-        dispatch(getInfrastructure(year, month));
+        dispatch(getUsersAch(year, month));
 
     }, [dispatch, year, month, error, enqueueSnackbar]);
 
@@ -55,8 +55,8 @@ const User  = ({year, month}) => {
             dispatch(clearErrors());
         }
         if (success) {
-            enqueueSnackbar("Infrastructure Setup Done", {variant: "success"});
-            dispatch({type: INFRASTRUCTURE_SETUP_RESET});
+            enqueueSnackbar("User achievement Setup Done", {variant: "success"});
+            dispatch({type: USERSACH_SETUP_RESET});
         }
     }, [dispatch, year, month, error, success, navigate, enqueueSnackbar]);
 
@@ -142,7 +142,7 @@ const User  = ({year, month}) => {
                                         <div className="flex justify-end">
                                             <input form="mainform" type="submit"
                                                    className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value={infrastructure != null ? "Update":"Submit"}/>
+                                                   value={UserAch != null ? "Update":"Submit"}/>
                                         </div>
                                     </Grid>
 
@@ -157,5 +157,5 @@ const User  = ({year, month}) => {
     );
 };
 
-export default User;
+export default UserAch;
 

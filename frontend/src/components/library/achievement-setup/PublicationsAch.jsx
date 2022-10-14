@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
-import {createPublicationAch, getPublicationAch, updatePublicationAch} from "../../../actions/infrastructureAction";
+import {createPublicationAch, getPublicationAch, updatePublicationAch} from "../../../actions/publicationAchAction";
 import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
@@ -14,7 +14,7 @@ const Publications = ({year, month}) => {
     const dispatch = useDispatch();
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
-    const {loading, success, infrastructure, error} = useSelector((state) => state.infrastructure);
+    const {loading, success, publicationsAch, error} = useSelector((state) => state.publicationsAch);
     const [NoOfRecordsInstitutionsAcademicPublicationsInTheInstitutionalRepository, setNoOfRecordsInstitutionsAcademicPublicationsInTheInstitutionalRepository] = useState();
 
     const handleSubmit = (e) => {
@@ -25,7 +25,7 @@ const Publications = ({year, month}) => {
         formData.set("year", year);
         formData.set("month", month);
 
-        if (infrastructure != null) {
+        if (publicationsAch != null) {
             dispatch(updatePublicationAch(year, month, formData));
         } else {
             dispatch(createPublicationAch(formData));
@@ -91,7 +91,7 @@ const Publications = ({year, month}) => {
                                         <div className="flex justify-end">
                                             <input form="mainform" type="submit"
                                                    className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value={infrastructure != null ? "Update":"Submit"}/>
+                                                   value={publicationsAch != null ? "Update":"Submit"}/>
                                         </div>
                                     </Grid>
 

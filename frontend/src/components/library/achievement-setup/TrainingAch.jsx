@@ -4,18 +4,18 @@ import Container from "@mui/material/Container";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
-import {createInfrastructure, getInfrastructure, updateInfrastructure} from "../../../actions/infrastructureAction";
+import {createTrainingAch, getTrainingAch, updateTrainingAch} from "../../../actions/trainingAchAction";
 import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
 import Loader from "../../Layouts/Loader";
-import {INFRASTRUCTURE_SETUP_RESET} from "../../../constants/libraryConstants";
+import {TRAININGACH_SETUP_RESET} from "../../../constants/libraryConstants";
 const Training  = ({year, month}) => {
 
     const dispatch = useDispatch();
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
-    const {loading, success, infrastructure, error} = useSelector((state) => state.infrastructure);
+    const {loading, success, trainingAch, error} = useSelector((state) => state.training);
     const [totalArea, setTotalArea] = useState(0);
     const [open, setOpen] = useState(false);
     const [Scientificprograms, setScientificprograms] = useState();
@@ -31,10 +31,10 @@ const Training  = ({year, month}) => {
         formData.set("year", year);
         formData.set("month", month);
 
-        if (infrastructure != null) {
-            dispatch(updateInfrastructure(year, month, formData));
+        if (training != null) {
+            dispatch(updateTrainingAch(year, month, formData));
         } else {
-            dispatch(createInfrastructure(formData));
+            dispatch(createTrainingAch(formData));
         }
     }
     useEffect(() => {
@@ -43,7 +43,7 @@ const Training  = ({year, month}) => {
             enqueueSnackbar(error, {variant: "error"});
             dispatch(clearErrors());
         }
-        dispatch(getInfrastructure(year, month));
+        dispatch(getTrainingAch(year, month));
 
     }, [dispatch, year, month, error, enqueueSnackbar]);
 
@@ -53,8 +53,8 @@ const Training  = ({year, month}) => {
             dispatch(clearErrors());
         }
         if (success) {
-            enqueueSnackbar("Infrastructure Setup Done", {variant: "success"});
-            dispatch({type: INFRASTRUCTURE_SETUP_RESET});
+            enqueueSnackbar("training achievement Setup Done", {variant: "success"});
+            dispatch({type: TRAININGACH_SETUP_RESET});
         }
     }, [dispatch, year, month, error, success, navigate, enqueueSnackbar]);
 
@@ -121,7 +121,7 @@ const Training  = ({year, month}) => {
                                         <div className="flex justify-end">
                                             <input form="mainform" type="submit"
                                                    className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value={infrastructure != null ? "Update":"Submit"}/>
+                                                   value={training != null ? "Update":"Submit"}/>
                                         </div>
                                     </Grid>
 

@@ -14,7 +14,7 @@ const Processing  = ({year, month}) => {
     const dispatch = useDispatch();
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
-    const {loading, success, infrastructure, error} = useSelector((state) => state.infrastructure);
+    const {loading, success, processingAch, error} = useSelector((state) => state.processingAch);
     const [NumberOfDocumentDigitizedInTheReportingYear, setNumberOfDocumentDigitizedInTheReportingYear] = useState();
     const [OwnerInstitutionsAcademicPublicationInTheInstitutionalRepository, setOwnerInstitutionsAcademicPublicationInTheInstitutionalRepository] = useState();
     const [RareMaterialsAccessibleViaWebCatalogues, setRareMaterialsAccessibleViaWebCatalogues] = useState();
@@ -229,7 +229,7 @@ const Processing  = ({year, month}) => {
                                         <div className="flex justify-end">
                                             <input form="mainform" type="submit"
                                                    className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value={infrastructure != null ? "Update":"Submit"}/>
+                                                   value={processingAch != null ? "Update":"Submit"}/>
                                         </div>
                                     </Grid>
 
