@@ -13,6 +13,14 @@ const {
 } = require("../controllers/humanResourcesController");
 const {createProcessing, getProcessing, updateProcessing} = require("../controllers/processingController");
 const {createFinance, getFinance, updateFinance} = require("../controllers/financeController");
+const {createGeneralAch, getGeneralAch, updateGeneralAch} = require("../controllers/achsetup/general");
+const {createCirculationsAch, getCirculationsAch, updateCirculationsAch} = require("../controllers/achsetup/circulation");
+const {createActivitesAch, updateActivitesAch, getActivitesAch} = require("../controllers/achsetup/activites");
+const {createProcessingAch, getProcessingAch, updateProcessingAch} = require("../controllers/achsetup/processing");
+const {createPublicationsAch, getPublicationsAch, updatePublicationsAch} = require("../controllers/achsetup/publications");
+const {createTrainingAch, updateTrainingAch, getTrainingAch} = require("../controllers/achsetup/training");
+const {createUsersAch, getUsersAch, updateUsersAch} = require("../controllers/achsetup/users");
+const {createFinanceAch, getFinanceAch, updateFinanceAch} = require("../controllers/achsetup/finance");
 
 const router = express.Router();
 

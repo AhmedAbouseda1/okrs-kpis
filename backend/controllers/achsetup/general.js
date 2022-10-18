@@ -1,7 +1,5 @@
-const Collections = require('../models/achievements/generalModel');
-const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
-const SearchFeatures = require('../utils/searchFeatures');
-const ErrorHandler = require('../utils/errorHandler');
+const asyncErrorHandler = require('../../middlewares/asyncErrorHandler');
+const ErrorHandler = require('../../utils/errorHandler');
 
 exports.createGeneralAch = asyncErrorHandler(async (req, res, next) => {
 

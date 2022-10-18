@@ -1,7 +1,6 @@
-const Collections = require('../models/achievements/activitesModel');
-const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
-const SearchFeatures = require('../utils/searchFeatures');
-const ErrorHandler = require('../utils/errorHandler');
+const asyncErrorHandler = require('../../middlewares/asyncErrorHandler');
+const SearchFeatures = require('../../utils/searchFeatures');
+const ErrorHandler = require('../../utils/errorHandler');
 
 exports.createActivitesAch = asyncErrorHandler(async (req, res, next) => {
 
@@ -10,7 +9,7 @@ exports.createActivitesAch = asyncErrorHandler(async (req, res, next) => {
 
     res.status(201).json({
         success: true,
-        user
+        activite
     });
 });
 

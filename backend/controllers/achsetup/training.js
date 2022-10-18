@@ -1,7 +1,5 @@
-const Collections = require('../models/achievements/trainingModel');
-const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
-const SearchFeatures = require('../utils/searchFeatures');
-const ErrorHandler = require('../utils/errorHandler');
+const ErrorHandler = require('../../utils/errorHandler');
+const asyncErrorHandler = require('../../middlewares/asyncErrorHandler');
 
 exports.createTrainingAch = asyncErrorHandler(async (req, res, next) => {
 

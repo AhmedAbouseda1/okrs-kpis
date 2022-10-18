@@ -1,9 +1,7 @@
-const Collections = require('../models/achievements/financeAchievementsModel');
-const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
-const SearchFeatures = require('../utils/searchFeatures');
-const ErrorHandler = require('../utils/errorHandler');
+const asyncErrorHandler = require('../../middlewares/asyncErrorHandler');
+const ErrorHandler = require('../../utils/errorHandler');
 
-exports.createFinance = asyncErrorHandler(async (req, res, next) => {
+exports.createFinanceAch  = asyncErrorHandler(async (req, res, next) => {
 
     req.body.user = req.user.id;
     const finance = await FinanceAch.create(req.body);
@@ -16,7 +14,7 @@ exports.createFinance = asyncErrorHandler(async (req, res, next) => {
 
 
 // updateCollections
-exports.updateFinance = asyncErrorHandler(async (req, res, next) => {
+exports.updateFinanceAch  = asyncErrorHandler(async (req, res, next) => {
     let finance = await FinanceAch.findOneAndUpdate({
         year: req.params.year,
         month: req.params.month,
@@ -35,7 +33,7 @@ exports.updateFinance = asyncErrorHandler(async (req, res, next) => {
     });
 });
 
-exports.getFinance = asyncErrorHandler(async (req, res, next) => {
+exports.getFinanceAch = asyncErrorHandler(async (req, res, next) => {
 
     const finance = await FinanceAch.findOne({
         year: req.params.year,
