@@ -15,7 +15,7 @@ const Training = ({year, month}) => {
     const dispatch = useDispatch();
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
-    const {loading, success, trainingAch, error} = useSelector((state) => state.training);
+    const {loading, success, trainingAch, error} = useSelector((state) => state.trainingAch);
     const [totalArea, setTotalArea] = useState(0);
     const [open, setOpen] = useState(false);
     const [Scientificprograms, setScientificprograms] = useState();

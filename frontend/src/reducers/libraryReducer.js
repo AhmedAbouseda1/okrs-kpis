@@ -333,7 +333,7 @@ export const financeReducer = (state = {finance: {}}, {type, payload}) => {
     }
 }
 
-export const activitesReducer = (state = {activites: {}}, {type, payload}) => {
+export const activitesReducer = (state = {activitesAch: {}}, {type, payload}) => {
     switch (type) {
         case LOAD_ACTIVITESACH_REQUEST:
         case  ACTIVITESACH_SETUP:
@@ -345,13 +345,13 @@ export const activitesReducer = (state = {activites: {}}, {type, payload}) => {
             return {
                 loading: false,
                 success: payload.success,
-                activites: payload,
+                activitesAch: payload,
             };
         case  ACTIVITESACH_SETUP_SUCCESS:
             return {
                 loading: false,
                 success: payload.success,
-                activites: payload.finance,
+                activitesAch: payload.activitesAch,
             };
         case LOAD_ACTIVITESACH_FAIL:
         case  ACTIVITESACH_SETUP_FAIL:
@@ -376,7 +376,7 @@ export const activitesReducer = (state = {activites: {}}, {type, payload}) => {
 }
 
 
-export const circulaionReducer = (state = {circulaion: {}}, {type, payload}) => {
+export const circulaionReducer = (state = {circulaionAch: {}}, {type, payload}) => {
     switch (type) {
         case LOAD_CIRCULATIONACH_REQUEST:
         case  CIRCULATIONACH_SETUP:
@@ -388,13 +388,13 @@ export const circulaionReducer = (state = {circulaion: {}}, {type, payload}) => 
             return {
                 loading: false,
                 success: payload.success,
-                circulaion: payload,
+                circulaionAch: payload,
             };
         case  CIRCULATIONACH_SETUP_SUCCESS:
             return {
                 loading: false,
                 success: payload.success,
-                circulaion: payload.finance,
+                circulaionAch: payload.circulaionAch,
             };
         case LOAD_CIRCULATIONACH_FAIL:
         case  CIRCULATIONACH_SETUP_FAIL:
@@ -437,7 +437,7 @@ export const financeAchReducer = (state = {financeAch: {}}, {type, payload}) => 
             return {
                 loading: false,
                 success: payload.success,
-                financeAch: payload.finance,
+                financeAch: payload.financeAch,
             };
         case LOAD_FINANCEACH_FAIL:
         case  FINANCEACH_SETUP_FAIL:
@@ -504,7 +504,49 @@ export const generalReducer = (state = {generalAch  : {}}, {type, payload}) => {
     }
 }
 
-export const publicationReducer = (state = {publicationAch: {}}, {type, payload}) => {
+export const processingAchReducer = (state = {processingAch: {}}, {type, payload}) => {
+    switch (type) {
+        case LOAD_PROCESSINGACH_REQUEST:
+        case PROCESSINGACH_SETUP:
+            return {
+                ...state,
+                loading: true,
+            };
+        case  LOAD_PROCESSINGACH_SUCCESS:
+            return {
+                loading: false,
+                success: payload.success,
+                processingAch: payload,
+            };
+        case  PROCESSINGACH_SETUP_SUCCESS:
+            return {
+                loading: false,
+                success: payload.success,
+                processingAch: payload.processingAch,
+            };
+        case  LOAD_PROCESSINGACH_FAIL:
+        case  PROCESSINGACH_SETUP_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: payload,
+            };
+        case  PROCESSINGACH_SETUP_RESET:
+            return {
+                ...state,
+                success: false,
+            };
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+        default:
+            return state;
+    }
+}
+
+export const publicationAchReducer = (state = {publicationAch: {}}, {type, payload}) => {
     switch (type) {
         case LOAD_PUBLICATIONACH_REQUEST:
         case PUBLICATIONACH_SETUP:
@@ -522,49 +564,7 @@ export const publicationReducer = (state = {publicationAch: {}}, {type, payload}
             return {
                 loading: false,
                 success: payload.success,
-                publicationAch: payload.processing,
-            };
-        case  LOAD_PUBLICATIONACH_FAIL:
-        case  PUBLICATIONACH_SETUP_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: payload,
-            };
-        case  PUBLICATIONACH_SETUP_RESET:
-            return {
-                ...state,
-                success: false,
-            };
-        case CLEAR_ERRORS:
-            return {
-                ...state,
-                error: null,
-            };
-        default:
-            return state;
-    }
-}
-
-export const publicationAchReducer = (state = {publicationAch: {}}, {type, payload}) => {
-    switch (type) {
-        case LOAD_PROCESSINGACH_REQUEST:
-        case PUBLICATIONACH_SETUP:
-            return {
-                ...state,
-                loading: true,
-            };
-        case  LOAD_PUBLICATIONACH_SUCCESS:
-            return {
-                loading: false,
-                success: payload.success,
-                publicationAch: payload,
-            };
-        case  PUBLICATIONACH_SETUP_SUCCESS:
-            return {
-                loading: false,
-                success: payload.success,
-                publicationAch: payload.processing,
+                publicationAch: payload.publicationAch,
             };
         case  LOAD_PUBLICATIONACH_FAIL:
         case  PUBLICATIONACH_SETUP_FAIL:
@@ -607,7 +607,7 @@ export const usersAchReducer = (state = {usersAch: {}}, {type, payload}) => {
             return {
                 loading: false,
                 success: payload.success,
-                usersAch: payload.processing,
+                usersAch: payload.usersAch,
             };
         case  LOAD_USERSACH_FAIL:
         case  USERSACH_SETUP_FAIL:
@@ -649,7 +649,7 @@ export const trainingAchReducer = (state = {trainingAch: {}}, {type, payload}) =
             return {
                 loading: false,
                 success: payload.success,
-                trainingAch: payload.processing,
+                trainingAch: payload.trainingAch,
             };
         case  LOAD_TRAININGACH_FAIL:
         case  TRAININGACH_SETUP_FAIL:

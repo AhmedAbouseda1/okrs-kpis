@@ -15,7 +15,7 @@ const Activites  = ({year, month}) => {
     const dispatch = useDispatch();
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
-    const {loading, success, Activities, error} = useSelector((state) => state.Activities);
+    const {loading, success, activitesAch, error} = useSelector((state) => state.activitesAch);
     const [outreachActivities, setOutreachActivities] = useState();
     const [scientificAndEducationalActivities, setScientificAndEducationalActivities] = useState();
     const [seminarsAndConferences, setSeminarsAndConferences] = useState();
@@ -30,7 +30,7 @@ const Activites  = ({year, month}) => {
         formData.set("year", year);
         formData.set("month", month);
 
-        if (Activities.year != null) {
+        if (activitesAch.year != null) {
             dispatch(updateActivitesAch(year, month, formData));
         } else {
             dispatch(createActivitesAch(formData));
@@ -43,10 +43,10 @@ const Activites  = ({year, month}) => {
             dispatch(clearErrors());
         }
         dispatch(getActivitesAch(year, month));
-        if (Activities.year !== null) {
-            setSeminarsAndConferences(Activities.seminarsAndConferences);
-            setScientificAndEducationalActivities(Activities.scientificAndEducationalActivities);
-            setOutreachActivities(Activities.outreachActivities);
+        if (activitesAch.year !== null) {
+            setSeminarsAndConferences(activitesAch.seminarsAndConferences);
+            setScientificAndEducationalActivities(activitesAch.scientificAndEducationalActivities);
+            setOutreachActivities(activitesAch.outreachActivities);
         }
     }, [dispatch, year, month, error, enqueueSnackbar]);
 
@@ -143,7 +143,7 @@ const Activites  = ({year, month}) => {
                                         <div className="flex justify-end">
                                             <input form="mainform" type="submit"
                                                    className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value={Activities.year != null ? "Update":"Submit"}/>
+                                                   value={activitesAch.year != null ? "Update":"Submit"}/>
                                         </div>
                                     </Grid>
 

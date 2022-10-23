@@ -32,7 +32,8 @@ import {
     collectionsReducer,
     currentSetupDateReducer, financeReducer, generalReducer,
     humanResourcesReducer,
-    infrastructureReducer, processingReducer
+    infrastructureReducer, processingReducer , financeAchReducer , processingAchReducer,
+    trainingAchReducer,usersAchReducer,publicationAchReducer,circulaionReducer,activitesReducer
 } from "./reducers/libraryReducer";
 
 const reducer = combineReducers({
@@ -63,7 +64,14 @@ const reducer = combineReducers({
     processing :processingReducer,
     finance: financeReducer,
     currentSetupDate : currentSetupDateReducer,
-    generalAch:  generalReducer
+    generalAch:  generalReducer ,
+    trainingAch: trainingAchReducer,
+    usersAch: usersAchReducer,
+    publicationAch: publicationAchReducer,
+    processingAch: processingAchReducer,
+    financeAch : financeAchReducer,
+    circulaionAch : circulaionReducer,
+    activitesAch: activitesReducer
 });
 
 let initialState = {

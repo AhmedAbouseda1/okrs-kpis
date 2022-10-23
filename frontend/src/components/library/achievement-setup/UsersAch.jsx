@@ -17,7 +17,7 @@ const UserAch  = ({year, month}) => {
     const dispatch = useDispatch();
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
-    const {loading, success, UserAch, error} = useSelector((state) => state.UserAch);
+    const {loading, success, usersAch, error} = useSelector((state) => state.usersAch);
     const [totalAreap, setTotalArea] = useState(0);
     const [open, setOpen] = useState(false);
     const [VisitsVirtual, setVisitsVirtual] = useState();
@@ -35,7 +35,7 @@ const UserAch  = ({year, month}) => {
         formData.set("year", year);
         formData.set("month", month);
 
-        if (UserAch != null) {
+        if (usersAch != null) {
             dispatch(updateUsersAch(year, month, formData));
         } else {
             dispatch(createUsersAch(formData));
@@ -144,7 +144,7 @@ const UserAch  = ({year, month}) => {
                                         <div className="flex justify-end">
                                             <input form="mainform" type="submit"
                                                    className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value={UserAch != null ? "Update":"Submit"}/>
+                                                   value={usersAch != null ? "Update":"Submit"}/>
                                         </div>
                                     </Grid>
 
