@@ -34,7 +34,7 @@ export const updateFinanceAch = (year, month,financeAchData) => async (dispatch)
         dispatch({ type: FINANCEACH_SETUP });
         const config = { header: { "Content-Type": "application/json" } }
         const { data } = await axios.put(`/api/v1/library/achievement-setup/FinanceAch/${year}/${month}`
-            , financAchData,
+            , financeAchData,
             config);
 
         dispatch({

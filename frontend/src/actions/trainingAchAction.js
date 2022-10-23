@@ -29,7 +29,7 @@ export const createTrainingAch = (TrainingAchData) => async (dispatch) => {
 }
 
 
-export const updateTrainingAch  = (year, month,TrainingAch Data) => async (dispatch) => {
+export const updateTrainingAch  = (year, month,TrainingAchData) => async (dispatch) => {
     try {
         dispatch({ type: TRAININGACH_SETUP });
         const config = { header: { "Content-Type": "application/json" } }
@@ -56,7 +56,6 @@ export const getTrainingAch = (year, month) => async (dispatch) => {
         dispatch({ type: LOAD_TRAININGACH_REQUEST });
 
         const { data } = await axios.get(`/api/v1/library/achievement-setup/TrainingAch/${year}/${month}`);
-
         dispatch({
             type: LOAD_TRAININGACH_SUCCESS,
             payload: data.TrainingAch,

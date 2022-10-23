@@ -4,8 +4,10 @@ import Container from "@mui/material/Container";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
-import {createUsersAch, getUsersAch, updateUsersAch} from "../../../actions/userAction";
+
+import {createUsersAch, updateUsersAch, getUsersAch} from "../../../actions/usersAchAction";
 import {clearErrors} from "../../../actions/productAction";
+
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
 import Loader from "../../Layouts/Loader";
@@ -16,7 +18,7 @@ const UserAch  = ({year, month}) => {
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
     const {loading, success, UserAch, error} = useSelector((state) => state.UserAch);
-    const [totalArea, setTotalArea] = useState(0);
+    const [totalAreap, setTotalArea] = useState(0);
     const [open, setOpen] = useState(false);
     const [VisitsVirtual, setVisitsVirtual] = useState();
     const [VisitsPhysical, setVisitsPhysical] = useState();

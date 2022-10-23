@@ -15,7 +15,7 @@ const General  = ({year, month}) => {
     const dispatch = useDispatch();
     const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate();
-    const {loading, success, general, error} = useSelector((state) => state.general);
+    const {loading, success, generalAch, error} = useSelector((state) => state.generalAch);
     const [Date, setDate] = useState();
     const [NoOfWorkingDays, setNoOfWorkingDays] = useState();
     const [NoOfStaff, setNoOfStaff] = useState();
@@ -38,7 +38,7 @@ const General  = ({year, month}) => {
         formData.set("year", year);
         formData.set("month", month);
 
-        if (general != null) {
+        if (generalAch != null) {
             dispatch(updateGeneralAch(year, month, formData));
         } else {
             dispatch(createGeneralAch(formData));
@@ -50,6 +50,7 @@ const General  = ({year, month}) => {
             enqueueSnackbar(error, {variant: "error"});
             dispatch(clearErrors());
         }
+        alert("hello here ");
         dispatch(getGeneralAch(year, month));
 
     }, [dispatch, year, month, error, enqueueSnackbar]);
@@ -230,7 +231,7 @@ const General  = ({year, month}) => {
                                         <div className="flex justify-end">
                                             <input form="mainform" type="submit"
                                                    className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value={general.year != null ? "Update":"Submit"}/>
+                                                   value={generalAch.year != null ? "Update":"Submit"}/>
                                         </div>
                                     </Grid>
 

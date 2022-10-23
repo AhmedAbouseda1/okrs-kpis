@@ -4,11 +4,11 @@ import Container from "@mui/material/Container";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {useNavigate} from "react-router-dom";
+import {createCollections, getCollections, updateCollections} from "../../../actions/collectionsAction";
 import {clearErrors} from "../../../actions/productAction";
 import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
 import Loader from "../../Layouts/Loader";
-import {createCollections, getCollections, updateCollections} from "../../../actions/collectionsAction";
 import {COLLECTIONS_SETUP_RESET} from "../../../constants/libraryConstants";
 
 const Collections = ({year, month}) => {

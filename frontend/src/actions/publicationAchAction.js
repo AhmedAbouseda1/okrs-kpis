@@ -14,7 +14,7 @@ export const createPublicationAch = (PublicationAchData) => async (dispatch) => 
     try {
         dispatch({ type: PUBLICATIONACH_SETUP });
         const config = { header: { "Content-Type": "application/json" } }
-        const { data } = await axios.post("/api/v1/library/achievement-setup/PublicationAch", PublicationAch, config);
+        const { data } = await axios.post("/api/v1/library/achievement-setup/PublicationAch", PublicationAchData, config);
 
         dispatch({
             type: PUBLICATIONACH_SETUP_SUCCESS,
@@ -29,7 +29,7 @@ export const createPublicationAch = (PublicationAchData) => async (dispatch) => 
 }
 
 
-export const updatePublicationAch  = (year, month,PublicationAch Data) => async (dispatch) => {
+export const updatePublicationAch  = (year, month,PublicationAchData) => async (dispatch) => {
     try {
         dispatch({ type: PUBLICATIONACH_SETUP });
         const config = { header: { "Content-Type": "application/json" } }

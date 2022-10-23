@@ -37,7 +37,7 @@ const Processing  = ({year, month}) => {
         formData.set("year", year);
         formData.set("month", month);
 
-        if (processing != null) {
+        if (processingAch != null) {
             dispatch(updateProcessingAch(year, month, formData));
         } else {
             dispatch(createProcessingAch(formData));

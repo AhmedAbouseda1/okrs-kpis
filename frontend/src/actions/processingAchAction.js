@@ -10,7 +10,7 @@ import {
 } from "../constants/libraryConstants";
 
 
-export const createProcessingAch = (processingData) => async (dispatch) => {
+export const createProcessingAch = (processingAchData) => async (dispatch) => {
     try {
         dispatch({type: PROCESSINGACH_SETUP});
         const config = {header: {"Content-Type": "application/json"}}
@@ -55,7 +55,7 @@ export const getProcessingAch = (year, month) => async (dispatch) => {
 
         dispatch({type: LOAD_PROCESSINGACH_REQUEST});
 
-        const {data} = await axios.get(`/api/v1/library/achievement-setup/processing/${year}/${month}`);
+        const {data} = await axios.get(`/api/v1/library/achievement-setup/processingAch/${year}/${month}`);
 
         dispatch({
             type: LOAD_PROCESSINGACH_SUCCESS,

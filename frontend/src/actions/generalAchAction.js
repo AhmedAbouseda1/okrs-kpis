@@ -29,7 +29,7 @@ export const createGeneralAch = (generalAchData) => async (dispatch) => {
 }
 
 
-export const updateGeneralAch  = (year, month,generalAch Data) => async (dispatch) => {
+export const updateGeneralAch  = (year, month,generalAchData) => async (dispatch) => {
     try {
         dispatch({ type: GENERALACH_SETUP });
         const config = { header: { "Content-Type": "application/json" } }
@@ -49,10 +49,8 @@ export const updateGeneralAch  = (year, month,generalAch Data) => async (dispatc
     }
 }
 
-// load Finance
 export const getGeneralAch = (year, month) => async (dispatch) => {
     try {
-
         dispatch({ type: LOAD_GENERALACH_REQUEST });
 
         const { data } = await axios.get(`/api/v1/library/achievement-setup/GeneralAch/${year}/${month}`);
