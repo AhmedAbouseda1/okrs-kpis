@@ -1,10 +1,11 @@
 const asyncErrorHandler = require('../../middlewares/asyncErrorHandler');
 const ErrorHandler = require('../../utils/errorHandler');
+const General = require('../../models/achievements/generalModel');
 
 exports.createGeneralAch = asyncErrorHandler(async (req, res, next) => {
 
     req.body.user = req.user.id;
-    const general = await GeneralAch.create(req.body);
+    const general = await General.create(req.body);
 
     res.status(201).json({
         success: true,
@@ -15,7 +16,7 @@ exports.createGeneralAch = asyncErrorHandler(async (req, res, next) => {
 
 // updateCollections
 exports.updateGeneralAch = asyncErrorHandler(async (req, res, next) => {
-    let general = await GeneralAch.findOneAndUpdate({
+    let general = await General.findOneAndUpdate({
         year: req.params.year,
         month: req.params.month,
     }, req.body, {
@@ -35,7 +36,7 @@ exports.updateGeneralAch = asyncErrorHandler(async (req, res, next) => {
 
 exports.getGeneralAch = asyncErrorHandler(async (req, res, next) => {
 
-    const general = await GeneralAch.findOne({
+    const general = await General.findOne({
         year: req.params.year,
         month: req.params.month,
     });

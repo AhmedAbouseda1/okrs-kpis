@@ -462,7 +462,7 @@ export const financeAchReducer = (state = {financeAch: {}}, {type, payload}) => 
 }
 
 
-export const generalReducer = (state = {general: {}}, {type, payload}) => {
+export const generalReducer = (state = {generalAch  : {}}, {type, payload}) => {
     switch (type) {
         case LOAD_GENERALACH_REQUEST:
         case  GENERALACH_SETUP:
@@ -474,13 +474,13 @@ export const generalReducer = (state = {general: {}}, {type, payload}) => {
             return {
                 loading: false,
                 success: payload.success,
-                general: payload,
+                generalAch: payload,
             };
         case  GENERALACH_SETUP_SUCCESS:
             return {
                 loading: false,
                 success: payload.success,
-                general: payload.finance,
+                generalAch: payload.generalAch,
             };
         case LOAD_GENERALACH_FAIL:
         case  GENERALACH_SETUP_FAIL:

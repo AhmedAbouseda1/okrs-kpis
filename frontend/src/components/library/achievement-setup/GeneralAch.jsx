@@ -50,7 +50,6 @@ const General  = ({year, month}) => {
             enqueueSnackbar(error, {variant: "error"});
             dispatch(clearErrors());
         }
-        alert("hello here ");
         dispatch(getGeneralAch(year, month));
 
     }, [dispatch, year, month, error, enqueueSnackbar]);

@@ -30,7 +30,7 @@ import {
 import {wishlistReducer} from './reducers/wishlistReducer';
 import {
     collectionsReducer,
-    currentSetupDateReducer, financeReducer,
+    currentSetupDateReducer, financeReducer, generalReducer,
     humanResourcesReducer,
     infrastructureReducer, processingReducer
 } from "./reducers/libraryReducer";
@@ -62,7 +62,8 @@ const reducer = combineReducers({
     humanResources: humanResourcesReducer,
     processing :processingReducer,
     finance: financeReducer,
-    currentSetupDate : currentSetupDateReducer
+    currentSetupDate : currentSetupDateReducer,
+    generalAch:  generalReducer
 });
 
 let initialState = {

@@ -99,14 +99,6 @@ function App() {
 
 
 
-              <Route path="/library/AchievementSetup" element={
-                <ProtectedRoute>
-                       <Library activeTab={1}>
-                           <AchievementSetup/>
-                        </Library>
-                  </ProtectedRoute>
-
-              }></Route>
 
               {/*<Route path="/library/TargetsSetup" element={*/}
               {/*  <ProtectedRoute>*/}
@@ -205,6 +197,17 @@ function App() {
                         </Library>
                     </ProtectedRoute>
                 }></Route>
+
+
+                <Route path="/library/AchievementSetup" element={
+                    <ProtectedRoute>
+                        <Library activeTab={1}>
+                            <AchievementSetup/>
+                        </Library>
+                    </ProtectedRoute>
+
+                }></Route>
+
 
                 <Route path="/OkrsAndKpis/OkrsKpis" element={
                     <ProtectedRoute>
