@@ -1,0 +1,17 @@
+{
+  "build": {
+    "env": {
+      "NPM_CONFIG_PRODUCTION": "false"
+    },
+    "commands": [
+      {
+        "command": "npm install --prefix frontend",
+        "use": "npm"
+      },
+      {
+        "command": "npm run build --prefix frontend",
+        "use": "npm"
+      }
+    ]
+  }
+}
