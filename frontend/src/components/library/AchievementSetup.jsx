@@ -1,195 +1,155 @@
-// import { DatePicker } from "@mui/lab";
-// import AdapterDateFns from "@mui/lab/AdapterDateFns";
-// import LocalizationProvider from "@mui/lab/LocalizationProvider";
-// import {
-//   Button,
-//   Checkbox,
-//   FormControlLabel,
-//   Grid,
-//   Icon,
-//   Radio,
-//   RadioGroup,
-//   styled,
-// } from "@mui/material";
-// import { Span } from "app/components/Typography";
-// import { useEffect, useState } from "react";
-// import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
-//
-// const TextField = styled(TextValidator)(() => ({
-//   width: "100%",
-//   marginBottom: "16px",
-// }));
-//
-// const AchievementSetup = () => {
-//   const [state, setState] = useState({ date: new Date() });
-//
-//   useEffect(() => {
-//     ValidatorForm.addValidationRule("isPasswordMatch", (value) => {
-//       if (value !== state.password) return false;
-//
-//       return true;
-//     });
-//     return () => ValidatorForm.removeValidationRule("isPasswordMatch");
-//   }, [state.password]);
-//
-//   const handleSubmit = (event) => {
-//     // console.log("submitted");
-//     // console.log(event);
-//   };
-//
-//   const handleChange = (event) => {
-//     event.persist();
-//     setState({ ...state, [event.target.name]: event.target.value });
-//   };
-//
-//   const handleDateChange = (date) => setState({ ...state, date });
-//
-//   const {
-//     username,
-//     firstName,
-//     creditCard,
-//     mobile,
-//     password,
-//     confirmPassword,
-//     gender,
-//     date,
-//     email,
-//   } = state;
-//
-//   return (
-//     <div>
-//       <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
-//         <Grid container spacing={6}>
-//           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
-//             <TextField
-//               type="text"
-//               name="username"
-//               id="standard-basic"
-//               value={username || ""}
-//               onChange={handleChange}
-//               errorMessages={["this field is required"]}
-//               label="Username (Min length 4, Max length 9)"
-//               validators={["required", "minStringLength: 4", "maxStringLength: 9"]}
-//             />
-//
-//             <TextField
-//               type="text"
-//               name="firstName"
-//               label="First Name"
-//               onChange={handleChange}
-//               value={firstName || ""}
-//               validators={["required"]}
-//               errorMessages={["this field is required"]}
-//             />
-//
-//             <TextField
-//               type="email"
-//               name="email"
-//               label="Email"
-//               value={email || ""}
-//               onChange={handleChange}
-//               validators={["required", "isEmail"]}
-//               errorMessages={["this field is required", "email is not valid"]}
-//             />
-//
-//             <LocalizationProvider dateAdapter={AdapterDateFns}>
-//               <DatePicker
-//                 value={date}
-//                 onChange={handleDateChange}
-//                 renderInput={(props) => (
-//                   <TextField
-//                     {...props}
-//                     label="Date picker"
-//                     id="mui-pickers-date"
-//                     sx={{ mb: 2, width: "100%" }}
-//                   />
-//                 )}
-//               />
-//             </LocalizationProvider>
-//
-//             <TextField
-//               sx={{ mb: 4 }}
-//               type="number"
-//               name="creditCard"
-//               label="Credit Card"
-//               onChange={handleChange}
-//               value={creditCard || ""}
-//               errorMessages={["this field is required"]}
-//               validators={["required", "minStringLength:16", "maxStringLength: 16"]}
-//             />
-//           </Grid>
-//
-//           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
-//             <TextField
-//               type="text"
-//               name="mobile"
-//               value={mobile || ""}
-//               label="Mobile Nubmer"
-//               onChange={handleChange}
-//               validators={["required"]}
-//               errorMessages={["this field is required"]}
-//             />
-//             <TextField
-//               name="password"
-//               type="password"
-//               label="Password"
-//               value={password || ""}
-//               onChange={handleChange}
-//               validators={["required"]}
-//               errorMessages={["this field is required"]}
-//             />
-//             <TextField
-//               type="password"
-//               name="confirmPassword"
-//               onChange={handleChange}
-//               label="Confirm Password"
-//               value={confirmPassword || ""}
-//               validators={["required", "isPasswordMatch"]}
-//               errorMessages={["this field is required", "password didn't match"]}
-//             />
-//             <RadioGroup
-//               row
-//               name="gender"
-//               sx={{ mb: 2 }}
-//               value={gender || ""}
-//               onChange={handleChange}
-//             >
-//               <FormControlLabel
-//                 value="Male"
-//                 label="Male"
-//                 labelPlacement="end"
-//                 control={<Radio color="secondary" />}
-//               />
-//
-//               <FormControlLabel
-//                 value="Female"
-//                 label="Female"
-//                 labelPlacement="end"
-//                 control={<Radio color="secondary" />}
-//               />
-//
-//               <FormControlLabel
-//                 value="Others"
-//                 label="Others"
-//                 labelPlacement="end"
-//                 control={<Radio color="secondary" />}
-//               />
-//             </RadioGroup>
-//
-//             <FormControlLabel
-//               control={<Checkbox />}
-//               label="I have read and agree to the terms of service."
-//             />
-//           </Grid>
-//         </Grid>
-//
-//         <Button color="primary" variant="contained" type="submit">
-//           <Icon>send</Icon>
-//           <Span sx={{ pl: 1, textTransform: "capitalize" }}>Submit</Span>
-//         </Button>
-//       </ValidatorForm>
-//     </div>
-//   );
-// };
-//
-// export default AchievementSetup;
+import {Box, styled} from "@mui/material";
+import Button from "@mui/material/Button";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import Stepper from "@mui/material/Stepper";
+import Typography from "@mui/material/Typography";
+import React from "react";
+import FinanceAch from "./achievement-setup/FinanceAch";
+import ProcessingAch from "./achievement-setup/ProcessingAch";
+import GeneralAch from "./achievement-setup/GeneralAch";
+import CirculationsAch from "./achievement-setup/CirculationsAch";
+import PublicationsAch from "./achievement-setup/PublicationsAch";
+import UsersAch from "./achievement-setup/UsersAch";
+import ActivitesAch from "./achievement-setup/ActivitesAch";
+import TrainingAch from "./achievement-setup/TrainingAch";
+
+import MetaData from "../Layouts/MetaData";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from 'react-date-picker';
+
+function getSteps() {
+    return ["Finance", "Processing", "General", "Circulations", "Publications" , "Users" ,"Activites", "Training Courses" ];
+}
+
+let year;
+let month;
+
+
+function getStepContent(stepIndex) {
+    switch (stepIndex) {
+        case 0:
+            return <FinanceAch year={year} month={month}/>
+        case 1:
+            return <ProcessingAch year={year} month={month}/>
+        case 2:
+            return <GeneralAch year={year} month={month}/>
+        case 3:
+            return <CirculationsAch year={year} month={month}/>
+        case 4:
+            return <PublicationsAch year={year} month={month}/>
+         case 5:
+            return <UsersAch year={year} month={month}/>
+        case 6:
+            return <ActivitesAch year={year} month={month}/>
+        case 7:
+            return <TrainingAch year={year} month={month}/>
+    }
+}
+
+export default function AchievementSetup() {
+
+    const [activeStep, setActiveStep] = React.useState(0);
+    const [openSteps, setOpenSteps] = React.useState(false);
+    const [setupDate, setSetupDate] = React.useState(new Date());
+
+    const steps = getSteps();
+
+    const handleNext = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
+
+    const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
+
+    const handleReset = () => setActiveStep(0);
+    const Container = styled("div")(({theme}) => ({
+        margin: "30px",
+        [theme.breakpoints.down("sm")]: {margin: "16px"},
+        "& .breadcrumb": {
+            marginBottom: "30px",
+            [theme.breakpoints.down("sm")]: {marginBottom: "16px"},
+        },
+    }));
+
+    function handleSubmit(s) {
+        setOpenSteps(true)
+        year = setupDate.getFullYear();
+        month = setupDate.getMonth();
+    }
+
+    return (
+        <>
+            <MetaData title="achievement setup"/>
+            <>
+                <Container>
+                    {openSteps ? (
+                        <Box>
+                            <Stepper activeStep={activeStep} alternativeLabel>
+                                {steps.map((label) => (
+                                    <Step key={label}>
+                                        <StepLabel>{label}</StepLabel>
+                                    </Step>
+                                ))}
+                            </Stepper>
+
+                            <Box mt={4}>
+                                {activeStep === steps.length ? (
+                                    <Box>
+                                        <Typography>All setup for this month completed</Typography>
+
+                                        <Button sx={{mt: 2}} variant="contained" color="secondary"
+                                                onClick={handleReset}>
+                                            Reset
+                                        </Button>
+                                    </Box>
+                                ) : (
+                                    <Box>
+                                        <Typography>{getStepContent(activeStep)}</Typography>
+
+                                        <Box pt={2}>
+                                            <Button
+                                                variant="contained"
+                                                color="secondary"
+                                                disabled={activeStep === 0}
+                                                onClick={handleBack}
+                                            >
+                                                Back
+                                            </Button>
+
+                                            <Button sx={{ml: 2}} variant="contained" color="primary"
+                                                    onClick={handleNext}>
+                                                {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                                            </Button>
+                                        </Box>
+                                    </Box>
+                                )}
+                            </Box>
+                        </Box>) : (
+                        <Box>
+                            <form onSubmit={handleSubmit} encType="multipart/form-data"
+                                  className="flex flex-col sm:flex-row bg-white rounded-lg shadow p-4"
+                                  id="mainform">
+                                <div className="flex flex-col gap-2">
+                                    <h2 className="text-sm">Setup your library for year and month :</h2>
+                                    <div
+                                        className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
+                                        <DatePicker
+                                            onChange={e => {
+                                                setSetupDate(e);
+                                            }}
+                                            value={setupDate}
+                                            dateFormat="MM/YYYY"
+                                            showMonthYearPicker
+                                        />
+                                        <input form="mainform" type="submit"
+                                               className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
+                                               value="Submit"/>
+                                    </div>
+                                </div>
+                            </form>
+                        </ Box>
+                    )
+                    }
+                </Container>
+            </>
+        </>
+    );
+}

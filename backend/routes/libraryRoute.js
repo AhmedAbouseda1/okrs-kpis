@@ -36,4 +36,8 @@ router.route('/library/librarySetup/finance').post(isAuthenticatedUser, createFi
 router.route('/library/librarySetup/finance/:year/:month').get(isAuthenticatedUser, getFinance);
 router.route('/library/librarySetup/finance/:year/:month').put(isAuthenticatedUser, updateFinance);
 
+
+router.route('/library/AchievementSetup').post();
+router.route('/library/AchievementSetup').get();
+
 module.exports = router;

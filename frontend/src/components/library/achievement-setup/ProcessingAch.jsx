@@ -10,9 +10,7 @@ import TextField from "@mui/material/TextField";
 import MetaData from "../../Layouts/MetaData";
 import Loader from "../../Layouts/Loader";
 import {INFRASTRUCTURE_SETUP_RESET} from "../../../constants/libraryConstants";
-
-
-const Infrastructure = ({year, month}) => {
+const Processing  = ({year, month}) => {
 
     const dispatch = useDispatch();
     const {enqueueSnackbar} = useSnackbar();
@@ -50,7 +48,7 @@ const Infrastructure = ({year, month}) => {
         formData.set("year", year);
         formData.set("month", month);
 
-        if (infrastructure.year != null) {
+        if (infrastructure != null) {
             dispatch(updateInfrastructure(year, month, formData));
         } else {
             dispatch(createInfrastructure(formData));
@@ -63,15 +61,7 @@ const Infrastructure = ({year, month}) => {
             dispatch(clearErrors());
         }
         dispatch(getInfrastructure(year, month));
-        if (infrastructure.year !== null) {
-            setSquaredMetersOfBuildings(infrastructure.squaredMetersOfBuildings);
-            setSquaredMetersAvailableForPublic(infrastructure.squaredMetersAvailableForPublic);
-            setReadingHallsSeats(infrastructure.readingHallsSeats);
-            setReadingHallsTables(infrastructure.readingHallsTables);
-            setActivitiesHallsTables(infrastructure.activitiesHallsTables);
-            setActivitiesHallsSeats(infrastructure.activitiesHallsSeats);
-            setNoOfPc(infrastructure.noOfPc);
-        }
+
     }, [dispatch, year, month, error, enqueueSnackbar]);
 
     useEffect(() => {
@@ -88,7 +78,7 @@ const Infrastructure = ({year, month}) => {
 
     return (
         <>
-            <MetaData title="Infrastructure"/>
+            <MetaData title="Processing achievement"/>
             {loading ? <Loader/> :
 
                 <>
@@ -100,14 +90,13 @@ const Infrastructure = ({year, month}) => {
                                 <Grid container spacing={6}>
                                     <Grid item lg={6} md={6} sm={12} xs={12} sx={{mt: 2}}>
                                         <div className="flex flex-col gap-2">
-                                            <h2 className="text-sm" class="text-[#006d76]">Area</h2>
                                             <div className="flex flex-col sm:flex-row items-center gap-3"
                                                  id="areaInputs">
                                                 <div
                                                     className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
                                                     <TextField
                                                         type="number"
-                                                        label="Squared Meters Of Buildings"
+                                                            label="Number Of Document Digitized In The Reporting Year"
                                                         variant="outlined"
                                                         size="small"
                                                         required
@@ -117,23 +106,6 @@ const Infrastructure = ({year, month}) => {
                                                         }}/>
                                                 </div>
                                                 <div className="flex flex-col gap-2">
-
-                                                    <React.Fragment>
-                                                        {!open && (
-                                                            <Button onClick={toggle} class="text-[#006d76]">Calculate
-                                                                Total Area
-                                                            </Button>
-                                                        )}
-                                                        {open && (
-                                                            <Container>
-                                                                Total Area : {totalArea}
-                                                                <IconButton onClick={toggle}
-                                                                            sx={{mx: 2, verticalAlign: 'middle'}}>
-                                                                    <CircularProgress className="progress"/>
-                                                                </IconButton>
-                                                            </Container>
-                                                        )}
-                                                    </React.Fragment>
 
                                                 </div>
                                             </div>
@@ -150,7 +122,7 @@ const Infrastructure = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        label="Squared Meters Available For Public"
+                                                        label="Owner Institution's Academic Publication In The Institutional Repository"
                                                         value={squaredMetersAvailableForPublic}
                                                         onChange={e => {
                                                             setSquaredMetersAvailableForPublic(parseInt(e.target.value.toString()));
@@ -163,14 +135,13 @@ const Infrastructure = ({year, month}) => {
 
                                         <div className="flex flex-col gap-2">
 
-                                            <h2 className="text-sm" class="text-[#006d76]">Activities Halls</h2>
                                             <div className="flex flex-col sm:flex-row items-center gap-3"
                                                  id="activitiesInputs">
                                                 <div
                                                     className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
                                                     <TextField
                                                         type="number"
-                                                        label="Activities Halls Tables"
+                                                        label="Rare Materials Accessible Via Web Catalogues"
                                                         variant="outlined"
                                                         size="small"
                                                         required
@@ -193,7 +164,7 @@ const Infrastructure = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        label="Activities Halls Seats"
+                                                        label="Library Visits"
                                                         value={activitiesHallsSeats}
                                                         onChange={e => {
                                                             setActivitiesHallsSeats(parseInt(e.target.value.toString()));
@@ -207,7 +178,6 @@ const Infrastructure = ({year, month}) => {
                                     </Grid>
                                     <Grid item lg={6} md={6} sm={12} xs={12} sx={{mt: 2}}>
                                         <div className="flex flex-col gap-2">
-                                            <h2 className="text-sm" class="text-[#006d76]">Reading Halls</h2>
 
                                             <div className="flex flex-col sm:flex-row items-center gap-3"
                                                  id="readingInputs">
@@ -218,7 +188,7 @@ const Infrastructure = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        label="Reading Halls Tables"
+                                                        label="Target Population Reached"
                                                         value={readingHallsTables}
                                                         onChange={e => {
                                                             setReadingHallsTables(parseInt(e.target.value.toString()));
@@ -239,7 +209,7 @@ const Infrastructure = ({year, month}) => {
                                                         variant="outlined"
                                                         size="small"
                                                         required
-                                                        label="Reading Halls Seats"
+                                                        label="The Number Of Media Acquired In A Certain Period"
                                                         value={readingHallsSeats}
                                                         onChange={e => {
                                                             setReadingHallsSeats(parseInt(e.target.value.toString()));
@@ -250,7 +220,6 @@ const Infrastructure = ({year, month}) => {
                                             </div>
                                         </div>
                                         <div className="flex flex-col gap-2">
-                                            <h2 className="text-sm" class="text-[#006d76]">No. of PC</h2>
                                             <div
                                                 className="flex flex-col gap-0.5 w-64 px-3 py-1.5 rounded-sm border inputs cursor-not-allowed focus-within:border-primary-blue">
                                                 <TextField
@@ -258,7 +227,7 @@ const Infrastructure = ({year, month}) => {
                                                     variant="outlined"
                                                     size="small"
                                                     required
-                                                    label="No. of PC's with int. for clients"
+                                                    label="Number Of Attendances At Library Instructional Sessions "
                                                     value={noOfPc}
 
                                                     onChange={e => {
@@ -271,7 +240,7 @@ const Infrastructure = ({year, month}) => {
                                         <div className="flex justify-end">
                                             <input form="mainform" type="submit"
                                                    className="backgroundgreen uppercase w-1/3 p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
-                                                   value={infrastructure.year != null ? "Update":"Submit"}/>
+                                                   value={infrastructure != null ? "Update":"Submit"}/>
                                         </div>
                                     </Grid>
 
@@ -286,5 +255,5 @@ const Infrastructure = ({year, month}) => {
     );
 };
 
-export default Infrastructure;
+export default Processing;
 
